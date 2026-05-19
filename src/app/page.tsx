@@ -16,9 +16,10 @@ export default function Home() {
       <div className="page">
 
         <div className="brandbar">
-          <span className="brand">
+          <h1 className="brand">
             PEPPU<span className="accent">DEX</span>
-          </span>
+            <span className="sr-only"> · A Pokedex of Research Peptides</span>
+          </h1>
           <span className="brand-sub">A POKEDEX OF RESEARCH PEPTIDES · v1.2</span>
         </div>
 
