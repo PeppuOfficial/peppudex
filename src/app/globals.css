@@ -32,16 +32,9 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
-  /* Solid fallback colour · paints behind html even before body's
-     gradient layers compute. Without this the page can flash white
-     when the gradient is computing on slow connections. */
-  background-color: var(--sky-deep);
-}
 html, body {
   font-family: var(--font-body), "VT323", monospace;
-  background-color: var(--sky-deep);
-  background-image:
+  background:
     repeating-linear-gradient(0deg, transparent, transparent 32px, rgba(255,255,255,0.04) 32px, rgba(255,255,255,0.04) 33px),
     repeating-linear-gradient(90deg, transparent, transparent 32px, rgba(255,255,255,0.04) 32px, rgba(255,255,255,0.04) 33px),
     linear-gradient(180deg, var(--sky) 0%, var(--sky-deep) 100%);
