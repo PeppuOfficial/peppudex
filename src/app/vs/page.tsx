@@ -1,11 +1,11 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import { COMPARISONS } from "@/data/comparisons";
 import { PEPPUDEX } from "@/data/peppudex";
 
 export const metadata: Metadata = {
   title: "Compound Comparisons · PEPPUDEX",
-  description: "Head-to-head comparisons of research peptides — BPC-157 vs TB-500, retatrutide vs tirzepatide, selank vs semax, GHK-Cu vs TB-500, and more.",
+  description: "Head-to-head comparisons of research peptides · BPC-157 vs TB-500, retatrutide vs tirzepatide, selank vs semax, GHK-Cu vs TB-500, and more.",
   alternates: { canonical: "https://peppudex.com/vs" },
 };
 

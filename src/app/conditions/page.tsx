@@ -1,11 +1,11 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import { CONDITIONS } from "@/data/conditions";
 import { ENRICHMENT } from "@/data/enrichment";
 
 export const metadata: Metadata = {
   title: "Research Conditions · PEPPUDEX",
-  description: "Browse research peptides by goal or condition — body composition, tendon repair, skin aging, cognitive performance, longevity, cardiometabolic, and more.",
+  description: "Browse research peptides by goal or condition · body composition, tendon repair, skin aging, cognitive performance, longevity, cardiometabolic, and more.",
   alternates: { canonical: "https://peppudex.com/conditions" },
 };
 

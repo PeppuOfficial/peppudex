@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { PEPPUDEX } from "@/data/peppudex";
 import { MECHANISMS } from "@/data/mechanisms";
 import { CONDITIONS } from "@/data/conditions";
@@ -12,7 +12,7 @@ export async function GET() {
     "",
     "> A Pokedex of research-grade peptides. Mechanism notes, evidence grades (A-F), FAQs, and peer-reviewed sources for every compound.",
     "",
-    "PEPPUDEX is a research-reference site, not a storefront. For purchase, see https://peppu.studio. All material is for laboratory research use only — no human dose is recommended.",
+    "PEPPUDEX is a research-reference site, not a storefront. For purchase, see https://peppu.studio. All material is for laboratory research use only · no human dose is recommended.",
     "",
     "## Compounds",
     "",

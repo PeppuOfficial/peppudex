@@ -1,9 +1,9 @@
-/**
+﻿/**
  * Mechanism categories · for /mechanisms/[slug] pages.
  * Joined to PEPPUDEX entries via ENRICHMENT[slug].mechanisms array.
  *
  * Each mechanism page aggregates all compounds tagged with that
- * mechanism — the Bulbapedia "Fire-type Pokémon" pattern that builds
+ * mechanism · the Bulbapedia "Fire-type Pokémon" pattern that builds
  * bidirectional internal links and ranks for the mechanism query.
  */
 
@@ -63,7 +63,7 @@ export const MECHANISMS: Mechanism[] = [
     shortName: "Actin",
     color: "#7E57C2",
     description: "G-actin sequestration and cell migration.",
-    longDescription: "Actin is the most abundant cytoskeletal protein in eukaryotic cells, cycling between monomeric G-actin and polymerized F-actin. G-actin sequestering proteins (Thymosin Beta-4, and its synthetic fragment TB-500) shift the equilibrium to promote cell migration — particularly endothelial cells and stem cells in tissue-repair contexts.",
+    longDescription: "Actin is the most abundant cytoskeletal protein in eukaryotic cells, cycling between monomeric G-actin and polymerized F-actin. G-actin sequestering proteins (Thymosin Beta-4, and its synthetic fragment TB-500) shift the equilibrium to promote cell migration · particularly endothelial cells and stem cells in tissue-repair contexts.",
   },
   {
     slug: "skin-matrix",
@@ -87,7 +87,7 @@ export const MECHANISMS: Mechanism[] = [
     shortName: "Sirtuins",
     color: "#AB47BC",
     description: "NAD+-dependent class-III deacylase signaling.",
-    longDescription: "Sirtuins (SIRT1–SIRT7) are NAD+-dependent class-III lysine deacylases that regulate metabolism, stress response, DNA repair, and circadian rhythm. They consume NAD+ stoichiometrically — sirtuin activity scales with cellular NAD+ availability. NAD+ precursor supplementation (NR, NMN) is the dominant translational approach for sirtuin activation.",
+    longDescription: "Sirtuins (SIRT1–SIRT7) are NAD+-dependent class-III lysine deacylases that regulate metabolism, stress response, DNA repair, and circadian rhythm. They consume NAD+ stoichiometrically · sirtuin activity scales with cellular NAD+ availability. NAD+ precursor supplementation (NR, NMN) is the dominant translational approach for sirtuin activation.",
   },
   {
     slug: "mitochondrial-function",
@@ -103,7 +103,7 @@ export const MECHANISMS: Mechanism[] = [
     shortName: "Exercise",
     color: "#FF7043",
     description: "Peptides that mimic exercise-induced signaling.",
-    longDescription: "Exercise mimetics are compounds that activate signaling pathways normally triggered by physical exercise — AMPK, PGC-1α-driven mitochondrial biogenesis, GLUT4 translocation, and FNDC5/irisin secretion. MOTS-c is the canonical example, released from mitochondria during exercise and reproducing many of the metabolic-conditioning effects in sedentary aged rodents.",
+    longDescription: "Exercise mimetics are compounds that activate signaling pathways normally triggered by physical exercise · AMPK, PGC-1α-driven mitochondrial biogenesis, GLUT4 translocation, and FNDC5/irisin secretion. MOTS-c is the canonical example, released from mitochondria during exercise and reproducing many of the metabolic-conditioning effects in sedentary aged rodents.",
   },
   {
     slug: "gh-axis",
@@ -127,7 +127,7 @@ export const MECHANISMS: Mechanism[] = [
     shortName: "Nootropic",
     color: "#4FC3F7",
     description: "Cognitive enhancement and CNS support.",
-    longDescription: "Nootropic compounds act on canonical CNS pathways — BDNF / TrkB neurotrophic signaling, monoamine modulation, and GABAergic regulation. Russian-developed heptapeptides Semax and Selank are the most-studied research nootropics in the Peppu Studio catalog, both built on the same C-terminal Pro-Gly-Pro stabilizing strategy.",
+    longDescription: "Nootropic compounds act on canonical CNS pathways · BDNF / TrkB neurotrophic signaling, monoamine modulation, and GABAergic regulation. Russian-developed heptapeptides Semax and Selank are the most-studied research nootropics in the Peppu Studio catalog, both built on the same C-terminal Pro-Gly-Pro stabilizing strategy.",
   },
   {
     slug: "anxiolytic",

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * PEPPUDEX entries · one per Peppu Studio research peptide.
  *
  * Pokedex-style schema:
@@ -70,7 +70,7 @@ export const PEPPUDEX: PeppudexEntry[] = [
     mechanism: "Engineered single-molecule agonist at GLP-1, GIP, and glucagon receptors. Investigational compound from Eli Lilly under the codename LY3437943.",
     moves: [
       { name: "Appetite Suppress", power: 60, desc: "GLP-1 arm slows gastric emptying." },
-      { name: "Triple Burn", power: 160, desc: "Activates all three receptors. Phase 2 NEJM 2023 — NCT04881760." },
+      { name: "Triple Burn", power: 160, desc: "Activates all three receptors. Phase 2 NEJM 2023 · NCT04881760." },
     ],
     evidence: [
       "Jastreboff AM, Kaplan LM, Frías JP et al., Triple-Hormone-Receptor Agonist Retatrutide for Obesity · NEJM 2023; PMID 37366315 · ClinicalTrials.gov NCT04881760.",

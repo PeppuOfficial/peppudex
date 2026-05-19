@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { PEPPUDEX } from "@/data/peppudex";
 import { ENRICHMENT } from "@/data/enrichment";
@@ -35,21 +35,21 @@ function parseHalfLifeHours(
 
   // Range patterns. "2 to 4 hours" / "2-4 hours" / "2 to 4 days".
   const rangeDay = lower.match(
-    /(\d+(?:\.\d+)?)\s*(?:to|–|—|-)\s*(\d+(?:\.\d+)?)\s*day/,
+    /(\d+(?:\.\d+)?)\s*(?:to|–|·|-)\s*(\d+(?:\.\d+)?)\s*day/,
   );
   if (rangeDay) {
     const mid = (parseFloat(rangeDay[1]) + parseFloat(rangeDay[2])) / 2;
     return { hours: mid * 24, display };
   }
   const rangeHour = lower.match(
-    /(\d+(?:\.\d+)?)\s*(?:to|–|—|-)\s*(\d+(?:\.\d+)?)\s*h(?:our|r)?/,
+    /(\d+(?:\.\d+)?)\s*(?:to|–|·|-)\s*(\d+(?:\.\d+)?)\s*h(?:our|r)?/,
   );
   if (rangeHour) {
     const mid = (parseFloat(rangeHour[1]) + parseFloat(rangeHour[2])) / 2;
     return { hours: mid, display };
   }
   const rangeMin = lower.match(
-    /(\d+(?:\.\d+)?)\s*(?:to|–|—|-)\s*(\d+(?:\.\d+)?)\s*min/,
+    /(\d+(?:\.\d+)?)\s*(?:to|–|·|-)\s*(\d+(?:\.\d+)?)\s*min/,
   );
   if (rangeMin) {
     const mid = (parseFloat(rangeMin[1]) + parseFloat(rangeMin[2])) / 2;

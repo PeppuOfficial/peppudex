@@ -1,13 +1,13 @@
-/**
+﻿/**
  * Head-to-head comparison pairs · for /vs/[pair] pages.
  *
  * Each pair targets a high-volume "X vs Y" commercial-intent query.
- * URL pattern: /vs/{a}-vs-{b} — alphabetical sort to enforce canonical
+ * URL pattern: /vs/{a}-vs-{b} · alphabetical sort to enforce canonical
  * ordering and prevent duplicate-content fragmentation.
  *
  * Per the strategy doc: "Each comparison is a separate indexed URL
  * targeting a high-intent commercial query. Nobody owns 'bpc 157 vs
- * tb 500' right now." — that's the moat.
+ * tb 500' right now." · that's the moat.
  */
 
 export interface Comparison {
@@ -26,7 +26,7 @@ export const COMPARISONS: Comparison[] = [
     slug: "bpc-157-vs-tb-500",
     a: "bpc-157",
     b: "tb-500",
-    verdict: "BPC-157 and TB-500 are the two most-discussed recovery research peptides — different mechanisms, often stacked. BPC-157 is a 15-amino-acid pentadecapeptide acting through VEGF angiogenesis, growth-hormone-receptor upregulation, and the cytoprotection paradigm. TB-500 is a 7-amino-acid Thymosin Beta-4 fragment that sequesters G-actin to promote cell migration. The two are complementary rather than competitive.",
+    verdict: "BPC-157 and TB-500 are the two most-discussed recovery research peptides · different mechanisms, often stacked. BPC-157 is a 15-amino-acid pentadecapeptide acting through VEGF angiogenesis, growth-hormone-receptor upregulation, and the cytoprotection paradigm. TB-500 is a 7-amino-acid Thymosin Beta-4 fragment that sequesters G-actin to promote cell migration. The two are complementary rather than competitive.",
     comparisonTable: [
       { row: "Class", aValue: "Synthetic 15-aa peptide (gastric-origin fragment)", bValue: "Synthetic 7-aa Thymosin Beta-4 fragment" },
       { row: "Sequence", aValue: "Gly-Glu-Pro-Pro-Pro-Gly-Lys-Pro-Ala-Asp-Asp-Ala-Gly-Leu-Val", bValue: "Ac-LKKTETQ (residues 17–23 of parent Tβ4)" },
@@ -51,7 +51,7 @@ export const COMPARISONS: Comparison[] = [
     slug: "retatrutide-vs-tirzepatide",
     a: "retatrutide",
     b: "tirzepatide",
-    verdict: "Both are next-generation incretin agonists from Eli Lilly. Tirzepatide is the dual GLP-1R + GIPR agonist already FDA-approved as Mounjaro (T2D) and Zepbound (weight management). Retatrutide adds glucagon-receptor (GCGR) agonism as a third arm — investigational, currently in Phase 3 TRIUMPH. Phase 2 retatrutide showed deeper body-weight reduction than published tirzepatide data at comparable timepoints.",
+    verdict: "Both are next-generation incretin agonists from Eli Lilly. Tirzepatide is the dual GLP-1R + GIPR agonist already FDA-approved as Mounjaro (T2D) and Zepbound (weight management). Retatrutide adds glucagon-receptor (GCGR) agonism as a third arm · investigational, currently in Phase 3 TRIUMPH. Phase 2 retatrutide showed deeper body-weight reduction than published tirzepatide data at comparable timepoints.",
     comparisonTable: [
       { row: "Class", aValue: "Triple GLP-1R + GIPR + GCGR agonist", bValue: "Dual GLP-1R + GIPR agonist" },
       { row: "Development code", aValue: "LY3437943", bValue: "LY3298176" },
@@ -86,7 +86,7 @@ export const COMPARISONS: Comparison[] = [
       { row: "WADA status", aValue: "Not listed (2026)", bValue: "Not listed (2026)" },
     ],
     whichBetter: [
-      { goal: "Anxiety / stress research", winner: "a", rationale: "Selank's mechanism — GABAergic modulation — is the more direct anxiety target. Russian rodent EPM and conditioned-suppression data describe potency comparable to short-acting benzodiazepines at the doses tested." },
+      { goal: "Anxiety / stress research", winner: "a", rationale: "Selank's mechanism · GABAergic modulation · is the more direct anxiety target. Russian rodent EPM and conditioned-suppression data describe potency comparable to short-acting benzodiazepines at the doses tested." },
       { goal: "Cognitive / memory research", winner: "b", rationale: "Semax has the documented BDNF + TrkB upregulation in rat hippocampus and basal forebrain (Dolotov 2006 series). Specific binding sites identified at KD ≈ 2.4 nM." },
       { goal: "Stroke-recovery research", winner: "b", rationale: "Russian clinical literature describes Semax in stroke recovery protocols specifically. Selank not studied here." },
     ],
@@ -97,7 +97,7 @@ export const COMPARISONS: Comparison[] = [
     slug: "mots-c-vs-nad-plus",
     a: "mots-c",
     b: "nad-plus",
-    verdict: "Both are longevity-research compounds acting on cellular bioenergetics — but at different layers of the system. NAD+ is the endogenous redox coenzyme and obligate substrate of sirtuins and PARPs. MOTS-c is a mitochondrial-encoded 16-amino-acid peptide that activates AMPK and modulates nuclear gene expression in response to mitochondrial state. Different molecular categories (coenzyme vs peptide), complementary biology.",
+    verdict: "Both are longevity-research compounds acting on cellular bioenergetics · but at different layers of the system. NAD+ is the endogenous redox coenzyme and obligate substrate of sirtuins and PARPs. MOTS-c is a mitochondrial-encoded 16-amino-acid peptide that activates AMPK and modulates nuclear gene expression in response to mitochondrial state. Different molecular categories (coenzyme vs peptide), complementary biology.",
     comparisonTable: [
       { row: "Class", aValue: "Mitochondrial-derived 16-aa peptide (MDP)", bValue: "Endogenous redox coenzyme (not a peptide)" },
       { row: "Primary mechanism", aValue: "AMPK activation · nuclear translocation · folate-cycle inhibition", bValue: "Sirtuin / PARP substrate · electron-transfer cofactor" },
@@ -112,14 +112,14 @@ export const COMPARISONS: Comparison[] = [
       { goal: "Exercise-mimetic research", winner: "a", rationale: "MOTS-c is the canonical mitochondrial-derived exercise mimetic. Released from mitochondria during exercise; exogenous administration reproduces some conditioning effects in sedentary aged rodents." },
       { goal: "Established sirtuin activation", winner: "b", rationale: "Sirtuins are NAD+-dependent class-III deacylases. Activity scales with NAD+ availability." },
     ],
-    stacking: "NAD+ + MOTS-c is the Cellular Bioenergetics stack — upstream coenzyme (NAD+) + downstream signaling response (MOTS-c) for combined longevity-pathway research.",
+    stacking: "NAD+ + MOTS-c is the Cellular Bioenergetics stack · upstream coenzyme (NAD+) + downstream signaling response (MOTS-c) for combined longevity-pathway research.",
   },
 
   {
     slug: "ghk-cu-vs-tb-500",
     a: "ghk-cu",
     b: "tb-500",
-    verdict: "GHK-Cu and TB-500 both appear in dermal and tissue-remodeling research but with completely different mechanisms. GHK-Cu is a copper-binding tripeptide driving transcriptional induction of collagen, elastin, and matrix synthesis. TB-500 is an actin-cytoskeleton modulator promoting cell migration. The two are complementary — GHK-Cu builds the matrix, TB-500 moves the cells into it.",
+    verdict: "GHK-Cu and TB-500 both appear in dermal and tissue-remodeling research but with completely different mechanisms. GHK-Cu is a copper-binding tripeptide driving transcriptional induction of collagen, elastin, and matrix synthesis. TB-500 is an actin-cytoskeleton modulator promoting cell migration. The two are complementary · GHK-Cu builds the matrix, TB-500 moves the cells into it.",
     comparisonTable: [
       { row: "Class", aValue: "Tripeptide-copper complex", bValue: "Thymosin Beta-4 fragment (7-aa)" },
       { row: "Mechanism", aValue: "Cu²⁺-dependent transcriptional gene modulation", bValue: "G-actin sequestration · cell migration" },
@@ -131,18 +131,18 @@ export const COMPARISONS: Comparison[] = [
     ],
     whichBetter: [
       { goal: "Skin matrix synthesis", winner: "a", rationale: "GHK-Cu directly induces collagen, elastin, and glycosaminoglycan synthesis in dermal fibroblasts. This is its core mechanism." },
-      { goal: "Wound-bed cell recruitment", winner: "b", rationale: "TB-500's actin-cytoskeleton mechanism drives endothelial and stem-cell migration into injury sites — the cell-recruitment phase of healing." },
+      { goal: "Wound-bed cell recruitment", winner: "b", rationale: "TB-500's actin-cytoskeleton mechanism drives endothelial and stem-cell migration into injury sites · the cell-recruitment phase of healing." },
       { goal: "Hair-loss research", winner: "a", rationale: "GHK-Cu enlarges hair follicles and prolongs the anagen phase in rodent models. TB-500 not specifically studied in hair biology." },
       { goal: "Cardiac repair", winner: "b", rationale: "Thymosin Beta-4 / TB-500 has the Bock-Marquette 2004 Nature paper on mouse MI. GHK-Cu not specifically studied in cardiac repair." },
     ],
-    stacking: "GHK-Cu + TB-500 + BPC-157 is the Wolverine Blend formulation — combining matrix synthesis (GHK-Cu) with cell migration (TB-500) and cytoprotection (BPC-157) across the major stages of tissue repair.",
+    stacking: "GHK-Cu + TB-500 + BPC-157 is the Wolverine Blend formulation · combining matrix synthesis (GHK-Cu) with cell migration (TB-500) and cytoprotection (BPC-157) across the major stages of tissue repair.",
   },
 
   {
     slug: "igf-1-lr3-vs-ipa-cjc1295",
     a: "igf-1-lr3",
     b: "ipa-cjc1295",
-    verdict: "Both target the GH/IGF-1 axis but at different layers. IGF-1 LR3 is the modified IGF-1 analog that directly engages the IGF-1 receptor, bypassing the GH axis entirely. Ipamorelin + CJC-1295 are upstream secretagogues — they stimulate the pituitary to release endogenous GH, which drives hepatic IGF-1 production. Direct downstream vs upstream pulsatile.",
+    verdict: "Both target the GH/IGF-1 axis but at different layers. IGF-1 LR3 is the modified IGF-1 analog that directly engages the IGF-1 receptor, bypassing the GH axis entirely. Ipamorelin + CJC-1295 are upstream secretagogues · they stimulate the pituitary to release endogenous GH, which drives hepatic IGF-1 production. Direct downstream vs upstream pulsatile.",
     comparisonTable: [
       { row: "Mechanism layer", aValue: "Downstream · direct IGF-1R agonism", bValue: "Upstream · GHRH-R + ghrelin-R agonism → pituitary GH pulse" },
       { row: "Half-life", aValue: "~6 hours (LR3 modification)", bValue: "Ipa ~2 hr · CJC-1295 No DAC ~30 min" },
@@ -156,16 +156,16 @@ export const COMPARISONS: Comparison[] = [
       { goal: "Physiological pulsatile rhythm", winner: "b", rationale: "Ipa + CJC-1295 No DAC produces a GH pulse that approximates the natural diurnal pattern, which downstream IGF-1 inherits." },
       { goal: "Safety profile (community-reported)", winner: "b", rationale: "Selective ghrelin agonism (ipamorelin) avoids cortisol and prolactin elevation seen with older GHS. GHRH agonism (CJC-1295) acts upstream so endogenous feedback regulates total exposure." },
     ],
-    stacking: "Not commonly stacked together in community protocols — they target the same axis at different layers. IGF-1 LR3 is typically used as a standalone direct-IGF-1R compound; Ipa/CJC-1295 as a pulsatile-GH-axis pair.",
+    stacking: "Not commonly stacked together in community protocols · they target the same axis at different layers. IGF-1 LR3 is typically used as a standalone direct-IGF-1R compound; Ipa/CJC-1295 as a pulsatile-GH-axis pair.",
   },
 
   {
     slug: "tesamorelin-vs-cjc-1295",
     a: "tesamorelin",
     b: "ipa-cjc1295",
-    verdict: "Both are GHRH-axis research compounds, but tesamorelin is FDA-approved (Egrifta®) while CJC-1295 No DAC is research-use only. Tesamorelin is a stabilized GHRH(1-44) — the full natural 44-aa hormone sequence. CJC-1295 No DAC is a GHRH(1-29) analog — the shorter active fragment with stabilizing substitutions. The IPA/CJC-1295 pair adds ghrelin-receptor agonism via ipamorelin.",
+    verdict: "Both are GHRH-axis research compounds, but tesamorelin is FDA-approved (Egrifta®) while CJC-1295 No DAC is research-use only. Tesamorelin is a stabilized GHRH(1-44) · the full natural 44-aa hormone sequence. CJC-1295 No DAC is a GHRH(1-29) analog · the shorter active fragment with stabilizing substitutions. The IPA/CJC-1295 pair adds ghrelin-receptor agonism via ipamorelin.",
     comparisonTable: [
-      { row: "Parent sequence", aValue: "GHRH(1-44) — full natural hormone", bValue: "GHRH(1-29) — active fragment" },
+      { row: "Parent sequence", aValue: "GHRH(1-44) · full natural hormone", bValue: "GHRH(1-29) · active fragment" },
       { row: "Length", aValue: "44 amino acids", bValue: "29 amino acids (CJC-1295) + 5 amino acids (ipamorelin)" },
       { row: "Half-life", aValue: "~26 min", bValue: "CJC-1295 No DAC ~30 min · ipamorelin ~2 hr" },
       { row: "Receptor engaged", aValue: "GHRH-R only", bValue: "GHRH-R (CJC) + GHS-R1a (ipamorelin)" },
@@ -178,7 +178,7 @@ export const COMPARISONS: Comparison[] = [
       { goal: "Pulsatile dual-pathway GH activation", winner: "b", rationale: "IPA/CJC-1295 combines GHRH-receptor + ghrelin-receptor stimulation, producing larger GH pulses via dual-pathway activation. Tesamorelin engages GHRH-R only." },
       { goal: "Cost-per-pulse research budget", winner: "b", rationale: "Tesamorelin (Egrifta) is expensive at the branded human-prescription level. Research-grade CJC-1295 + ipamorelin is significantly cheaper for laboratory characterization." },
     ],
-    stacking: "Tesamorelin + IPA/CJC-1295 = the GH-Axis Trifecta stack — three complementary upstream regulators of the GH pulse. Combining multiple GH-axis agonists is not supported by published research; the stack is a reference framing rather than a clinical protocol.",
+    stacking: "Tesamorelin + IPA/CJC-1295 = the GH-Axis Trifecta stack · three complementary upstream regulators of the GH pulse. Combining multiple GH-axis agonists is not supported by published research; the stack is a reference framing rather than a clinical protocol.",
   },
 ];
 

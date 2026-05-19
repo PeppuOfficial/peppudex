@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Condition / goal categories · for /conditions/[slug] pages.
  * Joined to PEPPUDEX entries via ENRICHMENT[slug].conditions array.
  *
@@ -87,7 +87,7 @@ export const CONDITIONS: Condition[] = [
     slug: "cardiac-research",
     name: "Cardiac Research",
     description: "Myocardial repair and protection research.",
-    longDescription: "Cardiac research encompasses myocardial-infarction repair, ischemia-reperfusion injury protection, and cardiac fibrosis. Thymosin Beta-4 (Bock-Marquette 2004, Nature) showed reduced infarct size and improved ejection fraction in a mouse MI model — a landmark study supporting cardiac applications of actin-cytoskeleton-modulating peptides.",
+    longDescription: "Cardiac research encompasses myocardial-infarction repair, ischemia-reperfusion injury protection, and cardiac fibrosis. Thymosin Beta-4 (Bock-Marquette 2004, Nature) showed reduced infarct size and improved ejection fraction in a mouse MI model · a landmark study supporting cardiac applications of actin-cytoskeleton-modulating peptides.",
   },
   {
     slug: "skin-aging",
@@ -172,7 +172,7 @@ export const CONDITIONS: Condition[] = [
     slug: "investigational",
     name: "Investigational",
     description: "Pre-approval compounds in active clinical trials.",
-    longDescription: "Investigational compounds are pre-approval pharmaceuticals in active clinical-trial programs but not yet approved by the FDA or comparable regulators. Retatrutide is the canonical example in the Peppu Studio catalog — Phase 3 TRIUMPH program ongoing under Eli Lilly. Research-grade material is supplied as a chemical reference compound for laboratory use only.",
+    longDescription: "Investigational compounds are pre-approval pharmaceuticals in active clinical-trial programs but not yet approved by the FDA or comparable regulators. Retatrutide is the canonical example in the Peppu Studio catalog · Phase 3 TRIUMPH program ongoing under Eli Lilly. Research-grade material is supplied as a chemical reference compound for laboratory use only.",
   },
   {
     slug: "anabolic-research",

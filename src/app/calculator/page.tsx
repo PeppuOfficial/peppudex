@@ -209,7 +209,7 @@ export default function CalculatorPage() {
             </p>
             <p className="body" style={{ marginTop: 10 }}>
               <strong style={{ fontFamily: "var(--font-pixel)", fontSize: 12 }}>{activeCard.name}</strong>
-              {" — "}{activeCard.tagline}
+              {" · "}{activeCard.tagline}
             </p>
             <p className="body" style={{ marginTop: 8, opacity: 0.85 }}>{activeCard.mechanism}</p>
             <div style={{ display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" }}>

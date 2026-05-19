@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Pre-built peptide stacks · for /stacks/[slug] pages.
  *
  * Each stack is a curated combination of 2–4 PEPPUDEX compounds tagged
@@ -72,7 +72,7 @@ export const STACKS: Stack[] = [
     name: "Cellular Bioenergetics",
     goal: "Mitochondrial function + sirtuin-axis longevity research.",
     description: "NAD+ + MOTS-c as a longevity-pathway research pair.",
-    longDescription: "NAD+ is the obligate substrate of sirtuins and PARPs and the electron-transfer coenzyme for oxidative phosphorylation. MOTS-c is the mitochondrial-derived peptide that activates AMPK and regulates nuclear gene expression in response to mitochondrial state. The pair is studied as an upstream + downstream longevity-pathway combination — NAD+ supporting the substrate pool, MOTS-c driving the signaling response.",
+    longDescription: "NAD+ is the obligate substrate of sirtuins and PARPs and the electron-transfer coenzyme for oxidative phosphorylation. MOTS-c is the mitochondrial-derived peptide that activates AMPK and regulates nuclear gene expression in response to mitochondrial state. The pair is studied as an upstream + downstream longevity-pathway combination · NAD+ supporting the substrate pool, MOTS-c driving the signaling response.",
     components: [
       { slug: "nad-plus", role: "Sirtuin / PARP substrate · mitochondrial electron-transfer coenzyme" },
       { slug: "mots-c",   role: "Mitochondrial-derived AMPK activator · exercise-mimetic" },
@@ -84,7 +84,7 @@ export const STACKS: Stack[] = [
     slug: "metabolic-tirz-reta",
     name: "Incretin Comparison",
     goal: "Side-by-side comparison framework for incretin agonists.",
-    description: "Tirzepatide + retatrutide reference framing (research only — never co-administered).",
+    description: "Tirzepatide + retatrutide reference framing (research only · never co-administered).",
     longDescription: "This is a reference framing for comparing dual GIP/GLP-1 agonism (tirzepatide) against triple GLP-1/GIP/glucagon agonism (retatrutide), not a co-administration protocol. The two compounds engage overlapping pathways and combined use is unstudied and not recommended. Buyers researching the incretin category typically order both for in-vitro characterization, not simultaneous use.",
     components: [
       { slug: "tirzepatide", role: "Dual GLP-1R / GIPR agonism (FDA-approved as Mounjaro / Zepbound)" },

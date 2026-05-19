@@ -1,4 +1,4 @@
-/**
+﻿/**
  * JSON-LD schema builders for PEPPUDEX.
  *
  * Returns full YMYL stack: MedicalWebPage + DietarySupplement + BreadcrumbList
@@ -85,7 +85,7 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
   const description = enr?.faqs?.[0]?.a ?? entry.mechanism;
   const lastUpdated = enr?.lastUpdated ?? "2026-05-19";
 
-  // 1. MedicalWebPage — page-level wrapper, @id = canonical URL
+  // 1. MedicalWebPage · page-level wrapper, @id = canonical URL
   const medicalWebPage = {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
@@ -145,7 +145,7 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
     ],
   };
 
-  // 4. MedicalStudy[] — one per citation
+  // 4. MedicalStudy[] · one per citation
   const medicalStudies = (enr?.citations ?? []).map((c) => ({
     "@context": "https://schema.org",
     "@type": "MedicalStudy",
@@ -160,7 +160,7 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
     "studySubject": { "@id": `${url}#substance` },
   }));
 
-  // 5. Dataset — evidence-grade table
+  // 5. Dataset · evidence-grade table
   const dataset = enr?.outcomes?.length
     ? {
         "@context": "https://schema.org",
@@ -178,7 +178,7 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
       }
     : null;
 
-  // 6. DefinedTerm — keep existing for backward compatibility
+  // 6. DefinedTerm · keep existing for backward compatibility
   const definedTerm = {
     "@context": "https://schema.org",
     "@type": "DefinedTerm",

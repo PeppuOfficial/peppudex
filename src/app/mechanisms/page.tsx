@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import { MECHANISMS } from "@/data/mechanisms";
 import { PEPPUDEX } from "@/data/peppudex";
@@ -6,7 +6,7 @@ import { ENRICHMENT } from "@/data/enrichment";
 
 export const metadata: Metadata = {
   title: "Mechanism Categories · PEPPUDEX",
-  description: "Browse research peptides by mechanism — incretin axis, GH-axis, tissue repair, cytoprotection, nootropic, longevity, and more. Bidirectional index linking every compound to its receptor pharmacology.",
+  description: "Browse research peptides by mechanism · incretin axis, GH-axis, tissue repair, cytoprotection, nootropic, longevity, and more. Bidirectional index linking every compound to its receptor pharmacology.",
   alternates: { canonical: "https://peppudex.com/mechanisms" },
 };
 
