@@ -166,6 +166,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${pixel.variable} ${body.variable}`}>
       <head>
+        {/* Inline solid bg-color paint · ships with HTML, immune to CSS
+            chunk caching / late stylesheet load. Prevents the
+            white-page-of-doom regression spotted post-068c020. */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html:
+              "html,body{background-color:#4FAEDE;color:#1A1A2E}",
+          }}
+        />
         {/* Organization + WebSite JSON-LD · 3-property entity unification.
             sameAs lists peppu.studio + pepputree.com + peppugirl.com so
             Google merges the network into one Knowledge Graph node. */}
