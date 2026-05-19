@@ -1,0 +1,299 @@
+{
+  "_meta": {
+    "description": "Regulatory status per peptide × jurisdiction. Categories: RUO (research use only · sold as chemical reference compound), OTC (over-the-counter cosmetic or supplement), Rx (prescription required), Scheduled (controlled / scheduled), Banned (banned, restricted, or WADA-prohibited), Unknown (no primary source located).",
+    "lastRegenerated": "2026-05-19",
+    "disclaimer": "Status as of regeneration date. Verify against linked primary sources before relying on this matrix. Regulatory landscape changes. Updated quarterly.",
+    "updateCadence": "Quarterly. Next review 2026-08-19.",
+    "primarySources": {
+      "US": "https://www.fda.gov/",
+      "EU": "https://www.ema.europa.eu/",
+      "UK": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency",
+      "AU": "https://www.tga.gov.au/",
+      "CA": "https://www.canada.ca/en/health-canada.html",
+      "JP": "https://www.pmda.go.jp/english/",
+      "KR": "https://www.mfds.go.kr/eng/",
+      "BR": "https://www.gov.br/anvisa/pt-br",
+      "IN": "https://cdsco.gov.in/",
+      "AE": "https://mohap.gov.ae/"
+    },
+    "globalNotes": {
+      "WADA": "World Anti-Doping Agency Prohibited List. Applies independently of national pharmacy law. https://www.wada-ama.org/en/prohibited-list",
+      "TGA-S10": "Australia Therapeutic Goods Administration Schedule 10 captures substances 'of such danger to health as to warrant prohibition of sale, supply and use'. https://www.tga.gov.au/products/unapproved-therapeutic-goods/poisons-standard-susmp"
+    }
+  },
+  "jurisdictions": ["US", "EU", "UK", "AU", "CA", "JP", "KR", "BR", "IN", "AE"],
+  "compounds": [
+    {
+      "slug": "retatrutide",
+      "name": "Retatrutide",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://clinicaltrials.gov/study/NCT04881760" },
+        "EU": { "status": "RUO", "sourceUrl": "https://www.ema.europa.eu/" },
+        "UK": { "status": "RUO", "sourceUrl": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency" },
+        "AU": { "status": "RUO", "sourceUrl": "https://www.tga.gov.au/products/unapproved-therapeutic-goods/poisons-standard-susmp" },
+        "CA": { "status": "RUO", "sourceUrl": "https://www.canada.ca/en/health-canada.html" },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "tirzepatide",
+      "name": "Tirzepatide",
+      "cells": {
+        "US": { "status": "Rx", "sourceUrl": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/215866s000lbl.pdf" },
+        "EU": { "status": "Rx", "sourceUrl": "https://www.ema.europa.eu/en/medicines/human/EPAR/mounjaro" },
+        "UK": { "status": "Rx", "sourceUrl": "https://www.medicines.org.uk/emc/product/13619" },
+        "AU": { "status": "Rx", "sourceUrl": "https://www.tga.gov.au/resources/auspmd/mounjaro" },
+        "CA": { "status": "Rx", "sourceUrl": "https://health-products.canada.ca/dpd-bdpp/" },
+        "JP": { "status": "Rx", "sourceUrl": "https://www.pmda.go.jp/english/review-services/reviews/approved-information/drugs/0001.html" },
+        "KR": { "status": "Rx", "sourceUrl": "https://www.mfds.go.kr/eng/" },
+        "BR": { "status": "Rx", "sourceUrl": "https://www.gov.br/anvisa/pt-br" },
+        "IN": { "status": "Rx", "sourceUrl": "https://cdsco.gov.in/" },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "bpc-157",
+      "name": "BPC-157",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.federalregister.gov/documents/2023/09/14/2023-19888/list-of-bulk-drug-substances-that-can-be-used-to-compound-drug-products-in-accordance-with-section" },
+        "EU": { "status": "RUO", "sourceUrl": "https://www.ema.europa.eu/" },
+        "UK": { "status": "RUO", "sourceUrl": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency" },
+        "AU": { "status": "Banned", "sourceUrl": "https://www.tga.gov.au/products/unapproved-therapeutic-goods/poisons-standard-susmp" },
+        "CA": { "status": "RUO", "sourceUrl": "https://www.canada.ca/en/health-canada.html" },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "ghk-cu",
+      "name": "GHK-Cu",
+      "cells": {
+        "US": { "status": "OTC", "sourceUrl": "https://www.fda.gov/cosmetics/cosmetics-laws-regulations" },
+        "EU": { "status": "OTC", "sourceUrl": "https://ec.europa.eu/growth/sectors/cosmetics_en" },
+        "UK": { "status": "OTC", "sourceUrl": "https://www.gov.uk/guidance/cosmetic-products-enforcement-regulations-2013" },
+        "AU": { "status": "OTC", "sourceUrl": "https://www.accord.asn.au/" },
+        "CA": { "status": "OTC", "sourceUrl": "https://www.canada.ca/en/health-canada/services/cosmetics.html" },
+        "JP": { "status": "OTC", "sourceUrl": "https://www.pmda.go.jp/english/" },
+        "KR": { "status": "OTC", "sourceUrl": "https://www.mfds.go.kr/eng/" },
+        "BR": { "status": "OTC", "sourceUrl": "https://www.gov.br/anvisa/pt-br" },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "tb-500",
+      "name": "TB-500",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.fda.gov/drugs/human-drug-compounding/503a-bulk-drug-substances-nominations-received" },
+        "EU": { "status": "RUO", "sourceUrl": "https://www.ema.europa.eu/" },
+        "UK": { "status": "RUO", "sourceUrl": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency" },
+        "AU": { "status": "Banned", "sourceUrl": "https://www.tga.gov.au/products/unapproved-therapeutic-goods/poisons-standard-susmp" },
+        "CA": { "status": "RUO", "sourceUrl": "https://www.canada.ca/en/health-canada.html" },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "nad-plus",
+      "name": "NAD+",
+      "cells": {
+        "US": { "status": "OTC", "sourceUrl": "https://www.fda.gov/food/dietary-supplements" },
+        "EU": { "status": "OTC", "sourceUrl": "https://food.ec.europa.eu/safety/labelling-and-nutrition/food-supplements_en" },
+        "UK": { "status": "OTC", "sourceUrl": "https://www.food.gov.uk/business-guidance/food-supplements" },
+        "AU": { "status": "OTC", "sourceUrl": "https://www.tga.gov.au/products/complementary-medicines" },
+        "CA": { "status": "OTC", "sourceUrl": "https://www.canada.ca/en/health-canada/services/drugs-health-products/natural-non-prescription.html" },
+        "JP": { "status": "OTC", "sourceUrl": "https://www.mhlw.go.jp/english/" },
+        "KR": { "status": "OTC", "sourceUrl": "https://www.mfds.go.kr/eng/" },
+        "BR": { "status": "OTC", "sourceUrl": "https://www.gov.br/anvisa/pt-br" },
+        "IN": { "status": "OTC", "sourceUrl": "https://www.fssai.gov.in/" },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "mots-c",
+      "name": "MOTS-c",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.fda.gov/" },
+        "EU": { "status": "RUO", "sourceUrl": "https://www.ema.europa.eu/" },
+        "UK": { "status": "RUO", "sourceUrl": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency" },
+        "AU": { "status": "RUO", "sourceUrl": "https://www.tga.gov.au/" },
+        "CA": { "status": "RUO", "sourceUrl": "https://www.canada.ca/en/health-canada.html" },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "tesamorelin",
+      "name": "Tesamorelin",
+      "cells": {
+        "US": { "status": "Rx", "sourceUrl": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2010/022505lbl.pdf" },
+        "EU": { "status": "Rx", "sourceUrl": "https://www.ema.europa.eu/" },
+        "UK": { "status": "Rx", "sourceUrl": "https://www.medicines.org.uk/emc/" },
+        "AU": { "status": "Rx", "sourceUrl": "https://www.tga.gov.au/" },
+        "CA": { "status": "Rx", "sourceUrl": "https://health-products.canada.ca/dpd-bdpp/" },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "selank",
+      "name": "Selank",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.fda.gov/" },
+        "EU": { "status": "Unknown", "sourceUrl": null },
+        "UK": { "status": "Unknown", "sourceUrl": null },
+        "AU": { "status": "Banned", "sourceUrl": "https://www.tga.gov.au/products/unapproved-therapeutic-goods/poisons-standard-susmp" },
+        "CA": { "status": "Unknown", "sourceUrl": null },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "semax",
+      "name": "Semax",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.fda.gov/" },
+        "EU": { "status": "Unknown", "sourceUrl": null },
+        "UK": { "status": "Unknown", "sourceUrl": null },
+        "AU": { "status": "Banned", "sourceUrl": "https://www.tga.gov.au/products/unapproved-therapeutic-goods/poisons-standard-susmp" },
+        "CA": { "status": "Unknown", "sourceUrl": null },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "ipa-cjc1295",
+      "name": "CJC-1295",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.fda.gov/" },
+        "EU": { "status": "RUO", "sourceUrl": "https://www.ema.europa.eu/" },
+        "UK": { "status": "RUO", "sourceUrl": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency" },
+        "AU": { "status": "Banned", "sourceUrl": "https://www.wada-ama.org/en/prohibited-list" },
+        "CA": { "status": "RUO", "sourceUrl": "https://www.canada.ca/en/health-canada.html" },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "ss-31",
+      "name": "SS-31",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://clinicaltrials.gov/search?intr=elamipretide" },
+        "EU": { "status": "RUO", "sourceUrl": "https://www.ema.europa.eu/" },
+        "UK": { "status": "RUO", "sourceUrl": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency" },
+        "AU": { "status": "RUO", "sourceUrl": "https://www.tga.gov.au/" },
+        "CA": { "status": "RUO", "sourceUrl": "https://www.canada.ca/en/health-canada.html" },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "5-amino-1mq",
+      "name": "5-Amino-1MQ",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.fda.gov/" },
+        "EU": { "status": "RUO", "sourceUrl": "https://www.ema.europa.eu/" },
+        "UK": { "status": "RUO", "sourceUrl": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency" },
+        "AU": { "status": "RUO", "sourceUrl": "https://www.tga.gov.au/" },
+        "CA": { "status": "RUO", "sourceUrl": "https://www.canada.ca/en/health-canada.html" },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "adamax",
+      "name": "Adamax",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.fda.gov/" },
+        "EU": { "status": "Unknown", "sourceUrl": null },
+        "UK": { "status": "Unknown", "sourceUrl": null },
+        "AU": { "status": "Unknown", "sourceUrl": null },
+        "CA": { "status": "Unknown", "sourceUrl": null },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "igf-1-lr3",
+      "name": "IGF-1 LR3",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.fda.gov/" },
+        "EU": { "status": "Banned", "sourceUrl": "https://www.wada-ama.org/en/prohibited-list" },
+        "UK": { "status": "Banned", "sourceUrl": "https://www.wada-ama.org/en/prohibited-list" },
+        "AU": { "status": "Banned", "sourceUrl": "https://www.tga.gov.au/products/unapproved-therapeutic-goods/poisons-standard-susmp" },
+        "CA": { "status": "Banned", "sourceUrl": "https://www.wada-ama.org/en/prohibited-list" },
+        "JP": { "status": "Banned", "sourceUrl": "https://www.wada-ama.org/en/prohibited-list" },
+        "KR": { "status": "Banned", "sourceUrl": "https://www.wada-ama.org/en/prohibited-list" },
+        "BR": { "status": "Banned", "sourceUrl": "https://www.wada-ama.org/en/prohibited-list" },
+        "IN": { "status": "Banned", "sourceUrl": "https://www.wada-ama.org/en/prohibited-list" },
+        "AE": { "status": "Banned", "sourceUrl": "https://www.wada-ama.org/en/prohibited-list" }
+      }
+    },
+    {
+      "slug": "klow-blend",
+      "name": "KLOW Blend",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.fda.gov/" },
+        "EU": { "status": "RUO", "sourceUrl": "https://www.ema.europa.eu/" },
+        "UK": { "status": "RUO", "sourceUrl": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency" },
+        "AU": { "status": "RUO", "sourceUrl": "https://www.tga.gov.au/" },
+        "CA": { "status": "RUO", "sourceUrl": "https://www.canada.ca/en/health-canada.html" },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    },
+    {
+      "slug": "wolverine-blend",
+      "name": "Wolverine Blend",
+      "cells": {
+        "US": { "status": "RUO", "sourceUrl": "https://www.fda.gov/" },
+        "EU": { "status": "RUO", "sourceUrl": "https://www.ema.europa.eu/" },
+        "UK": { "status": "RUO", "sourceUrl": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency" },
+        "AU": { "status": "Banned", "sourceUrl": "https://www.tga.gov.au/products/unapproved-therapeutic-goods/poisons-standard-susmp" },
+        "CA": { "status": "RUO", "sourceUrl": "https://www.canada.ca/en/health-canada.html" },
+        "JP": { "status": "Unknown", "sourceUrl": null },
+        "KR": { "status": "Unknown", "sourceUrl": null },
+        "BR": { "status": "Unknown", "sourceUrl": null },
+        "IN": { "status": "Unknown", "sourceUrl": null },
+        "AE": { "status": "Unknown", "sourceUrl": null }
+      }
+    }
+  ]
+}

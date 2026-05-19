@@ -1,0 +1,32 @@
+name: Lighthouse CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+      - run: npm run build
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.13.x
+          lhci autorun --collect.startServerCommand="npm run start" \
+                       --collect.url=http://localhost:3000/ \
+                       --collect.url=http://localhost:3000/bpc-157 \
+                       --collect.url=http://localhost:3000/vs/bpc-157-vs-tb-500 \
+                       --assert.preset=lighthouse:no-pwa \
+                       --assert.assertions.categories:performance=warn \
+                       --assert.assertions.categories:seo=error \
+                       --assert.assertions.first-contentful-paint=warn \
+                       --assert.assertions.largest-contentful-paint=error \
+                       --assert.assertions.cumulative-layout-shift=error
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

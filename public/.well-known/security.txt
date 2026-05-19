@@ -1,0 +1,8 @@
+Contact: mailto:security@peppu.studio
+Contact: https://discord.gg/pXhrnxCvJ
+Expires: 2027-05-19T00:00:00Z
+Encryption: https://peppu.studio/pgp.asc
+Acknowledgments: https://peppu.studio/security/acknowledgments
+Preferred-Languages: en
+Canonical: https://peppu.studio/.well-known/security.txt
+Policy: https://peppu.studio/security/policy
