@@ -8,6 +8,9 @@ import "./globals.css";
 // Microsoft Clarity project ID. Env var lets operator rotate without code
 // changes. Default fallback is the peppudex.com Clarity project.
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || "wta0434oly";
+// GA4 Measurement ID. Same env-var-rotation pattern as Clarity.
+const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-75ZC28V8VJ";
 
 const pixel = Press_Start_2P({
   subsets: ["latin"],
@@ -63,6 +66,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               })(window, document, "clarity", "script", "${CLARITY_ID}");
             `}
           </Script>
+        )}
+        {/* GA4 · gtag.js loader + init. afterInteractive. */}
+        {GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              id="ga4-loader"
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}');
+              `}
+            </Script>
+          </>
         )}
       </head>
       <body>
