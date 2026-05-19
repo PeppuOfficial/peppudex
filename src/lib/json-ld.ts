@@ -81,7 +81,7 @@ function entityIdAdditionalProperty(ids: EntityIds | undefined) {
 }
 
 export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | undefined): object[] {
-  const url = `${BASE}/${entry.slug}`;
+  const url = `${BASE}/peptides/${entry.slug}`;
   const description = enr?.faqs?.[0]?.a ?? entry.mechanism;
   const lastUpdated = enr?.lastUpdated ?? "2026-05-19";
 

@@ -37,12 +37,12 @@ export async function generateMetadata(
       `${entry.name} Safety Profile · Adverse Events, ` +
       `Interactions, Regulatory Status · PEPPUDEX`,
     description,
-    alternates: { canonical: `${BASE}/${slug}/safety` },
+    alternates: { canonical: `${BASE}/peptides/${slug}/safety` },
     openGraph: {
       title: `${entry.name} Safety Profile · PEPPUDEX`,
       description,
       type: "article",
-      url: `${BASE}/${slug}/safety`,
+      url: `${BASE}/peptides/${slug}/safety`,
       images: entry.card ? [entry.card] : [],
     },
   };
@@ -76,13 +76,13 @@ export default async function SafetyPage(
         "@type": "ListItem",
         "position": 2,
         "name": entry.name,
-        "item": `${BASE}/${slug}`,
+        "item": `${BASE}/peptides/${slug}`,
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "Safety Profile",
-        "item": `${BASE}/${slug}/safety`,
+        "item": `${BASE}/peptides/${slug}/safety`,
       },
     ],
   };
@@ -101,7 +101,7 @@ export default async function SafetyPage(
       <div className="page">
         <div className="brandbar">
           <Link
-            href={`/${slug}`}
+            href={`/peptides/${slug}`}
             style={{
               background: "var(--ink)",
               color: "var(--paper)",
@@ -300,7 +300,7 @@ export default async function SafetyPage(
           <h2>RELATED PAGES</h2>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <Link
-              href={`/${slug}`}
+              href={`/peptides/${slug}`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -314,7 +314,7 @@ export default async function SafetyPage(
               ◀ {entry.name.toUpperCase()} OVERVIEW
             </Link>
             <Link
-              href={`/${slug}/mechanism`}
+              href={`/peptides/${slug}/mechanism`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -328,7 +328,7 @@ export default async function SafetyPage(
               MECHANISM ▶
             </Link>
             <Link
-              href={`/${slug}/dosing`}
+              href={`/peptides/${slug}/dosing`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",

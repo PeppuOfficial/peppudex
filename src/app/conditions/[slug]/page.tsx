@@ -43,7 +43,7 @@ export default async function ConditionPage({ params }: { params: Promise<{ slug
           <h2>COMPOUNDS RESEARCHED FOR THIS GOAL · {compounds.length}</h2>
           <div className="grid">
             {compounds.map((p) => (
-              <Link key={p.slug} href={`/${p.slug}`} className="card">
+              <Link key={p.slug} href={`/peptides/${p.slug}`} className="card">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img className="art" src={p.card || "/cards/placeholder.svg"} alt={`${p.name} card`} />
                 <div className="meta">

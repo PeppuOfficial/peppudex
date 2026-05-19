@@ -372,7 +372,7 @@ export default function RegulatoryMatrixReport() {
                   >
                     <td style={{ padding: "6px 10px" }}>
                       <Link
-                        href={`/${c.slug}`}
+                        href={`/peptides/${c.slug}`}
                         style={{
                           color: "var(--ink)",
                           textDecoration: "underline",

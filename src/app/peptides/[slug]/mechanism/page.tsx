@@ -37,12 +37,12 @@ export async function generateMetadata(
   return {
     title,
     description,
-    alternates: { canonical: `${BASE}/${slug}/mechanism` },
+    alternates: { canonical: `${BASE}/peptides/${slug}/mechanism` },
     openGraph: {
       title: `${entry.name} Mechanism · PEPPUDEX`,
       description,
       type: "article",
-      url: `${BASE}/${slug}/mechanism`,
+      url: `${BASE}/peptides/${slug}/mechanism`,
       images: entry.card ? [entry.card] : [],
     },
   };
@@ -80,13 +80,13 @@ export default async function MechanismPage(
         "@type": "ListItem",
         "position": 2,
         "name": entry.name,
-        "item": `${BASE}/${slug}`,
+        "item": `${BASE}/peptides/${slug}`,
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "Mechanism",
-        "item": `${BASE}/${slug}/mechanism`,
+        "item": `${BASE}/peptides/${slug}/mechanism`,
       },
     ],
   };
@@ -105,7 +105,7 @@ export default async function MechanismPage(
       <div className="page">
         <div className="brandbar">
           <Link
-            href={`/${slug}`}
+            href={`/peptides/${slug}`}
             style={{
               background: "var(--ink)",
               color: "var(--paper)",
@@ -290,7 +290,7 @@ export default async function MechanismPage(
           <h2>RELATED PAGES</h2>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <Link
-              href={`/${slug}`}
+              href={`/peptides/${slug}`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -304,7 +304,7 @@ export default async function MechanismPage(
               ◀ {entry.name.toUpperCase()} OVERVIEW
             </Link>
             <Link
-              href={`/${slug}/dosing`}
+              href={`/peptides/${slug}/dosing`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -318,7 +318,7 @@ export default async function MechanismPage(
               DOSING LITERATURE ▶
             </Link>
             <Link
-              href={`/${slug}/safety`}
+              href={`/peptides/${slug}/safety`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",

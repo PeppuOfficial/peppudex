@@ -368,7 +368,7 @@ export default function PublicationTrendsReport() {
                       </td>
                       <td style={{ padding: "8px 12px" }}>
                         <Link
-                          href={`/${s.slug}`}
+                          href={`/peptides/${s.slug}`}
                           style={{
                             color: "var(--ink)",
                             textDecoration: "underline",
@@ -465,7 +465,7 @@ export default function PublicationTrendsReport() {
                   >
                     <td style={{ padding: "6px 10px" }}>
                       <Link
-                        href={`/${s.slug}`}
+                        href={`/peptides/${s.slug}`}
                         style={{
                           color: "var(--ink)",
                           textDecoration: "underline",

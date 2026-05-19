@@ -213,7 +213,7 @@ export default function CalculatorPage() {
             </p>
             <p className="body" style={{ marginTop: 8, opacity: 0.85 }}>{activeCard.mechanism}</p>
             <div style={{ display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
-              <Link href={`/${activeCard.slug}`} className="back" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "8px 12px", color: "var(--paper)", textDecoration: "none", background: "var(--ink)" }}>
+              <Link href={`/peptides/${activeCard.slug}`} className="back" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "8px 12px", color: "var(--paper)", textDecoration: "none", background: "var(--ink)" }}>
                 FULL CARD ▶
               </Link>
               <a className="back" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "8px 12px", color: "var(--paper)", textDecoration: "none", background: "var(--grass-deep)" }}

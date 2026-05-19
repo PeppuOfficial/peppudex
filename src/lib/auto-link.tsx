@@ -80,7 +80,7 @@ export function autoLink(text: string, currentSlug?: string): React.ReactNode {
     <>
       {segments.map((s, i) =>
         s.type === "link" ? (
-          <Link key={i} href={`/${s.slug}`} style={{ color: "var(--ink)", textDecoration: "underline" }}>
+          <Link key={i} href={`/peptides/${s.slug}`} style={{ color: "var(--ink)", textDecoration: "underline" }}>
             {s.content}
           </Link>
         ) : (

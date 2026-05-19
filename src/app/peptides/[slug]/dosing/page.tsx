@@ -39,12 +39,12 @@ export async function generateMetadata(
       `${entry.name} Dosing Literature · Published Ranges, ` +
       `Routes, Half-life · PEPPUDEX`,
     description,
-    alternates: { canonical: `${BASE}/${slug}/dosing` },
+    alternates: { canonical: `${BASE}/peptides/${slug}/dosing` },
     openGraph: {
       title: `${entry.name} Dosing Literature · PEPPUDEX`,
       description,
       type: "article",
-      url: `${BASE}/${slug}/dosing`,
+      url: `${BASE}/peptides/${slug}/dosing`,
       images: entry.card ? [entry.card] : [],
     },
   };
@@ -79,13 +79,13 @@ export default async function DosingPage(
         "@type": "ListItem",
         "position": 2,
         "name": entry.name,
-        "item": `${BASE}/${slug}`,
+        "item": `${BASE}/peptides/${slug}`,
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "Dosing Literature",
-        "item": `${BASE}/${slug}/dosing`,
+        "item": `${BASE}/peptides/${slug}/dosing`,
       },
     ],
   };
@@ -104,7 +104,7 @@ export default async function DosingPage(
       <div className="page">
         <div className="brandbar">
           <Link
-            href={`/${slug}`}
+            href={`/peptides/${slug}`}
             style={{
               background: "var(--ink)",
               color: "var(--paper)",
@@ -284,7 +284,7 @@ export default async function DosingPage(
           <h2>RELATED PAGES</h2>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <Link
-              href={`/${slug}`}
+              href={`/peptides/${slug}`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -298,7 +298,7 @@ export default async function DosingPage(
               ◀ {entry.name.toUpperCase()} OVERVIEW
             </Link>
             <Link
-              href={`/${slug}/mechanism`}
+              href={`/peptides/${slug}/mechanism`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -312,7 +312,7 @@ export default async function DosingPage(
               MECHANISM ▶
             </Link>
             <Link
-              href={`/${slug}/safety`}
+              href={`/peptides/${slug}/safety`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",

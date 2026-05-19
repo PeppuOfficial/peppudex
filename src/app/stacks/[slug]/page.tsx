@@ -44,7 +44,7 @@ export default async function StackPage({ params }: { params: Promise<{ slug: st
               const compound = PEPPUDEX.find((p) => p.slug === c.slug);
               if (!compound) return null;
               return (
-                <Link key={c.slug} href={`/${c.slug}`} className="card">
+                <Link key={c.slug} href={`/peptides/${c.slug}`} className="card">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img className="art" src={compound.card || "/cards/placeholder.svg"} alt={`${compound.name} card`} />
                   <div className="meta">

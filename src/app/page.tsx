@@ -49,7 +49,7 @@ export default function Home() {
         <section className="intro">
           <div className="box">
             <p className="pixel-h">★ TODAY&apos;S HIGHLIGHT</p>
-            <Link href={`/${featured.slug}`} style={{ display: "flex", gap: 16, marginTop: 12, alignItems: "center", textDecoration: "none", color: "var(--ink)" }}>
+            <Link href={`/peptides/${featured.slug}`} style={{ display: "flex", gap: 16, marginTop: 12, alignItems: "center", textDecoration: "none", color: "var(--ink)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={featured.card || "/cards/placeholder.svg"} alt={`${featured.name} card`} style={{ width: 80, imageRendering: "pixelated", border: "3px solid var(--ink)", boxShadow: "4px 4px 0 var(--shadow)" }} />
               <div>
@@ -74,7 +74,7 @@ export default function Home() {
         <h2 className="section-h">▶ THE INDEX · {PEPPUDEX.length} ENTRIES</h2>
         <section className="grid">
           {PEPPUDEX.map((p) => (
-            <Link key={p.id} href={`/${p.slug}`} className="card">
+            <Link key={p.id} href={`/peptides/${p.slug}`} className="card">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="art" src={p.card || "/cards/placeholder.svg"} alt={`${p.name} card`} />
               <div className="meta">

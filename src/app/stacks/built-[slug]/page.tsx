@@ -102,9 +102,9 @@ export default async function BuiltStackPage({
       position: idx + 1,
       item: {
         "@type": "DietarySupplement",
-        "@id": `${BASE}/${c.slug}#substance`,
+        "@id": `${BASE}/peptides/${c.slug}#substance`,
         name: c.name,
-        url: `${BASE}/${c.slug}`,
+        url: `${BASE}/peptides/${c.slug}`,
         description: c.mechanism,
       },
     })),
@@ -208,7 +208,7 @@ export default async function BuiltStackPage({
               return (
                 <Link
                   key={c.slug}
-                  href={`/${c.slug}`}
+                  href={`/peptides/${c.slug}`}
                   className="card"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
