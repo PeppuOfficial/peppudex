@@ -1,0 +1,143 @@
+{
+  "retatrutide": {
+    "wikidata": "Q120468350",
+    "chembl": "CHEMBL5095485"
+  },
+  "tirzepatide": {
+    "pubchem": "166567236",
+    "cas": "2023788-19-2",
+    "wikidata": "Q108324770",
+    "chembl": "CHEMBL4297839"
+  },
+  "bpc-157": {
+    "pubchem": "9941957",
+    "cas": "137525-51-0",
+    "wikidata": "Q27270252",
+    "chembl": "CHEMBL4297358"
+  },
+  "ghk-cu": {
+    "pubchem": "139035031",
+    "wikidata": "Q5168796",
+    "chembl": "CHEMBL4297339"
+  },
+  "klow-blend": {
+    "skipped": true,
+    "reason": "proprietary blend or research-only analog"
+  },
+  "nad-plus": {
+    "pubchem": "5892",
+    "cas": "53-84-9",
+    "wikidata": "Q12499775",
+    "chembl": "CHEMBL2058994"
+  },
+  "tb-500": {
+    "pubchem": "62707662",
+    "cas": "885340-08-9",
+    "wikidata": "Q7799643",
+    "chembl": "CHEMBL412531"
+  },
+  "tesamorelin": {
+    "pubchem": "16137828",
+    "cas": "218949-48-5",
+    "wikidata": "Q7705415",
+    "chembl": "CHEMBL1237026"
+  },
+  "ipa-cjc1295": {
+    "pubchem": "9831659",
+    "cas": "170851-70-4",
+    "wikidata": "Q20707829",
+    "chembl": "CHEMBL58547"
+  },
+  "mots-c": {
+    "pubchem": "146675088",
+    "cas": "1627580-64-6",
+    "wikidata": "Q56377357",
+    "chembl": "CHEMBL3350556"
+  },
+  "selank": {
+    "pubchem": "11765600",
+    "cas": "129954-34-3",
+    "wikidata": "Q5810370"
+  },
+  "semax": {
+    "pubchem": "9811102",
+    "cas": "80714-61-0",
+    "wikidata": "Q4415058"
+  },
+  "ss-31": {
+    "pubchem": "11764719",
+    "cas": "736992-21-5",
+    "wikidata": "Q27269822",
+    "chembl": "CHEMBL3833370"
+  },
+  "wolverine-blend": {
+    "skipped": true,
+    "reason": "proprietary blend or research-only analog"
+  },
+  "5-amino-1mq": {
+    "pubchem": "950107",
+    "cas": "685079-15-6",
+    "chembl": "CHEMBL1642019"
+  },
+  "adamax": {
+    "skipped": true,
+    "reason": "proprietary blend or research-only analog"
+  },
+  "igf-1-lr3": {
+    "wikidata": "Q20707573"
+  },
+  "cagrilintide": {
+    "pubchem": "171397054",
+    "cas": "1415456-99-3",
+    "wikidata": "Q123428019",
+    "chembl": "CHEMBL4802169"
+  },
+  "survodutide": {
+    "pubchem": "171378821",
+    "cas": "2805997-46-8",
+    "wikidata": "Q123907235",
+    "chembl": "CHEMBL5314776"
+  },
+  "orforglipron": {
+    "pubchem": "137319706",
+    "cas": "2212020-52-3",
+    "wikidata": "Q120491908",
+    "chembl": "CHEMBL5314577"
+  },
+  "mazdutide": {
+    "pubchem": "167312357",
+    "cas": "2259884-03-0",
+    "wikidata": "Q123248554",
+    "chembl": "CHEMBL5095358"
+  },
+  "pt-141": {
+    "pubchem": "9941379",
+    "cas": "189691-06-3",
+    "wikidata": "Q415353",
+    "chembl": "CHEMBL4297533"
+  },
+  "epitalon": {
+    "pubchem": "219042",
+    "cas": "307297-39-8"
+  },
+  "aod-9604": {
+    "pubchem": "71300630",
+    "cas": "221231-10-3",
+    "chembl": "CHEMBL6068615"
+  },
+  "kisspeptin-10": {
+    "pubchem": "25240297",
+    "cas": "374675-21-5",
+    "chembl": "CHEMBL3422406"
+  },
+  "thymosin-alpha-1": {
+    "pubchem": "16130571",
+    "cas": "62304-98-7",
+    "chembl": "CHEMBL2103979"
+  },
+  "humanin": {
+    "pubchem": "16131438",
+    "cas": "330936-69-1",
+    "chembl": "CHEMBL4447799"
+  }
+}

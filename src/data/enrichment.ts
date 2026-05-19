@@ -124,6 +124,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     entityIds: {
       pubchem: "162653930",
       chembl: "CHEMBL4297493",
+      wikidata: "Q120468350",
     },
     reviewer: "editorial-board",
   },
@@ -243,6 +244,8 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       cas: "137525-51-0",
       pubchem: "108101",
       mesh: "C543061",
+      wikidata: "Q27270252",
+      chembl: "CHEMBL4297358",
     },
     reviewer: "editorial-board",
   },
@@ -302,6 +305,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       pubchem: "73591",
       mesh: "C012326",
       chembl: "CHEMBL511685",
+      wikidata: "Q5168796",
     },
     reviewer: "editorial-board",
   },
@@ -357,6 +361,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       cas: "77591-33-4",
       pubchem: "16132341",
       chembl: "CHEMBL2107871",
+      wikidata: "Q7799643",
     },
     reviewer: "editorial-board",
   },
@@ -500,6 +505,12 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { pmid: "29983246", title: "The Mitochondrial-Encoded Peptide MOTS-c Translocates to the Nucleus to Regulate Nuclear Gene Expression", authors: "Kim KH, Son JM, Benayoun BA, Lee C", journal: "Cell Metab", year: 2018, url: "https://pubmed.ncbi.nlm.nih.gov/29983246/" },
     ],
     lastUpdated: "2026-05-19",
+    entityIds: {
+      cas: "1627580-64-6",
+      pubchem: "146675088",
+      wikidata: "Q56377357",
+      chembl: "CHEMBL3350556",
+    },
     reviewer: "editorial-board",
   },
 
@@ -548,9 +559,11 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     lastUpdated: "2026-05-19",
     entityIds: {
       cas: "218949-48-5",
+      pubchem: "16137828",
       unii: "92I64C2X5W",
       drugbank: "DB08858",
       chembl: "CHEMBL2107274",
+      wikidata: "Q7705415",
     },
     reviewer: "editorial-board",
   },
@@ -601,6 +614,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       cas: "170851-70-4",
       pubchem: "11270044",
       chembl: "CHEMBL420628",
+      wikidata: "Q20707829",
     },
     reviewer: "editorial-board",
   },
@@ -646,6 +660,12 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { title: "Synthetic Peptides as Promising Anxiolytics of New Generation: Experimental and Clinical Justification", authors: "Vyunova TV, Andreeva LA, Shevchenko KV, Myasoedov NF", journal: "Acta Naturae", year: 2018, url: "https://pubmed.ncbi.nlm.nih.gov/?term=Vyunova+Synthetic+Peptides+Anxiolytics" },
     ],
     lastUpdated: "2026-05-19",
+    entityIds: {
+      cas: "129954-34-3",
+      pubchem: "11765600",
+      wikidata: "Q5810370",
+    },
+    reviewer: "editorial-board",
   },
 
   "ss-31": {
@@ -688,6 +708,13 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { title: "Cardiolipin stabilizes respiratory-chain supercomplexes", authors: "Pfeiffer K, Gohil V, Stuart RA, et al.", journal: "J Biol Chem", year: 2003, url: "https://pubmed.ncbi.nlm.nih.gov/?term=Pfeiffer+cardiolipin+supercomplexes" },
     ],
     lastUpdated: "2026-05-19",
+    entityIds: {
+      cas: "736992-21-5",
+      pubchem: "11764719",
+      wikidata: "Q27269822",
+      chembl: "CHEMBL3833370",
+    },
+    reviewer: "editorial-board",
   },
 
   "wolverine-blend": {
@@ -764,6 +791,12 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { title: "Selective NNMT inhibitor (5-amino-1MQ) reduces adiposity in DIO mice", authors: "Neelakantan H, Vance V, Wetzel MD, et al.", journal: "J Med Chem", year: 2017, url: "https://pubmed.ncbi.nlm.nih.gov/?term=Neelakantan+NNMT+inhibitor" },
     ],
     lastUpdated: "2026-05-19",
+    entityIds: {
+      cas: "685079-15-6",
+      pubchem: "950107",
+      chembl: "CHEMBL1642019",
+    },
+    reviewer: "editorial-board",
   },
 
   "adamax": {
@@ -840,6 +873,10 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { title: "Pharmacokinetics of LR3-IGF-I in lambs", authors: "Walton PE, Dunshea FR, Ballard FJ", journal: "J Endocrinol", year: 1995, url: "https://pubmed.ncbi.nlm.nih.gov/?term=Walton+LR3+IGF" },
     ],
     lastUpdated: "2026-05-19",
+    entityIds: {
+      wikidata: "Q20707573",
+    },
+    reviewer: "editorial-board",
   },
 
   "semax": {
@@ -883,6 +920,12 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { pmid: "16635254", title: "Semax, an analogue of adrenocorticotropin (4-10), binds specifically and increases levels of BDNF in rat basal forebrain", authors: "Dolotov OV, Karpenko EA, Seredenina TS, et al.", journal: "J Neurochem", year: 2006, url: "https://pubmed.ncbi.nlm.nih.gov/16635254/" },
     ],
     lastUpdated: "2026-05-19",
+    entityIds: {
+      cas: "80714-61-0",
+      pubchem: "9811102",
+      wikidata: "Q4415058",
+    },
+    reviewer: "editorial-board",
   },
 
   "cagrilintide": {
@@ -921,7 +964,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { pmid: "34247670", title: "Once-weekly cagrilintide for weight management in people with overweight and obesity", authors: "Lau DCW, et al.", journal: "Lancet", year: 2021, url: "https://pubmed.ncbi.nlm.nih.gov/34247670/" },
       { pmid: "37364590", title: "Efficacy and safety of co-administered once-weekly cagrilintide 2·4 mg with once-weekly semaglutide 2·4 mg in type 2 diabetes", authors: "Frias JP, et al.", journal: "Lancet", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37364590/" },
     ],
-    entityIds: { cas: "1415456-99-3", pubchem: "168285063" },
+    entityIds: { cas: "1415456-99-3", pubchem: "168285063", wikidata: "Q123428019", chembl: "CHEMBL4802169" },
     lastUpdated: "2026-05-19",
     reviewer: "editorial-board",
   },
@@ -960,7 +1003,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     citations: [
       { pmid: "38219768", title: "Glucagon and GLP-1 receptor dual agonist survodutide for obesity: a randomised, double-blind, placebo-controlled, dose-finding phase 2 trial", authors: "Le Roux CW, et al.", journal: "Lancet Diabetes Endocrinol", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38219768/" },
     ],
-    entityIds: { cas: "2243737-04-0" },
+    entityIds: { cas: "2243737-04-0", pubchem: "171378821", wikidata: "Q123907235", chembl: "CHEMBL5314776" },
     lastUpdated: "2026-05-19",
     reviewer: "editorial-board",
   },
@@ -998,7 +1041,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     citations: [
       { pmid: "37364188", title: "Daily Oral GLP-1 Receptor Agonist Orforglipron for Adults with Obesity", authors: "Wharton S, et al.", journal: "N Engl J Med", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37364188/" },
     ],
-    entityIds: { cas: "2212020-52-3" },
+    entityIds: { cas: "2212020-52-3", pubchem: "137319706", wikidata: "Q120491908", chembl: "CHEMBL5314577" },
     lastUpdated: "2026-05-19",
     reviewer: "editorial-board",
   },
@@ -1038,7 +1081,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     citations: [
       { title: "Mazdutide IBI362 in obese Chinese adults: dose-finding phase 2", authors: "Zhao H, et al.", journal: "JAMA Netw Open", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/?term=mazdutide+IBI362+phase+2" },
     ],
-    entityIds: { cas: "2371824-04-7" },
+    entityIds: { cas: "2371824-04-7", pubchem: "167312357", wikidata: "Q123248554", chembl: "CHEMBL5095358" },
     lastUpdated: "2026-05-19",
     reviewer: "editorial-board",
   },
@@ -1079,7 +1122,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { pmid: "31022173", title: "Bremelanotide for the Treatment of Hypoactive Sexual Desire Disorder: Two Randomized Phase 3 Trials", authors: "Kingsberg SA, Clayton AH, et al.", journal: "Obstet Gynecol", year: 2019, url: "https://pubmed.ncbi.nlm.nih.gov/31022173/" },
       { pmid: "27193591", title: "Bremelanotide for female sexual dysfunctions in premenopausal women", authors: "Clayton AH, et al.", journal: "Womens Health (Lond)", year: 2016, url: "https://pubmed.ncbi.nlm.nih.gov/27193591/" },
     ],
-    entityIds: { cas: "189691-06-3", pubchem: "9941379", unii: "B47PT0J60R", drugbank: "DB12130" },
+    entityIds: { cas: "189691-06-3", pubchem: "9941379", unii: "B47PT0J60R", drugbank: "DB12130", wikidata: "Q415353", chembl: "CHEMBL4297533" },
     lastUpdated: "2026-05-19",
     reviewer: "editorial-board",
   },
@@ -1121,7 +1164,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { pmid: "12624353", title: "Peptides and Ageing", authors: "Khavinson VKh", journal: "Neuro Endocrinol Lett", year: 2002, url: "https://pubmed.ncbi.nlm.nih.gov/12624353/" },
       { pmid: "14523389", title: "Effects of pineal peptide preparation Epithalamin on free-radical processes in humans and animals", authors: "Khavinson V, et al.", journal: "Neuro Endocrinol Lett", year: 2003, url: "https://pubmed.ncbi.nlm.nih.gov/14523389/" },
     ],
-    entityIds: { cas: "307297-39-8" },
+    entityIds: { cas: "307297-39-8", pubchem: "219042" },
     lastUpdated: "2026-05-19",
     reviewer: "editorial-board",
   },
@@ -1162,7 +1205,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { pmid: "11713213", title: "The effects of human GH and its lipolytic fragment (AOD9604) on lipid metabolism following chronic treatment in obese mice and beta(3)-AR knock-out mice", authors: "Heffernan M, et al.", journal: "Endocrinology", year: 2001, url: "https://pubmed.ncbi.nlm.nih.gov/11713213/" },
       { pmid: "11146368", title: "Metabolic studies of a synthetic lipolytic domain (AOD9604) of human growth hormone", authors: "Ng FM, et al.", journal: "Horm Res", year: 2000, url: "https://pubmed.ncbi.nlm.nih.gov/11146368/" },
     ],
-    entityIds: { cas: "221231-10-3" },
+    entityIds: { cas: "221231-10-3", pubchem: "71300630", chembl: "CHEMBL6068615" },
     lastUpdated: "2026-05-19",
     reviewer: "editorial-board",
   },
@@ -1204,7 +1247,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { pmid: "15883247", title: "Kisspeptin-54 stimulates the hypothalamic-pituitary gonadal axis in human males", authors: "Dhillo WS, Chaudhri OB, Patterson M, et al.", journal: "J Clin Endocrinol Metab", year: 2005, url: "https://pubmed.ncbi.nlm.nih.gov/15883247/" },
       { pmid: "12944565", title: "Hypogonadotropic hypogonadism due to loss of function of the KiSS1-derived peptide receptor GPR54", authors: "de Roux N, et al.", journal: "Proc Natl Acad Sci U S A", year: 2003, url: "https://pubmed.ncbi.nlm.nih.gov/12944565/" },
     ],
-    entityIds: { cas: "374675-21-5" },
+    entityIds: { cas: "374675-21-5", pubchem: "25240297", chembl: "CHEMBL3422406" },
     lastUpdated: "2026-05-19",
     reviewer: "editorial-board",
   },
@@ -1248,7 +1291,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { pmid: "23327199", title: "The efficacy of thymosin alpha 1 for severe sepsis (ETASS): a multicentre, single-blind, randomized and controlled trial", authors: "Wu J, Zhou L, Liu J, et al.", journal: "Crit Care", year: 2013, url: "https://pubmed.ncbi.nlm.nih.gov/23327199/" },
       { pmid: "32442287", title: "Thymosin Alpha 1 Reduces the Mortality of Severe Coronavirus Disease 2019", authors: "Liu Y, Pan Y, Hu Z, et al.", journal: "Clin Infect Dis", year: 2020, url: "https://pubmed.ncbi.nlm.nih.gov/32442287/" },
     ],
-    entityIds: { cas: "62304-98-7", pubchem: "16130571", unii: "X18WDS3LCJ", drugbank: "DB13073" },
+    entityIds: { cas: "62304-98-7", pubchem: "16130571", unii: "X18WDS3LCJ", drugbank: "DB13073", chembl: "CHEMBL2103979" },
     lastUpdated: "2026-05-19",
     reviewer: "editorial-board",
   },
@@ -1291,7 +1334,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { pmid: "19470690", title: "Humanin: a novel central regulator of peripheral insulin action", authors: "Muzumdar RH, Huffman DM, Atzmon G, et al.", journal: "PLoS One", year: 2009, url: "https://pubmed.ncbi.nlm.nih.gov/19470690/" },
       { pmid: "25738459", title: "The mitochondrial-derived peptide MOTS-c promotes metabolic homeostasis and reduces obesity and insulin resistance", authors: "Lee C, Zeng J, Drew BG, et al.", journal: "Cell Metab", year: 2015, url: "https://pubmed.ncbi.nlm.nih.gov/25738459/" },
     ],
-    entityIds: { cas: "330936-69-1" },
+    entityIds: { cas: "330936-69-1", pubchem: "16131438", chembl: "CHEMBL4447799" },
     lastUpdated: "2026-05-19",
     reviewer: "editorial-board",
   },
