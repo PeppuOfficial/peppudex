@@ -5,7 +5,7 @@ const BASE = "https://peppudex.com";
 
 /** Research reports + reviewers / editorial board. */
 export async function GET() {
-  const lastmod = new Date().toISOString();
+  const lastmod = "2026-05-19";
   const urls: SitemapUrl[] = [
     {
       loc: `${BASE}/reports/peptide-research-publication-trends-2015-2026`,
@@ -33,6 +33,6 @@ export async function GET() {
     },
   ];
   return new NextResponse(buildUrlsetXml(urls), {
-    headers: { "Content-Type": "application/xml" },
+    headers: { "Content-Type": "application/xml; charset=utf-8" },
   });
 }

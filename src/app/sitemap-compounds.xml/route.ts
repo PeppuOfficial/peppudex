@@ -7,7 +7,7 @@ const SUBTOPICS = ["mechanism", "dosing", "safety"] as const;
 
 /** Compound pages + 3 Tier-3 subtopic pages each. */
 export async function GET() {
-  const lastmod = new Date().toISOString();
+  const lastmod = "2026-05-19";
   const urls: SitemapUrl[] = [];
   for (const p of PEPPUDEX) {
     urls.push({
@@ -26,6 +26,6 @@ export async function GET() {
     }
   }
   return new NextResponse(buildUrlsetXml(urls), {
-    headers: { "Content-Type": "application/xml" },
+    headers: { "Content-Type": "application/xml; charset=utf-8" },
   });
 }

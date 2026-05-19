@@ -6,7 +6,7 @@ const BASE = "https://peppudex.com";
 
 /** /vs index + /vs/{pair} comparison pages. */
 export async function GET() {
-  const lastmod = new Date().toISOString();
+  const lastmod = "2026-05-19";
   const urls: SitemapUrl[] = [
     {
       loc: `${BASE}/vs`,
@@ -24,6 +24,6 @@ export async function GET() {
     });
   }
   return new NextResponse(buildUrlsetXml(urls), {
-    headers: { "Content-Type": "application/xml" },
+    headers: { "Content-Type": "application/xml; charset=utf-8" },
   });
 }

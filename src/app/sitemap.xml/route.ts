@@ -7,7 +7,7 @@ const BASE = "https://peppudex.com";
  * Per https://www.sitemaps.org/protocol.html sitemap-index schema.
  */
 export async function GET() {
-  const lastmod = new Date().toISOString();
+  const lastmod = "2026-05-19";
   const segments = [
     "compounds",
     "categories",
@@ -30,6 +30,6 @@ export async function GET() {
     `${entries}\n` +
     `</sitemapindex>\n`;
   return new NextResponse(xml, {
-    headers: { "Content-Type": "application/xml" },
+    headers: { "Content-Type": "application/xml; charset=utf-8" },
   });
 }
