@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
-  <!-- Y2K sparkle: solid black disc + white 4-point star.
-       Solid disc renders cleanly on both light + dark notification panels
-       (Windows 11 Action Center, macOS, iOS, Android tray). -->
-  <circle cx="96" cy="96" r="96" fill="#000"/>
-  <path d="M96 24 L107 84 L168 96 L107 108 L96 168 L85 108 L24 96 L85 84 Z" fill="#fff"/>
-</svg>
