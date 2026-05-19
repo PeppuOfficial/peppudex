@@ -75,13 +75,19 @@ export default async function SafetyPage(
       {
         "@type": "ListItem",
         "position": 2,
+        "name": "Peptides",
+        "item": `${BASE}/peptides`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
         "name": entry.name,
         "item": `${BASE}/peptides/${slug}`,
       },
       {
         "@type": "ListItem",
-        "position": 3,
-        "name": "Safety Profile",
+        "position": 4,
+        "name": "Safety",
         "item": `${BASE}/peptides/${slug}/safety`,
       },
     ],

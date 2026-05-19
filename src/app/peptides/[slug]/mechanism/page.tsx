@@ -79,12 +79,18 @@ export default async function MechanismPage(
       {
         "@type": "ListItem",
         "position": 2,
+        "name": "Peptides",
+        "item": `${BASE}/peptides`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
         "name": entry.name,
         "item": `${BASE}/peptides/${slug}`,
       },
       {
         "@type": "ListItem",
-        "position": 3,
+        "position": 4,
         "name": "Mechanism",
         "item": `${BASE}/peptides/${slug}/mechanism`,
       },

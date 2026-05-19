@@ -111,6 +111,12 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
     "specialty": "Pharmacy",
     "mainContentOfPage": { "@type": "WebPageElement", "cssSelector": "article.detail" },
     "image": entry.card ? `${BASE}${entry.card}` : undefined,
+    // SpeakableSpecification · voice-assistant readout (Google Assistant, Alexa).
+    // Targets H1, body paragraphs, and first paragraph after each H2 (mechanism intro).
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1", ".body", "h2:first-of-type + p"],
+    },
   };
 
   // 2. DietarySupplement (preferred over Drug @type for RUO compliance)
@@ -206,10 +212,28 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
       }
     : null;
 
+  // 8. ImageObject · trading-card art licensing + provenance.
+  // Auto-emits for every compound that ships a card image.
+  const imageObject = entry.card
+    ? {
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        "@id": `${url}#card-image`,
+        "contentUrl": `${BASE}${entry.card}`,
+        "url": `${BASE}${entry.card}`,
+        "caption": `${entry.name} · Peppudex trading card art`,
+        "creditText": ORG_NAME,
+        "creator": { "@id": `${BASE}/#org` },
+        "copyrightNotice": `© 2026 ${ORG_NAME}`,
+        "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+      }
+    : null;
+
   const out: object[] = [medicalWebPage, dietarySupplement, breadcrumb, definedTerm];
   if (medicalStudies.length) out.push(...medicalStudies);
   if (dataset) out.push(dataset);
   if (faqPage) out.push(faqPage);
+  if (imageObject) out.push(imageObject);
   return out;
 }
 

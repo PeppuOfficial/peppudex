@@ -78,13 +78,19 @@ export default async function DosingPage(
       {
         "@type": "ListItem",
         "position": 2,
+        "name": "Peptides",
+        "item": `${BASE}/peptides`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
         "name": entry.name,
         "item": `${BASE}/peptides/${slug}`,
       },
       {
         "@type": "ListItem",
-        "position": 3,
-        "name": "Dosing Literature",
+        "position": 4,
+        "name": "Dosing",
         "item": `${BASE}/peptides/${slug}/dosing`,
       },
     ],
