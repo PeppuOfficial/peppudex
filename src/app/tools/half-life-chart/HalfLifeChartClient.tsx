@@ -322,7 +322,7 @@ export default function HalfLifeChartClient({ rows, categories }: Props) {
         {filtered.map((r) => (
           <Link
             key={r.slug}
-            href={`/${r.slug}`}
+            href={`/peptides/${r.slug}`}
             style={{
               display: "grid",
               gridTemplateColumns: "180px 1fr 140px",

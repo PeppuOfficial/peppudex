@@ -3,14 +3,15 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
 import { ENRICHMENT } from "@/data/enrichment";
-import { MECHANISMS_BY_SLUG } from "@/data/mechanisms";
 
 /**
- * Tier-3 subtopic: per-compound mechanism deep-dive.
- * Dynamic route emits one static page per compound that has
- * an ENRICHMENT entry. Joined to /[slug] parent compound page.
+ * Tier-3 subtopic: per-compound dosing literature.
  *
- * Mechanistic language only. NO dose recommendations on this page.
+ * DESCRIPTIVE ONLY. NO direct user recommendations. NO "you should
+ * take X". Every dose-mention is wrapped in a citation phrased as
+ * "the [year] study by [Author et al., PMID:XXXX] reports a range
+ * of X to Y mg administered ...". This wiki does not recommend any
+ * human dose.
  */
 
 const BASE = "https://peppudex.com";
@@ -28,27 +29,28 @@ export async function generateMetadata(
   const entry = PEPPUDEX.find((p) => p.slug === slug);
   const enr = ENRICHMENT[slug];
   if (!entry || !enr) return {};
-  const title =
-    `${entry.name} Mechanism · Receptor Binding, Signaling, ` +
-    `Half-life · PEPPUDEX`;
   const description = (
-    `Mechanism of action for ${entry.name}: ${entry.mechanism}`
+    `Published dosing literature for ${entry.name}. Descriptive ` +
+    `citations only. Half-life, route, and storage from peer-reviewed ` +
+    `sources. No human dose is recommended.`
   ).slice(0, 160);
   return {
-    title,
+    title:
+      `${entry.name} Dosing Literature · Published Ranges, ` +
+      `Routes, Half-life · PEPPUDEX`,
     description,
-    alternates: { canonical: `${BASE}/${slug}/mechanism` },
+    alternates: { canonical: `${BASE}/peptides/${slug}/dosing` },
     openGraph: {
-      title: `${entry.name} Mechanism · PEPPUDEX`,
+      title: `${entry.name} Dosing Literature · PEPPUDEX`,
       description,
       type: "article",
-      url: `${BASE}/${slug}/mechanism`,
+      url: `${BASE}/peptides/${slug}/dosing`,
       images: entry.card ? [entry.card] : [],
     },
   };
 }
 
-export default async function MechanismPage(
+export default async function DosingPage(
   { params }: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await params;
@@ -57,12 +59,9 @@ export default async function MechanismPage(
   const enr = ENRICHMENT[slug];
   if (!enr) notFound();
 
-  const categories = (enr.mechanisms ?? [])
-    .map((m) => MECHANISMS_BY_SLUG[m])
-    .filter(Boolean);
-
-  const mechanismFaqs = enr.faqs.filter((f) =>
-    /mechanism|receptor|binding|signal|half-?life|pharmacokinetic/i
+  // Pull dose-relevant FAQs (descriptive only)
+  const dosingFaqs = enr.faqs.filter((f) =>
+    /dose|dosing|cycle|administ|inject|orally|oral|half-?life|reconstitut|storage/i
       .test(f.q + " " + f.a),
   );
 
@@ -79,14 +78,20 @@ export default async function MechanismPage(
       {
         "@type": "ListItem",
         "position": 2,
-        "name": entry.name,
-        "item": `${BASE}/${slug}`,
+        "name": "Peptides",
+        "item": `${BASE}/peptides`,
       },
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Mechanism",
-        "item": `${BASE}/${slug}/mechanism`,
+        "name": entry.name,
+        "item": `${BASE}/peptides/${slug}`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Dosing",
+        "item": `${BASE}/peptides/${slug}/dosing`,
       },
     ],
   };
@@ -105,7 +110,7 @@ export default async function MechanismPage(
       <div className="page">
         <div className="brandbar">
           <Link
-            href={`/${slug}`}
+            href={`/peptides/${slug}`}
             style={{
               background: "var(--ink)",
               color: "var(--paper)",
@@ -141,9 +146,9 @@ export default async function MechanismPage(
               opacity: 0.7,
             }}
           >
-            ▶ {entry.name.toUpperCase()} · SUBTOPIC · MECHANISM
+            ▶ {entry.name.toUpperCase()} · SUBTOPIC · DOSING LITERATURE
           </p>
-          <h1>{entry.name} Mechanism</h1>
+          <h1>{entry.name} Dosing Literature</h1>
           <p
             className="body"
             style={{
@@ -153,103 +158,82 @@ export default async function MechanismPage(
               background: "var(--paper)",
             }}
           >
-            For Laboratory Research Use Only. The mechanistic information
-            below is descriptive of published research. No human dose is
-            recommended. No clinical claim is made.
+            For Laboratory Research Use Only. The content below describes
+            dose ranges as reported in peer-reviewed publications. This page
+            does not recommend any dose for human use. No clinical claim is
+            made. Always consult the original source publication.
           </p>
 
-          <h2>MECHANISM OF ACTION</h2>
-          <p className="body">{entry.mechanism}</p>
+          <h2>SCOPE OF THIS PAGE</h2>
+          <p className="body">
+            This page documents the published-literature dose ranges that
+            appear in trials and animal studies of {entry.name}. Every dose
+            mention is bound to a citation (author, year, PMID where
+            available). The PEPPUDEX wiki phrases these as descriptive
+            observations of the research record, not as instructions to the
+            reader.
+          </p>
+
+          <h2>ROUTES OF ADMINISTRATION IN PUBLISHED RESEARCH</h2>
+          <p className="body">
+            The published research record for {entry.name} reports the
+            following route(s) of administration: {enr.routes.join(", ")}.
+            Route selection in a study reflects pharmacokinetic
+            considerations specific to that protocol and is not a
+            recommendation for any human use of {entry.name}.
+          </p>
 
           {enr.halfLife && (
             <>
               <h2>PHARMACOKINETIC HALF-LIFE</h2>
               <p className="body">
-                Reported half-life for {entry.name}: {enr.halfLife}. Half-life
-                determines the kinetic window across which receptor occupancy
-                is maintained and frames the dosing rhythm used in published
-                literature.
+                Published pharmacokinetic data report a half-life for{" "}
+                {entry.name} of approximately {enr.halfLife}. Half-life is
+                the kinetic parameter that frames the dosing rhythm chosen
+                in trial design. It is a measurement, not a recommendation.
               </p>
             </>
           )}
 
-          {enr.sequence && (
-            <>
-              <h2>PRIMARY SEQUENCE</h2>
-              <p className="body">
-                {entry.name} is a defined sequence: {enr.sequence}. Synthesis
-                proceeds via solid-phase peptide synthesis with HPLC-verified
-                identity confirmation.
-              </p>
-            </>
-          )}
-
-          {categories.length > 0 && (
-            <>
-              <h2>MECHANISM CATEGORIES</h2>
-              <p className="body" style={{ marginBottom: 14 }}>
-                {entry.name} is tagged in {categories.length} mechanism
-                {categories.length === 1 ? " category" : " categories"} on
-                PEPPUDEX. Each category aggregates the broader pharmacology
-                of related compounds.
-              </p>
-              {categories.map((c) => (
-                <div key={c.slug} className="move" style={{ marginBottom: 10 }}>
-                  <div className="row">
-                    <span>
-                      ▶ <Link
-                        href={`/mechanisms/${c.slug}`}
-                        style={{ color: "var(--ink)" }}
-                      >
-                        {c.name.toUpperCase()}
-                      </Link>
-                    </span>
-                  </div>
-                  <p className="desc">{c.longDescription}</p>
-                </div>
+          <h2>CITED DOSE RANGES IN THE LITERATURE</h2>
+          <p className="body" style={{ marginBottom: 14 }}>
+            The peer-reviewed sources below report dose ranges, frequencies,
+            and durations used in studies of {entry.name}. Refer to the
+            original publication for full protocol detail.
+          </p>
+          {enr.citations && enr.citations.length > 0 ? (
+            <ul>
+              {enr.citations.map((c, i) => (
+                <li key={i}>
+                  {c.authors} ({c.year}) reports the {entry.name} protocol
+                  used in <em>{c.title}</em>, published in {c.journal}.
+                  {c.pmid ? ` PMID ${c.pmid}.` : ""}
+                  {c.nct ? ` ${c.nct}.` : ""} See the source for the
+                  protocol-level dose range, frequency, and duration.{" "}
+                  <a href={c.url} target="_blank" rel="noopener noreferrer">
+                    link
+                  </a>
+                </li>
               ))}
-            </>
+            </ul>
+          ) : (
+            <p className="body">
+              No peer-reviewed citations are currently indexed in PEPPUDEX
+              for {entry.name}. Refer to PubMed and ClinicalTrials.gov for
+              the most recent literature.
+            </p>
           )}
 
-          {enr.outcomes && enr.outcomes.length > 0 && (
+          {dosingFaqs.length > 0 && (
             <>
-              <h2>MECHANISTIC OUTCOMES IN LITERATURE</h2>
+              <h2>DOSING Q+A FROM LITERATURE</h2>
               <p className="body" style={{ marginBottom: 14 }}>
-                The following outcomes are the mechanistic endpoints reported
-                in the peer-reviewed literature, with PEPPUDEX evidence
-                grades. Grades reflect study quality and replication, not
-                clinical recommendation.
+                The questions below summarise dosing-relevant entries from
+                the literature record. Each answer is descriptive of
+                published material and is not a recommendation.
               </p>
-              <div style={{ display: "grid", gap: 10 }}>
-                {enr.outcomes.map((o) => (
-                  <div key={o.name} className="move">
-                    <div className="row">
-                      <span>▶ {o.name}</span>
-                      <span
-                        style={{
-                          background: "var(--ink)",
-                          color: "var(--paper)",
-                          padding: "4px 10px",
-                          border: "2px solid var(--ink)",
-                          fontFamily: "var(--font-pixel)",
-                          fontSize: 12,
-                        }}
-                      >
-                        GRADE {o.grade}
-                      </span>
-                    </div>
-                    <p className="desc">{o.rationale}</p>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-
-          {mechanismFaqs.length > 0 && (
-            <>
-              <h2>MECHANISM Q+A</h2>
               <div style={{ display: "grid", gap: 14 }}>
-                {mechanismFaqs.map((f, i) => (
+                {dosingFaqs.map((f, i) => (
                   <details key={i} className="move" style={{ cursor: "pointer" }}>
                     <summary
                       style={{
@@ -269,28 +253,44 @@ export default async function MechanismPage(
             </>
           )}
 
-          {enr.citations && enr.citations.length > 0 && (
+          {enr.storage && (
             <>
-              <h2>CITED LITERATURE</h2>
-              <ul>
-                {enr.citations.map((c, i) => (
-                  <li key={i}>
-                    {c.authors}. <em>{c.title}</em>. {c.journal} {c.year}.
-                    {c.pmid ? ` PMID ${c.pmid}.` : ""}
-                    {c.nct ? ` ${c.nct}.` : ""}{" "}
-                    <a href={c.url} target="_blank" rel="noopener noreferrer">
-                      link
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <h2>STORAGE OF THE REFERENCE COMPOUND</h2>
+              <p className="body">
+                <strong>Lyophilized · </strong>{enr.storage.lyo}
+              </p>
+              <p className="body" style={{ marginTop: 8 }}>
+                <strong>Reconstituted · </strong>{enr.storage.recon}
+              </p>
+              <p className="body" style={{ marginTop: 8 }}>
+                Storage conditions describe the stability of the
+                research-grade reference material, not a dosing protocol.
+              </p>
             </>
           )}
+
+          <h2>RECONSTITUTION MATH (CALCULATOR)</h2>
+          <p className="body">
+            The PEPPUDEX reconstitution calculator at{" "}
+            <Link href="/calculator">/calculator</Link> returns
+            volume-per-dose math given vial mg, BAC mL, and a target dose
+            in mcg. The calculator performs arithmetic only. It does not
+            recommend a dose. Any number entered by a researcher must come
+            from their own protocol design or the cited literature.
+          </p>
+
+          <h2>REGULATORY CONTEXT</h2>
+          <p className="body">
+            <strong>FDA · </strong>{enr.regulatory.fda}
+          </p>
+          <p className="body" style={{ marginTop: 10 }}>
+            <strong>WADA · </strong>{enr.regulatory.wada}
+          </p>
 
           <h2>RELATED PAGES</h2>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <Link
-              href={`/${slug}`}
+              href={`/peptides/${slug}`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -304,7 +304,7 @@ export default async function MechanismPage(
               ◀ {entry.name.toUpperCase()} OVERVIEW
             </Link>
             <Link
-              href={`/${slug}/dosing`}
+              href={`/peptides/${slug}/mechanism`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -315,10 +315,10 @@ export default async function MechanismPage(
                 background: "var(--ink)",
               }}
             >
-              DOSING LITERATURE ▶
+              MECHANISM ▶
             </Link>
             <Link
-              href={`/${slug}/safety`}
+              href={`/peptides/${slug}/safety`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -349,7 +349,7 @@ export default async function MechanismPage(
         </article>
 
         <footer className="footer">
-          PEPPUDEX · {entry.name} · Mechanism subtopic
+          PEPPUDEX · {entry.name} · Dosing literature subtopic
           <br />
           <a href="https://peppu.studio">PEPPU STUDIO</a> ·{" "}
           <a href="https://pepputree.com">PEPPUTREE</a> ·{" "}

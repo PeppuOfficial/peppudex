@@ -3,13 +3,14 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
 import { ENRICHMENT } from "@/data/enrichment";
+import { MECHANISMS_BY_SLUG } from "@/data/mechanisms";
 
 /**
- * Tier-3 subtopic: per-compound safety profile.
+ * Tier-3 subtopic: per-compound mechanism deep-dive.
+ * Dynamic route emits one static page per compound that has
+ * an ENRICHMENT entry. Joined to /[slug] parent compound page.
  *
- * Aggregates observed adverse events, drug interactions, and
- * contraindications from the published literature, plus WADA and
- * FDA regulatory status. Descriptive only. Not medical advice.
+ * Mechanistic language only. NO dose recommendations on this page.
  */
 
 const BASE = "https://peppudex.com";
@@ -27,28 +28,27 @@ export async function generateMetadata(
   const entry = PEPPUDEX.find((p) => p.slug === slug);
   const enr = ENRICHMENT[slug];
   if (!entry || !enr) return {};
+  const title =
+    `${entry.name} Mechanism · Receptor Binding, Signaling, ` +
+    `Half-life · PEPPUDEX`;
   const description = (
-    `Safety profile for ${entry.name}: observed adverse events, ` +
-    `interactions, contraindications, FDA and WADA status from ` +
-    `peer-reviewed literature.`
+    `Mechanism of action for ${entry.name}: ${entry.mechanism}`
   ).slice(0, 160);
   return {
-    title:
-      `${entry.name} Safety Profile · Adverse Events, ` +
-      `Interactions, Regulatory Status · PEPPUDEX`,
+    title,
     description,
-    alternates: { canonical: `${BASE}/${slug}/safety` },
+    alternates: { canonical: `${BASE}/peptides/${slug}/mechanism` },
     openGraph: {
-      title: `${entry.name} Safety Profile · PEPPUDEX`,
+      title: `${entry.name} Mechanism · PEPPUDEX`,
       description,
       type: "article",
-      url: `${BASE}/${slug}/safety`,
+      url: `${BASE}/peptides/${slug}/mechanism`,
       images: entry.card ? [entry.card] : [],
     },
   };
 }
 
-export default async function SafetyPage(
+export default async function MechanismPage(
   { params }: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await params;
@@ -57,8 +57,12 @@ export default async function SafetyPage(
   const enr = ENRICHMENT[slug];
   if (!enr) notFound();
 
-  const safetyFaqs = enr.faqs.filter((f) =>
-    /side effect|adverse|safety|contraindic|interact|pregnan|wada|fda|legal|prohibit|banned/i
+  const categories = (enr.mechanisms ?? [])
+    .map((m) => MECHANISMS_BY_SLUG[m])
+    .filter(Boolean);
+
+  const mechanismFaqs = enr.faqs.filter((f) =>
+    /mechanism|receptor|binding|signal|half-?life|pharmacokinetic/i
       .test(f.q + " " + f.a),
   );
 
@@ -75,14 +79,20 @@ export default async function SafetyPage(
       {
         "@type": "ListItem",
         "position": 2,
-        "name": entry.name,
-        "item": `${BASE}/${slug}`,
+        "name": "Peptides",
+        "item": `${BASE}/peptides`,
       },
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Safety Profile",
-        "item": `${BASE}/${slug}/safety`,
+        "name": entry.name,
+        "item": `${BASE}/peptides/${slug}`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Mechanism",
+        "item": `${BASE}/peptides/${slug}/mechanism`,
       },
     ],
   };
@@ -101,7 +111,7 @@ export default async function SafetyPage(
       <div className="page">
         <div className="brandbar">
           <Link
-            href={`/${slug}`}
+            href={`/peptides/${slug}`}
             style={{
               background: "var(--ink)",
               color: "var(--paper)",
@@ -137,9 +147,9 @@ export default async function SafetyPage(
               opacity: 0.7,
             }}
           >
-            ▶ {entry.name.toUpperCase()} · SUBTOPIC · SAFETY PROFILE
+            ▶ {entry.name.toUpperCase()} · SUBTOPIC · MECHANISM
           </p>
-          <h1>{entry.name} Safety Profile</h1>
+          <h1>{entry.name} Mechanism</h1>
           <p
             className="body"
             style={{
@@ -149,112 +159,103 @@ export default async function SafetyPage(
               background: "var(--paper)",
             }}
           >
-            For Laboratory Research Use Only. This page summarises observed
-            adverse events and regulatory status reported in the peer-
-            reviewed literature. It is not medical advice and does not
-            recommend any human use of {entry.name}.
+            For Laboratory Research Use Only. The mechanistic information
+            below is descriptive of published research. No human dose is
+            recommended. No clinical claim is made.
           </p>
 
-          <h2>OBSERVED ADVERSE EVENTS IN LITERATURE</h2>
-          {enr.safety.sideEffects.length > 0 ? (
+          <h2>MECHANISM OF ACTION</h2>
+          <p className="body">{entry.mechanism}</p>
+
+          {enr.halfLife && (
             <>
-              <p className="body" style={{ marginBottom: 14 }}>
-                The following adverse events have been observed in trials
-                or animal studies of {entry.name}. Severity, frequency, and
-                attribution depend on the source publication.
+              <h2>PHARMACOKINETIC HALF-LIFE</h2>
+              <p className="body">
+                Reported half-life for {entry.name}: {enr.halfLife}. Half-life
+                determines the kinetic window across which receptor occupancy
+                is maintained and frames the dosing rhythm used in published
+                literature.
               </p>
-              <ul>
-                {enr.safety.sideEffects.map((s, i) => (
-                  <li key={i}>{s}</li>
-                ))}
-              </ul>
             </>
-          ) : (
-            <p className="body">
-              The PEPPUDEX literature scan reports no characterised adverse
-              events for {entry.name}. Absence of recorded events does not
-              imply safety; data may be sparse.
-            </p>
           )}
 
-          <h2>DRUG INTERACTIONS</h2>
-          {enr.safety.interactions.length > 0 ? (
+          {enr.sequence && (
             <>
-              <p className="body" style={{ marginBottom: 14 }}>
-                The following interactions are reported in or theorised from
-                the published mechanism for {entry.name}.
+              <h2>PRIMARY SEQUENCE</h2>
+              <p className="body">
+                {entry.name} is a defined sequence: {enr.sequence}. Synthesis
+                proceeds via solid-phase peptide synthesis with HPLC-verified
+                identity confirmation.
               </p>
-              <ul>
-                {enr.safety.interactions.map((s, i) => (
-                  <li key={i}>{s}</li>
-                ))}
-              </ul>
             </>
-          ) : (
-            <p className="body">
-              No characterised drug interactions are indexed in PEPPUDEX
-              for {entry.name}. This reflects gaps in the literature, not
-              an absence of risk.
-            </p>
           )}
 
-          <h2>CONTRAINDICATIONS REPORTED IN LITERATURE</h2>
-          {enr.safety.contraindications.length > 0 ? (
+          {categories.length > 0 && (
             <>
+              <h2>MECHANISM CATEGORIES</h2>
               <p className="body" style={{ marginBottom: 14 }}>
-                Contraindications recorded for {entry.name} in the
-                published record:
+                {entry.name} is tagged in {categories.length} mechanism
+                {categories.length === 1 ? " category" : " categories"} on
+                PEPPUDEX. Each category aggregates the broader pharmacology
+                of related compounds.
               </p>
-              <ul>
-                {enr.safety.contraindications.map((s, i) => (
-                  <li key={i}>{s}</li>
+              {categories.map((c) => (
+                <div key={c.slug} className="move" style={{ marginBottom: 10 }}>
+                  <div className="row">
+                    <span>
+                      ▶ <Link
+                        href={`/mechanisms/${c.slug}`}
+                        style={{ color: "var(--ink)" }}
+                      >
+                        {c.name.toUpperCase()}
+                      </Link>
+                    </span>
+                  </div>
+                  <p className="desc">{c.longDescription}</p>
+                </div>
+              ))}
+            </>
+          )}
+
+          {enr.outcomes && enr.outcomes.length > 0 && (
+            <>
+              <h2>MECHANISTIC OUTCOMES IN LITERATURE</h2>
+              <p className="body" style={{ marginBottom: 14 }}>
+                The following outcomes are the mechanistic endpoints reported
+                in the peer-reviewed literature, with PEPPUDEX evidence
+                grades. Grades reflect study quality and replication, not
+                clinical recommendation.
+              </p>
+              <div style={{ display: "grid", gap: 10 }}>
+                {enr.outcomes.map((o) => (
+                  <div key={o.name} className="move">
+                    <div className="row">
+                      <span>▶ {o.name}</span>
+                      <span
+                        style={{
+                          background: "var(--ink)",
+                          color: "var(--paper)",
+                          padding: "4px 10px",
+                          border: "2px solid var(--ink)",
+                          fontFamily: "var(--font-pixel)",
+                          fontSize: 12,
+                        }}
+                      >
+                        GRADE {o.grade}
+                      </span>
+                    </div>
+                    <p className="desc">{o.rationale}</p>
+                  </div>
                 ))}
-              </ul>
-            </>
-          ) : (
-            <p className="body">
-              No formal contraindications are indexed in PEPPUDEX for{" "}
-              {entry.name}.
-            </p>
-          )}
-
-          <h2>FDA REGULATORY STATUS</h2>
-          <p className="body">{enr.regulatory.fda}</p>
-
-          <h2>WADA REGULATORY STATUS</h2>
-          <p className="body">{enr.regulatory.wada}</p>
-          {(enr.regulatory.cn || enr.regulatory.ru || enr.regulatory.au || enr.regulatory.international) && (
-            <>
-              <h2>OTHER JURISDICTIONS</h2>
-              {enr.regulatory.cn && (
-                <p className="body">
-                  <strong>China · </strong>{enr.regulatory.cn}
-                </p>
-              )}
-              {enr.regulatory.ru && (
-                <p className="body" style={{ marginTop: 8 }}>
-                  <strong>Russia · </strong>{enr.regulatory.ru}
-                </p>
-              )}
-              {enr.regulatory.au && (
-                <p className="body" style={{ marginTop: 8 }}>
-                  <strong>Australia · </strong>{enr.regulatory.au}
-                </p>
-              )}
-              {enr.regulatory.international && (
-                <p className="body" style={{ marginTop: 8 }}>
-                  <strong>International · </strong>
-                  {enr.regulatory.international}
-                </p>
-              )}
+              </div>
             </>
           )}
 
-          {safetyFaqs.length > 0 && (
+          {mechanismFaqs.length > 0 && (
             <>
-              <h2>SAFETY Q+A FROM LITERATURE</h2>
+              <h2>MECHANISM Q+A</h2>
               <div style={{ display: "grid", gap: 14 }}>
-                {safetyFaqs.map((f, i) => (
+                {mechanismFaqs.map((f, i) => (
                   <details key={i} className="move" style={{ cursor: "pointer" }}>
                     <summary
                       style={{
@@ -277,11 +278,6 @@ export default async function SafetyPage(
           {enr.citations && enr.citations.length > 0 && (
             <>
               <h2>CITED LITERATURE</h2>
-              <p className="body" style={{ marginBottom: 14 }}>
-                The safety statements above are drawn from the following
-                peer-reviewed sources. Refer to the originals for adverse-
-                event tables, attribution, and full context.
-              </p>
               <ul>
                 {enr.citations.map((c, i) => (
                   <li key={i}>
@@ -300,7 +296,7 @@ export default async function SafetyPage(
           <h2>RELATED PAGES</h2>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <Link
-              href={`/${slug}`}
+              href={`/peptides/${slug}`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -314,21 +310,7 @@ export default async function SafetyPage(
               ◀ {entry.name.toUpperCase()} OVERVIEW
             </Link>
             <Link
-              href={`/${slug}/mechanism`}
-              className="back"
-              style={{
-                fontFamily: "var(--font-pixel)",
-                fontSize: 10,
-                padding: "10px 14px",
-                color: "var(--paper)",
-                textDecoration: "none",
-                background: "var(--ink)",
-              }}
-            >
-              MECHANISM ▶
-            </Link>
-            <Link
-              href={`/${slug}/dosing`}
+              href={`/peptides/${slug}/dosing`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -340,6 +322,20 @@ export default async function SafetyPage(
               }}
             >
               DOSING LITERATURE ▶
+            </Link>
+            <Link
+              href={`/peptides/${slug}/safety`}
+              className="back"
+              style={{
+                fontFamily: "var(--font-pixel)",
+                fontSize: 10,
+                padding: "10px 14px",
+                color: "var(--paper)",
+                textDecoration: "none",
+                background: "var(--ink)",
+              }}
+            >
+              SAFETY PROFILE ▶
             </Link>
           </div>
 
@@ -359,7 +355,7 @@ export default async function SafetyPage(
         </article>
 
         <footer className="footer">
-          PEPPUDEX · {entry.name} · Safety profile subtopic
+          PEPPUDEX · {entry.name} · Mechanism subtopic
           <br />
           <a href="https://peppu.studio">PEPPU STUDIO</a> ·{" "}
           <a href="https://pepputree.com">PEPPUTREE</a> ·{" "}

@@ -16,7 +16,7 @@ export async function GET() {
     "",
     "## Compounds",
     "",
-    ...PEPPUDEX.map((p) => `- [${p.name}](https://peppudex.com/${p.slug}): ${p.tagline}`),
+    ...PEPPUDEX.map((p) => `- [${p.name}](https://peppudex.com/peptides/${p.slug}): ${p.tagline}`),
     "",
     "## Mechanism categories",
     "",

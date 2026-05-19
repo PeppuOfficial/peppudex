@@ -29,12 +29,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${e.name}${aliasLine} · Mechanism, Evidence, FAQ · PEPPUDEX`,
     description,
-    alternates: { canonical: `https://peppudex.com/${slug}` },
+    alternates: { canonical: `https://peppudex.com/peptides/${slug}` },
     openGraph: {
       title: `${e.name} · PEPPUDEX`,
       description,
       type: "article",
-      url: `https://peppudex.com/${slug}`,
+      url: `https://peppudex.com/peptides/${slug}`,
       images: e.card ? [e.card] : [],
     },
   };

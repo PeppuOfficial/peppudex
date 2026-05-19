@@ -11,14 +11,14 @@ export async function GET() {
   const urls: SitemapUrl[] = [];
   for (const p of PEPPUDEX) {
     urls.push({
-      loc: `${BASE}/${p.slug}`,
+      loc: `${BASE}/peptides/${p.slug}`,
       lastmod,
       changefreq: "weekly",
       priority: 0.9,
     });
     for (const sub of SUBTOPICS) {
       urls.push({
-        loc: `${BASE}/${p.slug}/${sub}`,
+        loc: `${BASE}/peptides/${p.slug}/${sub}`,
         lastmod,
         changefreq: "monthly",
         priority: 0.75,

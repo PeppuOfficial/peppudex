@@ -5,13 +5,11 @@ import { PEPPUDEX } from "@/data/peppudex";
 import { ENRICHMENT } from "@/data/enrichment";
 
 /**
- * Tier-3 subtopic: per-compound dosing literature.
+ * Tier-3 subtopic: per-compound safety profile.
  *
- * DESCRIPTIVE ONLY. NO direct user recommendations. NO "you should
- * take X". Every dose-mention is wrapped in a citation phrased as
- * "the [year] study by [Author et al., PMID:XXXX] reports a range
- * of X to Y mg administered ...". This wiki does not recommend any
- * human dose.
+ * Aggregates observed adverse events, drug interactions, and
+ * contraindications from the published literature, plus WADA and
+ * FDA regulatory status. Descriptive only. Not medical advice.
  */
 
 const BASE = "https://peppudex.com";
@@ -30,27 +28,27 @@ export async function generateMetadata(
   const enr = ENRICHMENT[slug];
   if (!entry || !enr) return {};
   const description = (
-    `Published dosing literature for ${entry.name}. Descriptive ` +
-    `citations only. Half-life, route, and storage from peer-reviewed ` +
-    `sources. No human dose is recommended.`
+    `Safety profile for ${entry.name}: observed adverse events, ` +
+    `interactions, contraindications, FDA and WADA status from ` +
+    `peer-reviewed literature.`
   ).slice(0, 160);
   return {
     title:
-      `${entry.name} Dosing Literature · Published Ranges, ` +
-      `Routes, Half-life · PEPPUDEX`,
+      `${entry.name} Safety Profile · Adverse Events, ` +
+      `Interactions, Regulatory Status · PEPPUDEX`,
     description,
-    alternates: { canonical: `${BASE}/${slug}/dosing` },
+    alternates: { canonical: `${BASE}/peptides/${slug}/safety` },
     openGraph: {
-      title: `${entry.name} Dosing Literature · PEPPUDEX`,
+      title: `${entry.name} Safety Profile · PEPPUDEX`,
       description,
       type: "article",
-      url: `${BASE}/${slug}/dosing`,
+      url: `${BASE}/peptides/${slug}/safety`,
       images: entry.card ? [entry.card] : [],
     },
   };
 }
 
-export default async function DosingPage(
+export default async function SafetyPage(
   { params }: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await params;
@@ -59,9 +57,8 @@ export default async function DosingPage(
   const enr = ENRICHMENT[slug];
   if (!enr) notFound();
 
-  // Pull dose-relevant FAQs (descriptive only)
-  const dosingFaqs = enr.faqs.filter((f) =>
-    /dose|dosing|cycle|administ|inject|orally|oral|half-?life|reconstitut|storage/i
+  const safetyFaqs = enr.faqs.filter((f) =>
+    /side effect|adverse|safety|contraindic|interact|pregnan|wada|fda|legal|prohibit|banned/i
       .test(f.q + " " + f.a),
   );
 
@@ -78,14 +75,20 @@ export default async function DosingPage(
       {
         "@type": "ListItem",
         "position": 2,
-        "name": entry.name,
-        "item": `${BASE}/${slug}`,
+        "name": "Peptides",
+        "item": `${BASE}/peptides`,
       },
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Dosing Literature",
-        "item": `${BASE}/${slug}/dosing`,
+        "name": entry.name,
+        "item": `${BASE}/peptides/${slug}`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Safety",
+        "item": `${BASE}/peptides/${slug}/safety`,
       },
     ],
   };
@@ -104,7 +107,7 @@ export default async function DosingPage(
       <div className="page">
         <div className="brandbar">
           <Link
-            href={`/${slug}`}
+            href={`/peptides/${slug}`}
             style={{
               background: "var(--ink)",
               color: "var(--paper)",
@@ -140,9 +143,9 @@ export default async function DosingPage(
               opacity: 0.7,
             }}
           >
-            ▶ {entry.name.toUpperCase()} · SUBTOPIC · DOSING LITERATURE
+            ▶ {entry.name.toUpperCase()} · SUBTOPIC · SAFETY PROFILE
           </p>
-          <h1>{entry.name} Dosing Literature</h1>
+          <h1>{entry.name} Safety Profile</h1>
           <p
             className="body"
             style={{
@@ -152,82 +155,112 @@ export default async function DosingPage(
               background: "var(--paper)",
             }}
           >
-            For Laboratory Research Use Only. The content below describes
-            dose ranges as reported in peer-reviewed publications. This page
-            does not recommend any dose for human use. No clinical claim is
-            made. Always consult the original source publication.
+            For Laboratory Research Use Only. This page summarises observed
+            adverse events and regulatory status reported in the peer-
+            reviewed literature. It is not medical advice and does not
+            recommend any human use of {entry.name}.
           </p>
 
-          <h2>SCOPE OF THIS PAGE</h2>
-          <p className="body">
-            This page documents the published-literature dose ranges that
-            appear in trials and animal studies of {entry.name}. Every dose
-            mention is bound to a citation (author, year, PMID where
-            available). The PEPPUDEX wiki phrases these as descriptive
-            observations of the research record, not as instructions to the
-            reader.
-          </p>
-
-          <h2>ROUTES OF ADMINISTRATION IN PUBLISHED RESEARCH</h2>
-          <p className="body">
-            The published research record for {entry.name} reports the
-            following route(s) of administration: {enr.routes.join(", ")}.
-            Route selection in a study reflects pharmacokinetic
-            considerations specific to that protocol and is not a
-            recommendation for any human use of {entry.name}.
-          </p>
-
-          {enr.halfLife && (
+          <h2>OBSERVED ADVERSE EVENTS IN LITERATURE</h2>
+          {enr.safety.sideEffects.length > 0 ? (
             <>
-              <h2>PHARMACOKINETIC HALF-LIFE</h2>
-              <p className="body">
-                Published pharmacokinetic data report a half-life for{" "}
-                {entry.name} of approximately {enr.halfLife}. Half-life is
-                the kinetic parameter that frames the dosing rhythm chosen
-                in trial design. It is a measurement, not a recommendation.
+              <p className="body" style={{ marginBottom: 14 }}>
+                The following adverse events have been observed in trials
+                or animal studies of {entry.name}. Severity, frequency, and
+                attribution depend on the source publication.
               </p>
+              <ul>
+                {enr.safety.sideEffects.map((s, i) => (
+                  <li key={i}>{s}</li>
+                ))}
+              </ul>
             </>
-          )}
-
-          <h2>CITED DOSE RANGES IN THE LITERATURE</h2>
-          <p className="body" style={{ marginBottom: 14 }}>
-            The peer-reviewed sources below report dose ranges, frequencies,
-            and durations used in studies of {entry.name}. Refer to the
-            original publication for full protocol detail.
-          </p>
-          {enr.citations && enr.citations.length > 0 ? (
-            <ul>
-              {enr.citations.map((c, i) => (
-                <li key={i}>
-                  {c.authors} ({c.year}) reports the {entry.name} protocol
-                  used in <em>{c.title}</em>, published in {c.journal}.
-                  {c.pmid ? ` PMID ${c.pmid}.` : ""}
-                  {c.nct ? ` ${c.nct}.` : ""} See the source for the
-                  protocol-level dose range, frequency, and duration.{" "}
-                  <a href={c.url} target="_blank" rel="noopener noreferrer">
-                    link
-                  </a>
-                </li>
-              ))}
-            </ul>
           ) : (
             <p className="body">
-              No peer-reviewed citations are currently indexed in PEPPUDEX
-              for {entry.name}. Refer to PubMed and ClinicalTrials.gov for
-              the most recent literature.
+              The PEPPUDEX literature scan reports no characterised adverse
+              events for {entry.name}. Absence of recorded events does not
+              imply safety; data may be sparse.
             </p>
           )}
 
-          {dosingFaqs.length > 0 && (
+          <h2>DRUG INTERACTIONS</h2>
+          {enr.safety.interactions.length > 0 ? (
             <>
-              <h2>DOSING Q+A FROM LITERATURE</h2>
               <p className="body" style={{ marginBottom: 14 }}>
-                The questions below summarise dosing-relevant entries from
-                the literature record. Each answer is descriptive of
-                published material and is not a recommendation.
+                The following interactions are reported in or theorised from
+                the published mechanism for {entry.name}.
               </p>
+              <ul>
+                {enr.safety.interactions.map((s, i) => (
+                  <li key={i}>{s}</li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p className="body">
+              No characterised drug interactions are indexed in PEPPUDEX
+              for {entry.name}. This reflects gaps in the literature, not
+              an absence of risk.
+            </p>
+          )}
+
+          <h2>CONTRAINDICATIONS REPORTED IN LITERATURE</h2>
+          {enr.safety.contraindications.length > 0 ? (
+            <>
+              <p className="body" style={{ marginBottom: 14 }}>
+                Contraindications recorded for {entry.name} in the
+                published record:
+              </p>
+              <ul>
+                {enr.safety.contraindications.map((s, i) => (
+                  <li key={i}>{s}</li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p className="body">
+              No formal contraindications are indexed in PEPPUDEX for{" "}
+              {entry.name}.
+            </p>
+          )}
+
+          <h2>FDA REGULATORY STATUS</h2>
+          <p className="body">{enr.regulatory.fda}</p>
+
+          <h2>WADA REGULATORY STATUS</h2>
+          <p className="body">{enr.regulatory.wada}</p>
+          {(enr.regulatory.cn || enr.regulatory.ru || enr.regulatory.au || enr.regulatory.international) && (
+            <>
+              <h2>OTHER JURISDICTIONS</h2>
+              {enr.regulatory.cn && (
+                <p className="body">
+                  <strong>China · </strong>{enr.regulatory.cn}
+                </p>
+              )}
+              {enr.regulatory.ru && (
+                <p className="body" style={{ marginTop: 8 }}>
+                  <strong>Russia · </strong>{enr.regulatory.ru}
+                </p>
+              )}
+              {enr.regulatory.au && (
+                <p className="body" style={{ marginTop: 8 }}>
+                  <strong>Australia · </strong>{enr.regulatory.au}
+                </p>
+              )}
+              {enr.regulatory.international && (
+                <p className="body" style={{ marginTop: 8 }}>
+                  <strong>International · </strong>
+                  {enr.regulatory.international}
+                </p>
+              )}
+            </>
+          )}
+
+          {safetyFaqs.length > 0 && (
+            <>
+              <h2>SAFETY Q+A FROM LITERATURE</h2>
               <div style={{ display: "grid", gap: 14 }}>
-                {dosingFaqs.map((f, i) => (
+                {safetyFaqs.map((f, i) => (
                   <details key={i} className="move" style={{ cursor: "pointer" }}>
                     <summary
                       style={{
@@ -247,44 +280,33 @@ export default async function DosingPage(
             </>
           )}
 
-          {enr.storage && (
+          {enr.citations && enr.citations.length > 0 && (
             <>
-              <h2>STORAGE OF THE REFERENCE COMPOUND</h2>
-              <p className="body">
-                <strong>Lyophilized · </strong>{enr.storage.lyo}
+              <h2>CITED LITERATURE</h2>
+              <p className="body" style={{ marginBottom: 14 }}>
+                The safety statements above are drawn from the following
+                peer-reviewed sources. Refer to the originals for adverse-
+                event tables, attribution, and full context.
               </p>
-              <p className="body" style={{ marginTop: 8 }}>
-                <strong>Reconstituted · </strong>{enr.storage.recon}
-              </p>
-              <p className="body" style={{ marginTop: 8 }}>
-                Storage conditions describe the stability of the
-                research-grade reference material, not a dosing protocol.
-              </p>
+              <ul>
+                {enr.citations.map((c, i) => (
+                  <li key={i}>
+                    {c.authors}. <em>{c.title}</em>. {c.journal} {c.year}.
+                    {c.pmid ? ` PMID ${c.pmid}.` : ""}
+                    {c.nct ? ` ${c.nct}.` : ""}{" "}
+                    <a href={c.url} target="_blank" rel="noopener noreferrer">
+                      link
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </>
           )}
-
-          <h2>RECONSTITUTION MATH (CALCULATOR)</h2>
-          <p className="body">
-            The PEPPUDEX reconstitution calculator at{" "}
-            <Link href="/calculator">/calculator</Link> returns
-            volume-per-dose math given vial mg, BAC mL, and a target dose
-            in mcg. The calculator performs arithmetic only. It does not
-            recommend a dose. Any number entered by a researcher must come
-            from their own protocol design or the cited literature.
-          </p>
-
-          <h2>REGULATORY CONTEXT</h2>
-          <p className="body">
-            <strong>FDA · </strong>{enr.regulatory.fda}
-          </p>
-          <p className="body" style={{ marginTop: 10 }}>
-            <strong>WADA · </strong>{enr.regulatory.wada}
-          </p>
 
           <h2>RELATED PAGES</h2>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <Link
-              href={`/${slug}`}
+              href={`/peptides/${slug}`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -298,7 +320,7 @@ export default async function DosingPage(
               ◀ {entry.name.toUpperCase()} OVERVIEW
             </Link>
             <Link
-              href={`/${slug}/mechanism`}
+              href={`/peptides/${slug}/mechanism`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -312,7 +334,7 @@ export default async function DosingPage(
               MECHANISM ▶
             </Link>
             <Link
-              href={`/${slug}/safety`}
+              href={`/peptides/${slug}/dosing`}
               className="back"
               style={{
                 fontFamily: "var(--font-pixel)",
@@ -323,7 +345,7 @@ export default async function DosingPage(
                 background: "var(--ink)",
               }}
             >
-              SAFETY PROFILE ▶
+              DOSING LITERATURE ▶
             </Link>
           </div>
 
@@ -343,7 +365,7 @@ export default async function DosingPage(
         </article>
 
         <footer className="footer">
-          PEPPUDEX · {entry.name} · Dosing literature subtopic
+          PEPPUDEX · {entry.name} · Safety profile subtopic
           <br />
           <a href="https://peppu.studio">PEPPU STUDIO</a> ·{" "}
           <a href="https://pepputree.com">PEPPUTREE</a> ·{" "}

@@ -59,14 +59,9 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  // Google Search Console site verification.
-  // Set GOOGLE_SITE_VERIFICATION on Vercel env to the value Google shows
-  // when adding peppudex.com as a URL-prefix property.
   ...(process.env.GOOGLE_SITE_VERIFICATION
     ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
     : {}),
-  // Icon stack · mirrored from peppu.studio so all 4 Peppu surfaces
-  // share one install icon set (PWA + iOS + Android + Windows 11).
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
@@ -80,17 +75,13 @@ export const metadata: Metadata = {
   },
 };
 
-// Organization JSON-LD · brand entity for the 3-property Peppu network.
-// `sameAs` lists the other 2 properties + all socials so Google collapses
-// peppu.studio + peppudex.com + pepputree.com + peppugirl.com into a
-// single Knowledge Graph node. Mirror with peppu-link-site + peppu.studio.
 const ORG_JSONLD = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${BASE_URL}/#organization`,
   name: "Peppu Labs",
   legalName: "Peppu Studio LLC",
-  alternateName: ["Peppu Studio", "Peppu Studio LLC", "Peppudex", "Peppu", "ペップ", "Peppulabs"],
+  alternateName: ["Peppu Studio", "Peppu Studio LLC", "Peppudex", "Peppu", "Peppulabs"],
   url: BASE_URL,
   description:
     "Peppudex is the Pokedex-style reference encyclopedia of research peptides. Card-style profiles, mechanism notes, evidence grades, peer-reviewed sources. Operated by Peppu Studio LLC.",
@@ -108,40 +99,8 @@ const ORG_JSONLD = {
     "https://www.youtube.com/@PeppuStudio",
     "https://www.tiktok.com/@peppumaxxing",
   ],
-  knowsAbout: [
-    "Research peptides",
-    "Retatrutide",
-    "Tirzepatide",
-    "BPC-157",
-    "GHK-Cu",
-    "MOTS-c",
-    "NAD+",
-    "TB-500",
-    "Tesamorelin",
-    "Ipamorelin",
-    "CJC-1295",
-    "Selank",
-    "Semax",
-    "Kisspeptin",
-    "Cagrilintide",
-    "Survodutide",
-    "Orforglipron",
-    "Mazdutide",
-    "PT-141",
-    "Epitalon",
-    "AOD-9604",
-    "Thymosin Alpha-1",
-    "Humanin",
-    "Mechanism of action",
-    "Evidence grading",
-    "Longevity research",
-    "Transhumanism",
-    "Biohacking",
-  ],
 };
 
-// WebSite JSON-LD · publisher references the Organization @id above so
-// the entity graph stays singular.
 const WEBSITE_JSONLD = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -153,22 +112,12 @@ const WEBSITE_JSONLD = {
   inLanguage: ["en-US"],
   copyrightYear: 2026,
   copyrightHolder: { "@id": `${BASE_URL}/#organization` },
-  about: [
-    { "@type": "Thing", name: "Research peptides" },
-    { "@type": "Thing", name: "Peptide mechanism of action" },
-    { "@type": "Thing", name: "Evidence-graded peptide profiles" },
-    { "@type": "Thing", name: "Longevity research" },
-    { "@type": "Thing", name: "Transhumanism" },
-  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${pixel.variable} ${body.variable}`}>
       <head>
-        {/* Organization + WebSite JSON-LD · 3-property entity unification.
-            sameAs lists peppu.studio + pepputree.com + peppugirl.com so
-            Google merges the network into one Knowledge Graph node. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSONLD) }}
