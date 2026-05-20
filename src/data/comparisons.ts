@@ -465,7 +465,7 @@ export const COMPARISONS: Comparison[] = [
       { row: "Class", aValue: "Mitochondrial-derived peptide (MDP)", bValue: "Mitochondrial-derived peptide (MDP)" },
       { row: "Encoded by", aValue: "Mitochondrial 16S rRNA short open reading frame", bValue: "Mitochondrial 12S rRNA short open reading frame" },
       { row: "Length", aValue: "24 amino acids", bValue: "16 amino acids" },
-      { row: "Discovery", aValue: "Hashimoto et al. 2001 (PNAS PMID 11371641) from cDNA library of dying neurons", bValue: "Lee et al. 2015 (Cell Metab PMID 25738459) Cohen group at USC" },
+      { row: "Discovery", aValue: "Hashimoto et al. 2001 (PNAS PMID 11371646) from cDNA library of dying neurons", bValue: "Lee et al. 2015 (Cell Metab PMID 25738459) Cohen group at USC" },
       { row: "Primary mechanism", aValue: "Anti-apoptotic via BAX inhibition · neuroprotection", bValue: "AMPK activation · folate-cycle inhibition · nuclear translocation" },
       { row: "Research focus", aValue: "Alzheimer cell-line models · insulin sensitivity · longevity correlation", bValue: "Insulin sensitivity · exercise-mimetic · physical-decline mitigation" },
       { row: "Notable evidence", aValue: "Muzumdar 2009 insulin action in obese rats · Lee 2015 longevity correlation", bValue: "Lee 2015 (Cell Metab) · Reynolds 2021 (Nat Commun) aged mice exercise mimetic" },

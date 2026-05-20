@@ -115,7 +115,7 @@ export const PEPPUDEX: PeppudexEntry[] = [
     hp: 130,
     level: 70,
     types: ["regen", "cytoprotection"],
-    card: "/cards/placeholder.svg", // BPC-157 card art pending · generic placeholder beats wrong-compound art for og:image + crawler accuracy
+    card: "/cards/bpc-157.png",
     mechanism: "Synthetic 15-amino-acid fragment of a gastric protective protein. Documented in animal-model literature for tissue remodeling, GI mucosal barrier signaling, and the cytoprotection paradigm.",
     moves: [
       { name: "Cyto Veil", power: 40, desc: "Stabilizes gastric and vascular endothelium." },

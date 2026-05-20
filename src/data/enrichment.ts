@@ -1289,7 +1289,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { q: "Is it on the WHO essential medicines list?", a: "Thymosin alpha-1 is on the essential medicines list in some countries (e.g., China) but not the WHO Model List as of the latest revision." },
     ],
     citations: [
-      { pmid: "19392576", title: "From lab to bedside: emerging clinical applications of thymosin alpha 1", authors: "Goldstein AL, Goldstein AL", journal: "Expert Opin Biol Ther", year: 2009, url: "https://pubmed.ncbi.nlm.nih.gov/19392576/" },
+      { pmid: "19392576", title: "From lab to bedside: emerging clinical applications of thymosin alpha 1", authors: "Goldstein AL, Hannappel E", journal: "Expert Opin Biol Ther", year: 2009, url: "https://pubmed.ncbi.nlm.nih.gov/19392576/" },
       { pmid: "23327199", title: "The efficacy of thymosin alpha 1 for severe sepsis (ETASS): a multicentre, single-blind, randomized and controlled trial", authors: "Wu J, Zhou L, Liu J, et al.", journal: "Crit Care", year: 2013, url: "https://pubmed.ncbi.nlm.nih.gov/23327199/" },
       { pmid: "32442287", title: "Thymosin Alpha 1 Reduces the Mortality of Severe Coronavirus Disease 2019", authors: "Liu Y, Pan Y, Hu Z, et al.", journal: "Clin Infect Dis", year: 2020, url: "https://pubmed.ncbi.nlm.nih.gov/32442287/" },
     ],
@@ -1332,9 +1332,8 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { q: "Is there a humanin variant called HNG?", a: "HNG (S14G-humanin) is a synthetic analog with a serine-to-glycine substitution at position 14 that increases potency ~1000-fold in some cell models. It is the variant most commonly used in mechanism studies." },
     ],
     citations: [
-      { pmid: "11371641", title: "A rescue factor abolishing neuronal cell death by a wide spectrum of familial Alzheimer's disease genes and Abeta", authors: "Hashimoto Y, Niikura T, Tajima H, et al.", journal: "Proc Natl Acad Sci U S A", year: 2001, url: "https://pubmed.ncbi.nlm.nih.gov/11371641/" },
+      { pmid: "11371646", title: "A rescue factor abolishing neuronal cell death by a wide spectrum of familial Alzheimer's disease genes and Abeta", authors: "Hashimoto Y, Niikura T, Tajima H, et al.", journal: "Proc Natl Acad Sci U S A", year: 2001, url: "https://pubmed.ncbi.nlm.nih.gov/11371646/" },
       { pmid: "19470690", title: "Humanin: a novel central regulator of peripheral insulin action", authors: "Muzumdar RH, Huffman DM, Atzmon G, et al.", journal: "PLoS One", year: 2009, url: "https://pubmed.ncbi.nlm.nih.gov/19470690/" },
-      { pmid: "25738459", title: "The mitochondrial-derived peptide MOTS-c promotes metabolic homeostasis and reduces obesity and insulin resistance", authors: "Lee C, Zeng J, Drew BG, et al.", journal: "Cell Metab", year: 2015, url: "https://pubmed.ncbi.nlm.nih.gov/25738459/" },
     ],
     entityIds: { cas: "330936-69-1", pubchem: "16131438", chembl: "CHEMBL4447799" },
     lastUpdated: "2026-05-19",
