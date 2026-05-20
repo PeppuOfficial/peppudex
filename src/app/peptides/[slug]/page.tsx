@@ -12,6 +12,7 @@ import { peppugirlPostsForCompound } from "@/data/peppugirl-links";
 import { wikiUrlFor } from "@/lib/wiki-map";
 import { autoLink } from "@/lib/auto-link";
 import { PageviewBeacon, TrackedLink } from "@/components/TrackClient";
+import { SourceForResearch } from "@/components/SourceForResearch";
 
 export function generateStaticParams() {
   return PEPPUDEX.map((p) => ({ slug: p.slug }));
@@ -79,6 +80,10 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
 
         <article className="detail">
           <PageviewBeacon compound={entry.slug} />
+
+          {/* Where-to-source widget · Letterboxd / IMDB pattern. Sits above
+              the hero so commercial intent has a clean landing spot. */}
+          <SourceForResearch slug={entry.slug} name={entry.name} />
 
           {/* ── 1. HERO · CARD + IDENTIFIERS ── */}
           <section className="top" style={{ marginBottom: 24 }}>
