@@ -27,6 +27,16 @@ const body = VT323({
 
 const BASE_URL = "https://peppudex.com";
 
+// Mobile viewport · viewport-fit=cover so safe-area-inset env() resolves
+// on iPhone notch + home indicator. Apple HIG · iOS native pattern.
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover" as const,
+  themeColor: "#1A1A2E",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: "List of Peptides and What They Do · 27 Research Peptide Cards · Peppudex",

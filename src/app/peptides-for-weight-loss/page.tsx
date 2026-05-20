@@ -163,7 +163,7 @@ export default function PeptidesForWeightLossPage() {
           </section>
 
           <h2>RECEPTOR AGONISM MATRIX</h2>
-          <div style={{ background: "var(--paper)", border: "4px solid var(--ink)", boxShadow: "6px 6px 0 var(--shadow)", overflow: "hidden", marginTop: 8 }}>
+          <div className="scroll-x-on-mobile" style={{ background: "var(--paper)", border: "4px solid var(--ink)", boxShadow: "6px 6px 0 var(--shadow)", marginTop: 8 }}>
             <div style={{ display: "grid", gridTemplateColumns: "1.4fr repeat(4, 1fr)", borderBottom: "3px solid var(--ink)", background: "var(--ink)", color: "var(--paper)" }}>
               <div style={{ fontFamily: "var(--font-pixel)", fontSize: 9, padding: "10px 12px", letterSpacing: "0.16em" }}>COMPOUND</div>
               <div style={{ fontFamily: "var(--font-pixel)", fontSize: 9, padding: "10px 12px", letterSpacing: "0.16em", borderLeft: "2px solid var(--paper)" }}>GLP-1</div>

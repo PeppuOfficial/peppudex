@@ -357,3 +357,279 @@ html, body {
   background: var(--ink); color: var(--paper);
   text-transform: uppercase;
 }
+
+/* ─────────────────────────────────────────────────────────────
+ * iOS / Android · mobile optimization pass (2026-05-20)
+ *
+ * - iPhone safe-area insets (top notch + bottom home-indicator)
+ * - VT323 body scaled to 17px (iOS native body)
+ * - Press Start 2P scaled down · stays readable
+ * - Horizontal-scroll nav + mechanism shelf (iOS App Store pattern)
+ * - 2-col card grid on phone (Photos / App Store grid)
+ * - 44px+ touch targets (Apple HIG)
+ * - No horizontal page overflow
+ * - Disable double-tap zoom on tap targets
+ * ─────────────────────────────────────────────────────────── */
+
+html, body {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+button, a, [role="button"], input, summary {
+  touch-action: manipulation;
+}
+
+/* Safe area · iPhone notch + home indicator */
+.header-strip {
+  padding-top: calc(8px + env(safe-area-inset-top));
+}
+.disclaimer-band {
+  padding-bottom: calc(6px + env(safe-area-inset-bottom));
+}
+
+/* Tablet · iPad portrait + small laptop */
+@media (max-width: 768px) {
+  .billboard { grid-template-columns: 1fr; }
+  .stack-grid { grid-template-columns: 1fr; }
+}
+
+/* Phone · iPhone SE through Pro Max */
+@media (max-width: 480px) {
+  /* Body type · iOS native body size */
+  .body { font-size: 17px; line-height: 1.45; }
+
+  /* Page container · tighter outer padding (iOS 16px gutter) */
+  .page { padding: 0 12px 32px; }
+
+  /* Brand bar · stack tag below logo for narrow viewports */
+  .brandbar {
+    padding: 12px 0 6px;
+    gap: 6px;
+  }
+  .brand {
+    font-size: 22px;
+    text-shadow: 3px 3px 0 var(--ink), -1px -1px 0 var(--ink), 1px -1px 0 var(--ink), -1px 1px 0 var(--ink), 1px 1px 0 var(--ink);
+  }
+  .brand-sub {
+    font-size: 7px;
+    letter-spacing: 0.16em;
+    line-height: 1.6;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  /* Header strip + disclaimer band · iOS small caption */
+  .header-strip {
+    font-size: 7.5px;
+    letter-spacing: 0.14em;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .disclaimer-band { font-size: 7px; letter-spacing: 0.14em; }
+
+  /* Top nav · horizontal scroll like iOS section header */
+  .topnav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 4px -12px 14px;
+    padding: 4px 12px;
+    gap: 6px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .topnav::-webkit-scrollbar { display: none; }
+  .topnav a {
+    flex-shrink: 0;
+    font-size: 8px;
+    padding: 10px 12px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 2px 2px 0 var(--shadow);
+  }
+
+  /* Search bar · taller touch target, smaller font, shorter placeholder */
+  .peppudex-search { margin: 0 0 14px; }
+  .peppudex-search input {
+    font-size: 10px;
+    padding: 14px 14px;
+    box-shadow: 3px 3px 0 var(--shadow);
+    min-height: 48px;
+    letter-spacing: 0.06em;
+  }
+  .peppudex-search input:focus { transform: none; box-shadow: 4px 4px 0 var(--shadow); }
+  .peppudex-search-results { box-shadow: 4px 4px 0 var(--shadow); max-height: 50vh; }
+  .peppudex-search-results li a {
+    padding: 10px 12px;
+    min-height: 52px;
+  }
+  .peppudex-search-results .r-name { font-size: 10px; }
+  .peppudex-search-results .r-why { font-size: 14px; }
+
+  /* Featured pill · iOS hero-banner compact */
+  .featured-pill {
+    margin: 0 0 14px;
+    padding: 11px 13px;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    gap: 8px;
+    min-height: 40px;
+  }
+  .featured-pill:hover { transform: none; }
+  .featured-pill .featured-label { display: none; }
+  .featured-pill .featured-name {
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Section headers · readable, less aggressive spacing */
+  .section-h {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    margin: 22px 0 10px;
+    line-height: 1.6;
+    text-shadow: 2px 2px 0 var(--ink);
+  }
+
+  /* Card grid · 2-col on phone (App Store / Photos pattern) */
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .card {
+    padding: 8px 8px;
+    gap: 6px;
+    box-shadow: 3px 3px 0 var(--shadow);
+    border-width: 3px;
+  }
+  .card:hover, .card:active { transform: none; box-shadow: 3px 3px 0 var(--shadow); }
+  .card .art { border-width: 2px; }
+  .card .name { font-size: 9px; line-height: 1.3; }
+  .card .meta { font-size: 7px; }
+  .card .types { gap: 3px; }
+  .badge { font-size: 6px; padding: 3px 5px; }
+
+  /* Mechanism shelf · horizontal scroll · iOS chip-row */
+  .shelf {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -12px;
+    padding: 4px 12px 8px;
+    gap: 6px;
+    scrollbar-width: none;
+  }
+  .shelf::-webkit-scrollbar { display: none; }
+  .shelf-tile {
+    flex-shrink: 0;
+    font-size: 8px;
+    padding: 10px 12px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 2px 2px 0 var(--shadow);
+  }
+  .shelf-tile:hover { transform: none; box-shadow: 2px 2px 0 var(--shadow); }
+
+  /* Stacks · single col on phone */
+  .stack-grid { gap: 10px; }
+  .stack-card {
+    padding: 12px 14px;
+    box-shadow: 3px 3px 0 var(--shadow);
+    border-width: 3px;
+  }
+  .stack-card:hover { transform: none; box-shadow: 3px 3px 0 var(--shadow); }
+
+  /* Billboards · stacked + tighter */
+  .billboard { gap: 10px; padding: 4px 0; }
+  .billboard a {
+    padding: 16px 14px;
+    box-shadow: 4px 4px 0 var(--shadow);
+    border-width: 3px;
+    gap: 6px;
+  }
+  .billboard a:hover, .billboard a:active { transform: none; box-shadow: 4px 4px 0 var(--shadow); }
+  .billboard .bb-eye { font-size: 8px; }
+  .billboard .bb-title { font-size: 16px; line-height: 1.4; }
+  .billboard .bb-sub { font-size: 16px; }
+
+  /* Welcome intro */
+  .intro { margin: 14px 0 4px; }
+  .intro .box { padding: 14px 14px; box-shadow: 4px 4px 0 var(--shadow); border-width: 3px; }
+  .intro .pixel-h { font-size: 11px; line-height: 1.6; }
+
+  /* Generic boxes · tighter */
+  .box { padding: 14px 14px; box-shadow: 4px 4px 0 var(--shadow); border-width: 3px; }
+
+  /* Footer · iOS small caption */
+  .footer {
+    font-size: 7px;
+    padding: 14px 12px;
+    line-height: 1.9;
+  }
+
+  /* Detail (compound + vs + landing) pages · iOS-native spacing */
+  .detail { padding: 12px 0 32px; }
+  .detail h1 {
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    text-wrap: balance;
+  }
+  .detail h2 {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    margin: 18px 0 8px;
+    line-height: 1.6;
+  }
+  .detail h3 { font-size: 11px; line-height: 1.5; }
+  .detail .top { gap: 16px; }
+  .detail .moves { gap: 8px; }
+  .move { padding: 10px 12px; border-width: 2px; }
+  .move .row { font-size: 10px; gap: 8px; }
+  .move .desc { font-size: 16px; }
+  .detail ul li { font-size: 17px; padding-left: 16px; line-height: 1.5; }
+  .detail ul li::before { font-size: 10px; top: 4px; }
+  .detail .back {
+    font-size: 9px;
+    padding: 10px 12px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Comparison / matrix tables · horizontal scroll on phone */
+  .detail [class*="comparisonTable"],
+  .detail > div[style*="grid-template-columns"]:not(.grid):not(.shelf):not(.stack-grid),
+  .scroll-x-on-mobile {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* FAQ details · iOS-style accordion */
+  details summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Helper class · wrap wide tables to scroll horizontally on phone */
+.scroll-x-on-mobile {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.scroll-x-on-mobile > * {
+  min-width: 480px;
+}
+@media (min-width: 481px) {
+  .scroll-x-on-mobile > * {
+    min-width: 0;
+  }
+}
