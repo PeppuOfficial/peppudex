@@ -8,11 +8,18 @@ import HalfLifeChartClient, {
 } from "./HalfLifeChartClient";
 
 export const metadata: Metadata = {
-  title: "Peptide Half-Life Comparison Chart · PEPPUDEX",
+  title: "Peptide Half-Life Chart · Retatrutide, Tirzepatide, BPC-157, TB-500 + 23 More · Peppudex",
   description:
-    "Interactive horizontal bar chart of plasma half-life across 17 research peptides. Filter by mechanism (incretin, tissue repair, longevity, nootropic). Shareable URLs.",
+    "Peptide half-life chart comparing plasma half-life for 27 research peptides. Retatrutide ~6 days. Tirzepatide ~5 days. BPC-157 ~4 hr. TB-500 ~2-3 days. GHK-Cu ~3 hr. Sortable, pharmacokinetic sources cited.",
   alternates: {
     canonical: "https://peppudex.com/tools/half-life-chart",
+  },
+  openGraph: {
+    title: "Peptide Half-Life Chart · 27 Research Peptides Compared",
+    description:
+      "Plasma half-life across 27 research peptides. Incretin agonists ~5-7 days. Tissue-repair peptides hours to days. Sortable, sources cited.",
+    type: "website",
+    url: "https://peppudex.com/tools/half-life-chart",
   },
 };
 
@@ -187,11 +194,12 @@ export default function HalfLifeChartPage() {
         </div>
 
         <article className="detail">
-          <h1>PEPTIDE HALF-LIFE COMPARISON</h1>
+          <h1>PEPTIDE HALF-LIFE CHART</h1>
+          <p style={{ fontFamily: "var(--font-pixel)", fontSize: 11, letterSpacing: "0.14em", marginTop: 8, opacity: 0.7 }}>
+            27 RESEARCH PEPTIDES COMPARED · PLASMA HALF-LIFE · SORTABLE
+          </p>
           <p className="body" style={{ marginTop: 12 }}>
-            Interactive plasma half-life chart across the 17 PEPPUDEX
-            compounds. Filter by mechanism category or share a custom
-            compound set via URL.
+            Peptide half-life chart for the {PEPPUDEX.length} research compounds in PEPPUDEX. Retatrutide and tirzepatide sit at the multi-day end (weekly dosing in trials). BPC-157, TB-500 and GHK-Cu sit at the hours-to-days range. MOTS-c, semax and selank clear in minutes. Filter by mechanism category or share a custom compound set via URL.
           </p>
 
           <HalfLifeChartClient rows={rows} categories={categories} />

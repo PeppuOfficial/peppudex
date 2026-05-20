@@ -127,6 +127,10 @@ export default function CalculatorPage() {
           </span>
         </div>
 
+        <h1 style={{ fontFamily: "var(--font-pixel)", fontSize: 20, color: "var(--paper)", textShadow: "3px 3px 0 var(--ink)", margin: "4px 0 18px", letterSpacing: "0.04em" }}>
+          PEPTIDE RECONSTITUTION CALCULATOR
+        </h1>
+
       <section>
         <div className="box" style={{ marginBottom: 14 }}>
           <p style={{ fontFamily: "var(--font-pixel)", fontSize: 11, letterSpacing: "0.16em" }}>
