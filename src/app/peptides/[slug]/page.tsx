@@ -14,7 +14,6 @@ import { autoLink } from "@/lib/auto-link";
 import { PageviewBeacon, TrackedLink } from "@/components/TrackClient";
 import { SourceForResearch } from "@/components/SourceForResearch";
 import { TableOfContents } from "@/components/TableOfContents";
-import { isComingSoon } from "@/data/coming-soon";
 
 export function generateStaticParams() {
   return PEPPUDEX.map((p) => ({ slug: p.slug }));
@@ -107,14 +106,9 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
 
           {/* Where-to-source widget · Letterboxd / IMDB pattern. Sits above
               the hero so commercial intent has a clean landing spot.
-              comingSoon swaps the primary CTA for a COMING SOON pill so
-              we don't leak the link to a /products/<slug> page that's
-              gated by peppu.studio's catalog-grid filter. */}
-          <SourceForResearch
-            slug={entry.slug}
-            name={entry.name}
-            comingSoon={isComingSoon(entry.slug)}
-          />
+              Peppudex stays education-only · the storefront handles its
+              own catalog state (live vs coming soon) on its side. */}
+          <SourceForResearch slug={entry.slug} name={entry.name} />
 
           {/* ── 1. HERO · CARD + IDENTIFIERS ── */}
           <section className="top" style={{ marginBottom: 24 }}>
