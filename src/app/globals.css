@@ -444,26 +444,24 @@ button, a, [role="button"], input, summary {
   }
   .disclaimer-band { font-size: 7px; letter-spacing: 0.14em; }
 
-  /* Top nav · horizontal scroll like iOS section header */
+  /* Top nav · wrap so every button is visible on mobile.
+   * Previously horizontal-scrolled · users missed STACKS + COMPARE because
+   * the right-edge had no scroll affordance. Wrap is simpler than a fade
+   * gradient + safer for discoverability. */
   .topnav {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    margin: 4px -12px 14px;
-    padding: 4px 12px;
+    flex-wrap: wrap;
+    margin: 4px 0 14px;
     gap: 6px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
   }
-  .topnav::-webkit-scrollbar { display: none; }
   .topnav a {
-    flex-shrink: 0;
+    flex: 1 1 calc(33.333% - 6px);
     font-size: 8px;
-    padding: 10px 12px;
+    padding: 10px 8px;
     min-height: 40px;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     box-shadow: 2px 2px 0 var(--shadow);
   }
 
@@ -537,25 +535,23 @@ button, a, [role="button"], input, summary {
   .card .types { gap: 3px; }
   .badge { font-size: 6px; padding: 3px 5px; }
 
-  /* Mechanism shelf · horizontal scroll · iOS chip-row */
+  /* Mechanism shelf · wrap so every chip is visible on mobile.
+   * Previously horizontal-scrolled · users missed CYTOPROTECTION (and any
+   * chip beyond #3) because the right edge clipped without affordance. */
   .shelf {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    margin: 0 -12px;
-    padding: 4px 12px 8px;
+    flex-wrap: wrap;
+    margin: 0;
     gap: 6px;
-    scrollbar-width: none;
   }
-  .shelf::-webkit-scrollbar { display: none; }
   .shelf-tile {
-    flex-shrink: 0;
+    flex: 1 1 calc(50% - 6px);
     font-size: 8px;
-    padding: 10px 12px;
+    padding: 10px 8px;
     min-height: 40px;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     box-shadow: 2px 2px 0 var(--shadow);
   }
   .shelf-tile:hover { transform: none; box-shadow: 2px 2px 0 var(--shadow); }
