@@ -51,12 +51,21 @@ export const metadata: Metadata = {
     type: "website",
     url: BASE_URL,
     locale: "en_US",
+    images: [
+      {
+        url: `${BASE_URL}/og-default.png`,
+        width: 1344,
+        height: 768,
+        alt: "Peppudex · Research Peptide Encyclopedia · 7 trading-card spread",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "List of Peptides and What They Do · 27 Research Peptide Reference Cards",
     description:
       "Mechanism, evidence grades, FAQs, peer-reviewed sources for 27 research peptides.",
+    images: [`${BASE_URL}/og-default.png`],
   },
   robots: {
     index: true,
