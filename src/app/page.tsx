@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PEPPUDEX } from "@/data/peppudex";
 import { MECHANISMS } from "@/data/mechanisms";
 import { STACKS } from "@/data/stacks";
+import SearchBar from "@/components/SearchBar";
 
 export default function Home() {
   // Daily-highlight · deterministic rotation, day-of-year → compound.
@@ -12,17 +13,18 @@ export default function Home() {
     <main>
       <div className="header-strip">FOR LABORATORY RESEARCH USE ONLY · NOT FOR HUMAN CONSUMPTION</div>
 
-      {/* SINGLE CENTERED CONTAINER · max 1100px so cards never stretch edge-to-edge */}
       <div className="page">
 
+        {/* BRAND + TAGLINE · "Peptide Pokedex" is the search-engine-facing handle */}
         <div className="brandbar">
-          <span className="brand">
+          <h1 className="brand">
             PEPPU<span className="accent">DEX</span>
-          </span>
-          <span className="brand-sub">A POKEDEX OF RESEARCH PEPTIDES · v1.2</span>
+            <span className="sr-only"> · The Peptide Pokedex · Research Peptide Encyclopedia</span>
+          </h1>
+          <span className="brand-sub">THE PEPTIDE POKEDEX · {PEPPUDEX.length} RESEARCH PEPTIDES</span>
         </div>
 
-        {/* GLOBAL NAV · sits below the brand bar */}
+        {/* GLOBAL NAV */}
         <nav className="topnav">
           <Link href="/calculator">RECON CALC</Link>
           <Link href="/mechanisms">MECHANISMS</Link>
@@ -31,52 +33,24 @@ export default function Home() {
           <Link href="/vs">COMPARE</Link>
         </nav>
 
-        {/* TWO BILLBOARD ADS · big and obvious · HOMEPAGE only */}
-        <div className="billboard">
-          <a className="tone-labs" href="https://peppu.studio?utm_source=peppudex&utm_medium=billboard&utm_campaign=labs" rel="noopener noreferrer">
-            <span className="bb-eye">▶ ENTER THE LAB ◀</span>
-            <span className="bb-title">PEPPU LABS</span>
-            <span className="bb-sub">Buy research-grade peptides · ≥99% purity · third-party COAs</span>
-          </a>
-          <a className="tone-tree" href="https://pepputree.com?utm_source=peppudex&utm_medium=billboard&utm_campaign=tree" rel="noopener noreferrer">
-            <span className="bb-eye">▶ JOIN THE TREE ◀</span>
-            <span className="bb-title">PEPPUTREE</span>
-            <span className="bb-sub">Community · Discord · Telegram · price index</span>
-          </a>
-        </div>
+        {/* SEARCH BAR · primary CTA above the fold, Pokemon-database pattern */}
+        <SearchBar />
 
-        {/* DAILY HIGHLIGHT · habit mechanic */}
-        <section className="intro">
-          <div className="box">
-            <p className="pixel-h">★ TODAY&apos;S HIGHLIGHT</p>
-            <Link href={`/peptides/${featured.slug}`} style={{ display: "flex", gap: 16, marginTop: 12, alignItems: "center", textDecoration: "none", color: "var(--ink)" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={featured.card || "/cards/placeholder.svg"} alt={`${featured.name} card`} style={{ width: 80, imageRendering: "pixelated", border: "3px solid var(--ink)", boxShadow: "4px 4px 0 var(--shadow)" }} />
-              <div>
-                <p style={{ fontFamily: "var(--font-pixel)", fontSize: 14, marginBottom: 4 }}>{featured.name}</p>
-                <p className="body" style={{ opacity: 0.85 }}>{featured.tagline}</p>
-                <p className="body" style={{ marginTop: 6, opacity: 0.6, fontSize: 16 }}>▶ READ FULL CARD</p>
-              </div>
-            </Link>
-          </div>
-        </section>
+        {/* DAILY HIGHLIGHT · compact one-liner, no longer a full box */}
+        <Link href={`/peptides/${featured.slug}`} className="featured-pill">
+          <span className="featured-star">★</span>
+          <span className="featured-label">TODAY&apos;S FEATURED</span>
+          <span className="featured-name">{featured.name}</span>
+          <span className="featured-arrow">→</span>
+        </Link>
 
-        <section className="intro">
-          <div className="box">
-            <p className="pixel-h">▶ WELCOME, RESEARCHER!</p>
-            <p className="body" style={{ marginTop: 12 }}>
-              Each entry in the PEPPUDEX is a research-grade peptide reference card. Click a card to read its mechanism notes, signature moves, evidence grades A–F, FAQs, and the peer-reviewed sources it&apos;s built on. For mechanism in plain prose see <a href="https://wiki.peppu.studio" target="_blank" rel="noopener noreferrer">wiki.peppu.studio</a>.
-            </p>
-          </div>
-        </section>
-
-        {/* THE INDEX */}
+        {/* THE INDEX · primary content, promoted above the fold */}
         <h2 className="section-h">▶ THE INDEX · {PEPPUDEX.length} ENTRIES</h2>
         <section className="grid">
           {PEPPUDEX.map((p) => (
             <Link key={p.id} href={`/peptides/${p.slug}`} className="card">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="art" src={p.card || "/cards/placeholder.svg"} alt={`${p.name} card`} />
+              <img className="art" src={p.card || "/cards/placeholder.svg"} alt={`${p.name} trading card`} />
               <div className="meta">
                 <span>No. {p.id}</span>
                 <span className="hp">HP {p.hp}</span>
@@ -91,7 +65,7 @@ export default function Home() {
           ))}
         </section>
 
-        {/* MECHANISMS SHELF */}
+        {/* MECHANISMS SHELF · category browse */}
         <h2 className="section-h">▶ BROWSE BY MECHANISM</h2>
         <section className="shelf">
           {MECHANISMS.slice(0, 12).map((m) => (
@@ -119,8 +93,32 @@ export default function Home() {
           ))}
         </section>
 
+        {/* WELCOME · moved BELOW the content per Pokemon-database pattern */}
+        <section className="intro">
+          <div className="box">
+            <p className="pixel-h">▶ WELCOME, RESEARCHER!</p>
+            <p className="body" style={{ marginTop: 12 }}>
+              Each entry in the PEPPUDEX is a research-grade peptide reference card. Click a card to read its mechanism notes, signature moves, evidence grades A-F, FAQs, and the peer-reviewed sources it&apos;s built on. For mechanism in plain prose see <a href="https://wiki.peppu.studio" target="_blank" rel="noopener noreferrer">wiki.peppu.studio</a>.
+            </p>
+          </div>
+        </section>
+
+        {/* BILLBOARDS · moved AFTER the encyclopedia content, Bulbapedia footer-pattern */}
+        <div className="billboard">
+          <a className="tone-labs" href="https://peppu.studio?utm_source=peppudex&utm_medium=billboard&utm_campaign=labs" rel="noopener noreferrer">
+            <span className="bb-eye">▶ ENTER THE LAB ◀</span>
+            <span className="bb-title">PEPPU LABS</span>
+            <span className="bb-sub">Buy research-grade peptides · ≥99% purity · third-party COAs</span>
+          </a>
+          <a className="tone-tree" href="https://pepputree.com?utm_source=peppudex&utm_medium=billboard&utm_campaign=tree" rel="noopener noreferrer">
+            <span className="bb-eye">▶ JOIN THE TREE ◀</span>
+            <span className="bb-title">PEPPUTREE</span>
+            <span className="bb-sub">Community · Discord · Telegram · price index</span>
+          </a>
+        </div>
+
         <footer className="footer">
-          PEPPUDEX · Powered by Peppu Studio + Peppu Labs · v1.1<br />
+          PEPPUDEX · The Peptide Pokedex · Powered by Peppu Studio + Peppu Labs · v1.2<br />
           <a href="https://peppu.studio">PEPPU STUDIO</a> · <a href="https://pepputree.com">PEPPUTREE</a> · <a href="https://wiki.peppu.studio">WIKI</a> · <a href="https://peppugirl.com">PEPPUGIRL</a>
         </footer>
       </div>

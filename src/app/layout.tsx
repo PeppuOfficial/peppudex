@@ -29,24 +29,24 @@ const BASE_URL = "https://peppudex.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "PEPPUDEX · Peppu Pokedex of Research Peptides",
+  title: "Peptide Pokedex · Research Peptide Cards + Mechanism + FAQ · Peppudex",
   description:
-    "PEPPUDEX · the Pokedex of research-grade peptides. Card-style profiles, mechanism notes, peer-reviewed sources. Powered by Peppu Studio and Peppu Labs.",
+    "The Pokedex of research peptides. Trading-card profiles, mechanism notes, evidence grades A-F, peer-reviewed sources. BPC-157, GHK-Cu, Retatrutide, Tirzepatide, MOTS-c, NAD+ and 21 more.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "PEPPUDEX · Peppu Pokedex of Research Peptides",
+    title: "Peptide Pokedex · 27 Research Peptide Reference Cards",
     description:
-      "Pokedex-style cards for research peptides. Mechanism notes, sources, levels and types.",
-    siteName: "PEPPUDEX",
+      "Trading-card profiles for 27 research peptides. Mechanism, evidence grades A-F, FAQs, peer-reviewed sources. Built like a Pokedex.",
+    siteName: "Peppudex",
     type: "website",
     url: BASE_URL,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PEPPUDEX · Peppu Pokedex of Research Peptides",
+    title: "Peptide Pokedex · 27 Research Peptide Reference Cards",
     description:
-      "Pokedex-style cards for research peptides. Mechanism notes, sources, levels and types.",
+      "Trading-card profiles for 27 research peptides. Mechanism, evidence grades, FAQs, peer-reviewed sources.",
   },
   robots: {
     index: true,
@@ -105,13 +105,18 @@ const WEBSITE_JSONLD = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": `${BASE_URL}/#website`,
-  name: "PEPPUDEX",
-  alternateName: "Peppudex · Pokedex of Research Peptides",
+  name: "Peptide Pokedex",
+  alternateName: ["Peppudex", "Peptide Pokedex", "Peppudex · The Peptide Pokedex", "Research Peptide Encyclopedia"],
   url: BASE_URL,
   publisher: { "@id": `${BASE_URL}/#organization` },
   inLanguage: ["en-US"],
   copyrightYear: 2026,
   copyrightHolder: { "@id": `${BASE_URL}/#organization` },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${BASE_URL}/?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
