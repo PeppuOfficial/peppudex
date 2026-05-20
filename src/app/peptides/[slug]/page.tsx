@@ -23,9 +23,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!e) return {};
   const enr = ENRICHMENT[slug];
   const aliasLine = enr?.aliases?.length ? ` (${enr.aliases.slice(0, 3).join(", ")})` : "";
-  const description = enr?.faqs?.[0]?.a
-    ? enr.faqs[0].a.slice(0, 160)
-    : e.mechanism.slice(0, 160);
+  // Head-term-front-loaded description: open with "[Name] is a [class] research peptide
+  // studied for [conditions]" so Google sees the high-volume terms first. Falls back to
+  // tagline when enrichment is sparse.
+  const classLabel = enr?.classLabel ?? "research peptide";
+  const conditionsLine = (enr?.conditions ?? []).slice(0, 2).join(" and ") || e.tagline.toLowerCase();
+  const description = `${e.name} is a ${classLabel} studied for ${conditionsLine}. Mechanism notes, evidence grades A-F, FAQs, peer-reviewed sources. Research-only.`.slice(0, 160);
   return {
     title: `${e.name}${aliasLine} · Mechanism, Evidence, FAQ · PEPPUDEX`,
     description,
