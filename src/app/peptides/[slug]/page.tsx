@@ -13,6 +13,7 @@ import { wikiUrlFor } from "@/lib/wiki-map";
 import { autoLink } from "@/lib/auto-link";
 import { PageviewBeacon, TrackedLink } from "@/components/TrackClient";
 import { SourceForResearch } from "@/components/SourceForResearch";
+import { TableOfContents } from "@/components/TableOfContents";
 
 export function generateStaticParams() {
   return PEPPUDEX.map((p) => ({ slug: p.slug }));
@@ -62,6 +63,24 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
   // via additionalProperty (CAS/PubChem/MeSH/UNII/KEGG/ChEMBL) + sameAs.
   const jsonLd = buildCompoundJsonLd(entry, enr);
 
+  // ToC sections · only include the ones the page will actually render for
+  // this compound so the sidebar never points to a missing anchor.
+  const tocSections: { id: string; label: string }[] = [
+    { id: "mechanism", label: "Mechanism" },
+    ...(enr?.outcomes ? [{ id: "evidence-grades", label: "Evidence Grades" }] : []),
+    ...(mechanisms.length > 0 ? [{ id: "mechanism-categories", label: "Mechanism Categories" }] : []),
+    ...(conditions.length > 0 ? [{ id: "research-conditions", label: "Research Conditions" }] : []),
+    ...(enr?.safety ? [{ id: "safety", label: "Safety" }] : []),
+    ...(enr?.regulatory ? [{ id: "regulatory", label: "Regulatory" }] : []),
+    ...(enr?.storage ? [{ id: "storage", label: "Storage" }] : []),
+    ...(enr?.citations && enr.citations.length > 0 ? [{ id: "citations", label: "Peer-Reviewed Evidence" }] : []),
+    ...(enr?.faqs && enr.faqs.length > 0 ? [{ id: "faq", label: "FAQ" }] : []),
+    ...(stacks.length > 0 ? [{ id: "stacks", label: "Stacks" }] : []),
+    { id: "signature-moves", label: "Signature Moves" },
+    ...(peppugirlPosts.length > 0 ? [{ id: "peppugirl-diary", label: "Peppugirl Diary" }] : []),
+    { id: "source", label: "Source at Peppu Labs" },
+  ];
+
   return (
     <main>
       <div className="header-strip">FOR LABORATORY RESEARCH USE ONLY · NOT FOR HUMAN CONSUMPTION</div>
@@ -78,6 +97,10 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           </span>
         </div>
 
+        <div className="detail-shell">
+          <aside className="detail-sidebar">
+            <TableOfContents sections={tocSections} />
+          </aside>
         <article className="detail">
           <PageviewBeacon compound={entry.slug} />
 
@@ -119,13 +142,13 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           </section>
 
           {/* ── 2. MECHANISM (data first, no banner above) ── */}
-          <h2>MECHANISM OF ACTION</h2>
+          <h2 id="mechanism">MECHANISM OF ACTION</h2>
           <p className="body">{autoLink(entry.mechanism, entry.slug)}</p>
 
           {/* ── 3. EVIDENCE GRADES (the moat) ── */}
           {enr?.outcomes && (
             <>
-              <h2>EVIDENCE GRADES</h2>
+              <h2 id="evidence-grades">EVIDENCE GRADES</h2>
               <div style={{ display: "grid", gap: 10 }}>
                 {enr.outcomes.map((o) => (
                   <div key={o.name} className="move">
@@ -145,7 +168,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           {/* ── 4. MECHANISMS + CONDITIONS (bidirectional links) ── */}
           {mechanisms.length > 0 && (
             <>
-              <h2>MECHANISM CATEGORIES</h2>
+              <h2 id="mechanism-categories">MECHANISM CATEGORIES</h2>
               <div className="shelf">
                 {mechanisms.map((m) => (
                   <Link key={m.slug} href={`/mechanisms/${m.slug}`} className="shelf-tile" style={{ background: m.color }}>
@@ -158,7 +181,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
 
           {conditions.length > 0 && (
             <>
-              <h2>RESEARCH CONDITIONS</h2>
+              <h2 id="research-conditions">RESEARCH CONDITIONS</h2>
               <div className="shelf">
                 {conditions.map((c) => (
                   <Link key={c.slug} href={`/conditions/${c.slug}`} className="shelf-tile" style={{ background: "var(--paper)" }}>
@@ -172,7 +195,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           {/* ── 5. SAFETY (YMYL trust signal) ── */}
           {enr?.safety && (
             <>
-              <h2>SAFETY</h2>
+              <h2 id="safety">SAFETY</h2>
               <p className="body" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, marginTop: 14 }}>Side effects</p>
               <ul>{enr.safety.sideEffects.map((s, i) => (<li key={i}>{s}</li>))}</ul>
               <p className="body" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, marginTop: 14 }}>Drug interactions</p>
@@ -185,7 +208,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           {/* ── 6. REGULATORY STATUS ── */}
           {enr?.regulatory && (
             <>
-              <h2>REGULATORY STATUS</h2>
+              <h2 id="regulatory">REGULATORY STATUS</h2>
               <p className="body"><strong>FDA · </strong>{enr.regulatory.fda}</p>
               <p className="body" style={{ marginTop: 10 }}><strong>WADA · </strong>{enr.regulatory.wada}</p>
             </>
@@ -194,7 +217,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           {/* ── 7. STORAGE ── */}
           {enr?.storage && (
             <>
-              <h2>STORAGE</h2>
+              <h2 id="storage">STORAGE</h2>
               <p className="body"><strong>Lyophilized · </strong>{enr.storage.lyo}</p>
               <p className="body" style={{ marginTop: 8 }}><strong>Reconstituted · </strong>{enr.storage.recon}</p>
             </>
@@ -203,7 +226,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           {/* ── 8. PEER-REVIEWED EVIDENCE / CITATIONS ── */}
           {enr?.citations && enr.citations.length > 0 && (
             <>
-              <h2>PEER-REVIEWED EVIDENCE</h2>
+              <h2 id="citations">PEER-REVIEWED EVIDENCE</h2>
               <ul>
                 {enr.citations.map((c, i) => (
                   <li key={i}>
@@ -218,7 +241,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           {/* ── 9. FAQ (15-25 entries · captures PAA + featured snippets) ── */}
           {enr?.faqs && enr.faqs.length > 0 && (
             <>
-              <h2>FAQ · {enr.faqs.length} QUESTIONS</h2>
+              <h2 id="faq">FAQ · {enr.faqs.length} QUESTIONS</h2>
               <div style={{ display: "grid", gap: 14 }}>
                 {enr.faqs.map((f, i) => (
                   <details key={i} className="move" style={{ cursor: "pointer" }}>
@@ -235,7 +258,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           {/* ── 10. STACK MEMBERSHIPS ── */}
           {stacks.length > 0 && (
             <>
-              <h2>APPEARS IN STACKS</h2>
+              <h2 id="stacks">APPEARS IN STACKS</h2>
               <div className="stack-grid">
                 {stacks.map((s) => (
                   <Link key={s.slug} href={`/stacks/${s.slug}`} className="stack-card">
@@ -249,7 +272,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           )}
 
           {/* ── 11. SIGNATURE MOVES (game flavor) ── */}
-          <h2>SIGNATURE MOVES</h2>
+          <h2 id="signature-moves">SIGNATURE MOVES</h2>
           <div className="moves">
             {entry.moves.map((m) => (
               <div key={m.name} className="move">
@@ -265,7 +288,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           {/* ── 11.5 PEPPUGIRL DIARY · bidirectional authority loop (Phase P-1) ── */}
           {peppugirlPosts.length > 0 && (
             <>
-              <h2>READ PEPPUGIRL&apos;S {entry.name} DIARY</h2>
+              <h2 id="peppugirl-diary">READ PEPPUGIRL&apos;S {entry.name} DIARY</h2>
               <p className="body" style={{ marginBottom: 14 }}>
                 First-person photo-documented research-protocol log for {entry.name}. Timestamped weekly observations, before-after, evidence-grade context.
               </p>
@@ -288,7 +311,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           )}
 
           {/* ── 12. SOURCE NOTE / BANNER (below the research content per E-E-A-T) ── */}
-          <h2>SOURCED FROM PEPPU LABS</h2>
+          <h2 id="source">SOURCED FROM PEPPU LABS</h2>
           <p className="body" style={{ marginBottom: 14 }}>
             Reference compounds documented on this page are available as research-grade material at Peppu Studio · ≥99% purity · per-batch Certificate of Analysis. For laboratory research use only. No human dose is recommended by this wiki.
           </p>
@@ -318,6 +341,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
             </p>
           )}
         </article>
+        </div>
 
         <footer className="footer">
           PEPPUDEX · {entry.name} · {entry.tagline}<br />

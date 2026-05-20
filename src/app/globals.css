@@ -652,3 +652,92 @@ button, a, [role="button"], input, summary {
     min-width: 0;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+ * Peptide detail page readability polish (2026-05-21)
+ * - Desktop ≥1024px: sticky table-of-contents sidebar
+ * - Bumped body line-height + spacing breathe
+ * - Alternating .move row tinting for scannability
+ * - <details> FAQ rows · expanded state visible accent
+ * - Anchor scroll-margin so #jumps don't sit under the header strip
+ * ─────────────────────────────────────────────────────────── */
+.detail-shell { display: block; }
+.detail h2 { scroll-margin-top: 80px; }
+.detail .body { line-height: 1.6; }
+.detail .move .desc { line-height: 1.55; opacity: 0.92; }
+.detail .move:nth-of-type(odd) { background: var(--paper); }
+.detail .move:nth-of-type(even) { background: #FFF7DC; }
+.detail details.move[open] {
+  border-color: #FFB74D;
+  box-shadow: 4px 4px 0 rgba(255, 183, 77, 0.25);
+}
+.detail details.move summary {
+  padding: 4px 0;
+  line-height: 1.4;
+}
+
+@media (min-width: 1024px) {
+  .detail-shell {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 28px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 12px;
+    align-items: start;
+  }
+  .detail-shell .detail {
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+    max-width: none;
+  }
+  .detail-sidebar { position: sticky; top: 72px; }
+}
+@media (max-width: 1023px) {
+  .detail-sidebar { display: none; }
+}
+
+.peptide-toc {
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  padding: 14px 14px 12px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.18);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+.peptide-toc__label {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  margin: 0 0 10px;
+  opacity: 0.55;
+}
+.peptide-toc__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 4px;
+}
+.peptide-toc__link {
+  display: block;
+  font-family: var(--font-body), "VT323", monospace;
+  font-size: 16px;
+  line-height: 1.3;
+  padding: 5px 8px;
+  color: var(--ink);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.peptide-toc__link:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-left-color: var(--ink);
+}
+.peptide-toc__link.is-active {
+  background: var(--ink);
+  color: var(--paper);
+  border-left-color: #FFE680;
+}
+
