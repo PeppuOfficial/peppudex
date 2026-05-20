@@ -833,14 +833,19 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     ],
     citations: [
       { title: "ARA-290, a non-erythropoietic EPO analog, modulates inflammation and tissue protection", authors: "Brines M, Patel NS, Villa P, et al.", journal: "Mol Med", year: 2014, url: "https://pubmed.ncbi.nlm.nih.gov/?term=Brines+ARA-290" },
+      { title: "Cibinetide (ARA-290) attenuates small-fiber neuropathy in sarcoidosis: a placebo-controlled trial", authors: "Heij L, Niesters M, Swartjes M, et al.", journal: "Mol Med", year: 2012, url: "https://pubmed.ncbi.nlm.nih.gov/?term=Heij+ARA-290+sarcoidosis+neuropathy" },
     ],
-    lastUpdated: "2026-05-19",
+    lastUpdated: "2026-05-20",
+    entityIds: {
+      wikidata: "Q4779870",
+    },
+    reviewer: "editorial-board",
   },
 
   "igf-1-lr3": {
     aliases: ["Long R3 IGF-1", "LR3 IGF-1", "IGF-1LR3", "IGF1 LR3"],
     classLabel: "Synthetic 83-residue insulin-like growth factor 1 analog",
-    formula: "Approximately C400H625N111O115S9",
+    formula: "C400H625N111O115S9",
     halfLife: "~6 hours (vs ~10 minutes native IGF-1)",
     routes: ["Subcutaneous (research)"],
     storage: { lyo: "2–8 °C, 12+ months", recon: "2–8 °C, 14 days" },
@@ -1004,6 +1009,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     ],
     citations: [
       { pmid: "38219768", title: "Glucagon and GLP-1 receptor dual agonist survodutide for obesity: a randomised, double-blind, placebo-controlled, dose-finding phase 2 trial", authors: "Le Roux CW, et al.", journal: "Lancet Diabetes Endocrinol", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/38219768/" },
+      { nct: "NCT06066515", title: "A study of survodutide in adults with overweight or obesity (SYNCHRONIZE-1)", authors: "Boehringer Ingelheim", journal: "ClinicalTrials.gov · Phase 3", year: 2024, url: "https://clinicaltrials.gov/study/NCT06066515" },
     ],
     entityIds: { cas: "2243737-04-0", pubchem: "171378821", wikidata: "Q123907235", chembl: "CHEMBL5314776" },
     lastUpdated: "2026-05-19",
@@ -1042,6 +1048,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     ],
     citations: [
       { pmid: "37364188", title: "Daily Oral GLP-1 Receptor Agonist Orforglipron for Adults with Obesity", authors: "Wharton S, et al.", journal: "N Engl J Med", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/37364188/" },
+      { title: "Efficacy and safety of an orally administered GLP-1 receptor agonist (orforglipron) in adults with type 2 diabetes", authors: "Frias JP, et al.", journal: "N Engl J Med", year: 2023, url: "https://pubmed.ncbi.nlm.nih.gov/?term=Frias+orforglipron+type+2+diabetes+NEJM" },
     ],
     entityIds: { cas: "2212020-52-3", pubchem: "137319706", wikidata: "Q120491908", chembl: "CHEMBL5314577" },
     lastUpdated: "2026-05-19",
@@ -1082,6 +1089,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     ],
     citations: [
       { title: "Mazdutide IBI362 in obese Chinese adults: dose-finding phase 2", authors: "Zhao H, et al.", journal: "JAMA Netw Open", year: 2024, url: "https://pubmed.ncbi.nlm.nih.gov/?term=mazdutide+IBI362+phase+2" },
+      { nct: "NCT05216575", title: "A phase 3 study of mazdutide in Chinese participants with overweight or obesity (GLORY-1)", authors: "Innovent Biologics / Eli Lilly", journal: "ClinicalTrials.gov · Phase 3", year: 2024, url: "https://clinicaltrials.gov/study/NCT05216575" },
     ],
     entityIds: { cas: "2371824-04-7", pubchem: "167312357", wikidata: "Q123248554", chembl: "CHEMBL5095358" },
     lastUpdated: "2026-05-19",
@@ -1234,7 +1242,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     },
     regulatory: {
       fda: "Not FDA-approved. Research-use only in the United States.",
-      wada: "Not specifically named on the 2024 Prohibited List. GnRH-axis-active compounds (e.g., hCG) are prohibited for male athletes under S2; kisspeptin may fall under regulator discretion.",
+      wada: "Not specifically named on the WADA Prohibited List as of 2026. GnRH-axis-active compounds (e.g., hCG) are prohibited for male athletes under S2; kisspeptin may fall under regulator discretion.",
     },
     faqs: [
       { q: "What is kisspeptin-10?", a: "Kisspeptin-10 (KP-10) is the 10-amino-acid C-terminal active fragment of the human KISS1 gene product. It is the principal upstream activator of the hypothalamic GnRH neuron firing pattern and downstream pituitary LH/FSH release." },
@@ -1248,6 +1256,7 @@ export const ENRICHMENT: Record<string, Enrichment> = {
     citations: [
       { pmid: "15883247", title: "Kisspeptin-54 stimulates the hypothalamic-pituitary gonadal axis in human males", authors: "Dhillo WS, Chaudhri OB, Patterson M, et al.", journal: "J Clin Endocrinol Metab", year: 2005, url: "https://pubmed.ncbi.nlm.nih.gov/15883247/" },
       { pmid: "12944565", title: "Hypogonadotropic hypogonadism due to loss of function of the KiSS1-derived peptide receptor GPR54", authors: "de Roux N, et al.", journal: "Proc Natl Acad Sci U S A", year: 2003, url: "https://pubmed.ncbi.nlm.nih.gov/12944565/" },
+      { title: "Kisspeptin-54 triggers egg maturation in women undergoing in vitro fertilization", authors: "Abbara A, Jayasena CN, Christopoulos G, et al.", journal: "J Clin Invest", year: 2015, url: "https://pubmed.ncbi.nlm.nih.gov/?term=Abbara+Kisspeptin+oocyte+maturation+IVF" },
     ],
     entityIds: { cas: "374675-21-5", pubchem: "25240297", chembl: "CHEMBL3422406" },
     lastUpdated: "2026-05-19",
@@ -1327,13 +1336,14 @@ export const ENRICHMENT: Record<string, Enrichment> = {
       { q: "How is humanin different from MOTS-c?", a: "Both are mitochondrial-derived peptides. Humanin is 24 residues encoded by 16S rRNA and characterized first for neuroprotective activity against amyloid-beta. MOTS-c is 16 residues encoded by 12S rRNA and characterized for AMPK-pathway metabolic effects." },
       { q: "Is humanin FDA-approved?", a: "No. Humanin is research-use only. No FDA-approved indication." },
       { q: "What does humanin do?", a: "Documented effects include neuroprotection against amyloid-beta toxicity (Hashimoto 2001), insulin-sensitizing effects in obese rodents (Muzumdar 2009), and anti-apoptotic activity in multiple cell types via Bax modulation." },
-      { q: "Why is humanin called a longevity peptide?", a: "Circulating humanin levels decline with age and have been correlated with longevity in human studies (Lee et al., 2015). Centenarians and their offspring show elevated humanin levels relative to age-matched controls in some cohorts." },
+      { q: "Why is humanin called a longevity peptide?", a: "Circulating humanin levels decline with age. Centenarians and their offspring show elevated humanin levels relative to age-matched controls in some cohorts. The IGF-1/humanin axis (Lee et al., 2014, Aging Cell) connects mitochondrial-derived peptide signaling with growth-axis aging biology." },
       { q: "What's the dose in research?", a: "Preclinical animal-model research has used SC humanin at 5-10 nmol/kg/day. Human dosing is not established. This wiki does not recommend any human dose." },
       { q: "Is there a humanin variant called HNG?", a: "HNG (S14G-humanin) is a synthetic analog with a serine-to-glycine substitution at position 14 that increases potency ~1000-fold in some cell models. It is the variant most commonly used in mechanism studies." },
     ],
     citations: [
       { pmid: "11371646", title: "A rescue factor abolishing neuronal cell death by a wide spectrum of familial Alzheimer's disease genes and Abeta", authors: "Hashimoto Y, Niikura T, Tajima H, et al.", journal: "Proc Natl Acad Sci U S A", year: 2001, url: "https://pubmed.ncbi.nlm.nih.gov/11371646/" },
       { pmid: "19470690", title: "Humanin: a novel central regulator of peripheral insulin action", authors: "Muzumdar RH, Huffman DM, Atzmon G, et al.", journal: "PLoS One", year: 2009, url: "https://pubmed.ncbi.nlm.nih.gov/19470690/" },
+      { title: "IGF-I regulates the age-dependent signaling peptide humanin", authors: "Lee C, Wan J, Miyazaki B, Fang Y, Guevara-Aguirre J, Yen K, Longo VD, Bartke A, Cohen P", journal: "Aging Cell", year: 2014, url: "https://pubmed.ncbi.nlm.nih.gov/?term=Lee+humanin+IGF-1+aging+cell+2014" },
     ],
     entityIds: { cas: "330936-69-1", pubchem: "16131438", chembl: "CHEMBL4447799" },
     lastUpdated: "2026-05-19",
