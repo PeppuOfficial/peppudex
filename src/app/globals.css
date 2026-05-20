@@ -380,6 +380,22 @@ button, a, [role="button"], input, summary {
   touch-action: manipulation;
 }
 
+/* Visually-hidden utility · screen-reader content only.
+ * Used on H1 to embed long SEO-friendly phrasing without
+ * showing the text in the layout. Defined here because
+ * Tailwind's `sr-only` is not loaded in this project. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Safe area · iPhone notch + home indicator */
 .header-strip {
   padding-top: calc(8px + env(safe-area-inset-top));
@@ -451,23 +467,28 @@ button, a, [role="button"], input, summary {
     box-shadow: 2px 2px 0 var(--shadow);
   }
 
-  /* Search bar · taller touch target, smaller font, shorter placeholder */
+  /* Search bar · iOS no-zoom requires font-size >= 16px on input
+   * focus. Tap any input < 16px in mobile Safari and the page auto-zooms.
+   * Bumped to 16px CSS px (= the iOS zoom threshold) so the keyboard pops
+   * without rescaling the viewport. Press Start 2P at 16px is chunky but
+   * predictable. The shorter placeholder absorbs the size bump. */
   .peppudex-search { margin: 0 0 14px; }
   .peppudex-search input {
-    font-size: 10px;
+    font-size: 16px;
     padding: 14px 14px;
     box-shadow: 3px 3px 0 var(--shadow);
     min-height: 48px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.02em;
   }
   .peppudex-search input:focus { transform: none; box-shadow: 4px 4px 0 var(--shadow); }
   .peppudex-search-results { box-shadow: 4px 4px 0 var(--shadow); max-height: 50vh; }
   .peppudex-search-results li a {
-    padding: 10px 12px;
-    min-height: 52px;
+    padding: 12px 12px;
+    min-height: 56px;
+    gap: 10px;
   }
-  .peppudex-search-results .r-name { font-size: 10px; }
-  .peppudex-search-results .r-why { font-size: 14px; }
+  .peppudex-search-results .r-name { font-size: 11px; }
+  .peppudex-search-results .r-why { font-size: 15px; }
 
   /* Featured pill · iOS hero-banner compact */
   .featured-pill {
@@ -496,9 +517,11 @@ button, a, [role="button"], input, summary {
     text-shadow: 2px 2px 0 var(--ink);
   }
 
-  /* Card grid · 2-col on phone (App Store / Photos pattern) */
+  /* Card grid · 2-col on phone (App Store / Photos pattern).
+   * Important on the override to beat the desktop auto-fill minmax rule
+   * which would otherwise compute 1-col when the viewport is below 200px+gutter. */
   .grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px;
   }
   .card {
