@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
+import { autoLink } from "@/lib/auto-link";
 
 const CLUSTER = [
   "retatrutide",
@@ -69,6 +70,22 @@ export default function PeptidesForWeightLossPage() {
     },
     {
       "@context": "https://schema.org",
+      "@type": "Article",
+      "@id": "https://peppudex.com/peptides-for-weight-loss#article",
+      headline: "Peptides for Weight Loss · Research Reference",
+      description:
+        "Eight research peptides studied for body composition and glycemic control. Incretin axis (GLP-1, GIP, glucagon). Mechanism, evidence grades, FAQs.",
+      url: "https://peppudex.com/peptides-for-weight-loss",
+      datePublished: "2026-05-20",
+      dateModified: "2026-05-20",
+      inLanguage: "en-US",
+      mainEntityOfPage: { "@id": "https://peppudex.com/peptides-for-weight-loss" },
+      publisher: { "@id": "https://peppudex.com/#organization" },
+      author: { "@id": "https://peppudex.com/#organization" },
+      about: ["weight loss", "body composition", "GLP-1 receptor agonist", "incretin axis"],
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "PEPPUDEX", item: "https://peppudex.com" },
@@ -132,12 +149,12 @@ export default function PeptidesForWeightLossPage() {
             RESEARCH REFERENCE · INCRETIN AXIS · GLP-1 · GIP · GLUCAGON
           </p>
           <p className="body" style={{ marginTop: 14 }}>
-            Eight research peptides studied for body composition and glycemic control. The largest weight-loss effects in published trials come from the incretin axis: GLP-1 receptor (semaglutide, liraglutide), dual GLP-1 plus GIP (tirzepatide), triple GLP-1 plus GIP plus glucagon (retatrutide, survodutide), and amylin-receptor co-agonists (cagrilintide). MOTS-c sits outside the incretin family · a mitochondrial-derived peptide studied for metabolic effects. AOD-9604 is a synthetic C-terminal fragment of human growth hormone studied for lipolytic activity.
+            {autoLink("Eight research peptides studied for body composition and glycemic control. The largest weight-loss effects in published trials come from the incretin axis: GLP-1 receptor (semaglutide, liraglutide), dual GLP-1 plus GIP (tirzepatide), triple GLP-1 plus GIP plus glucagon (retatrutide, survodutide), and amylin-receptor co-agonists (cagrilintide). MOTS-c sits outside the incretin family · a mitochondrial-derived peptide studied for metabolic effects. AOD-9604 is a synthetic C-terminal fragment of human growth hormone studied for lipolytic activity.")}
           </p>
 
           <h2>WHAT THE RESEARCH SHOWS</h2>
           <p className="body">
-            Incretin receptor agonism drives glucose-dependent insulin secretion, glucagon suppression, delayed gastric emptying, and central appetite suppression. Adding the GIP arm (tirzepatide, retatrutide) increases absolute weight loss versus single-agonist GLP-1 compounds. Adding the glucagon arm (retatrutide, survodutide, mazdutide) further increases energy expenditure via thermogenic signaling, which is the leading hypothesis for why retatrutide Phase 2 produced deeper body-weight reductions than dual-agonist trials at comparable timepoints.
+            {autoLink("Incretin receptor agonism drives glucose-dependent insulin secretion, glucagon suppression, delayed gastric emptying, and central appetite suppression. Adding the GIP arm (tirzepatide, retatrutide) increases absolute weight loss versus single-agonist GLP-1 compounds. Adding the glucagon arm (retatrutide, survodutide, mazdutide) further increases energy expenditure via thermogenic signaling, which is the leading hypothesis for why retatrutide Phase 2 produced deeper body-weight reductions than dual-agonist trials at comparable timepoints.")}
           </p>
 
           <h2>COMPOUND CLUSTER · {cluster.length} ENTRIES</h2>

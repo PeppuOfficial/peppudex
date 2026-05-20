@@ -48,6 +48,7 @@ export async function GET() {
     });
   }
   const flat: Array<[string, SitemapUrl["changefreq"], number]> = [
+    ["/peptides", "weekly", 0.95],
     ["/calculator", "monthly", 0.9],
     ["/tools/half-life-chart", "monthly", 0.85],
     ["/tools/stack-builder", "monthly", 0.85],

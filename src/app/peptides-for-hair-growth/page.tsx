@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
+import { autoLink } from "@/lib/auto-link";
 
 const CLUSTER = ["ghk-cu", "pt-141"];
 
@@ -57,6 +58,22 @@ export default function PeptidesForHairGrowthPage() {
       publisher: { "@id": "https://peppudex.com/#organization" },
       datePublished: "2026-05-20",
       dateModified: "2026-05-20",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "@id": "https://peppudex.com/peptides-for-hair-growth#article",
+      headline: "Peptides for Hair Growth · Research Reference",
+      description:
+        "Research peptides studied for hair growth and follicle activity. GHK-Cu, PT-141. Mechanism, evidence grades, FAQs.",
+      url: "https://peppudex.com/peptides-for-hair-growth",
+      datePublished: "2026-05-20",
+      dateModified: "2026-05-20",
+      inLanguage: "en-US",
+      mainEntityOfPage: { "@id": "https://peppudex.com/peptides-for-hair-growth" },
+      publisher: { "@id": "https://peppudex.com/#organization" },
+      author: { "@id": "https://peppudex.com/#organization" },
+      about: ["hair growth", "copper peptide", "GHK-Cu", "follicle biology"],
     },
     {
       "@context": "https://schema.org",
@@ -123,7 +140,7 @@ export default function PeptidesForHairGrowthPage() {
             RESEARCH REFERENCE · COPPER PEPTIDE · FOLLICLE BIOLOGY
           </p>
           <p className="body" style={{ marginTop: 14 }}>
-            GHK-Cu (glycyl-L-histidyl-L-lysine copper) is the most-studied research peptide in the hair-growth space. Mechanistically it binds copper(II), modulates growth-factor signaling, and remodels the extracellular matrix. Several small clinical and follicle-biology studies report increased anagen-phase duration, dermal-papilla cell proliferation, and follicle size with topical application. PT-141 (bremelanotide) is a melanocortin-receptor agonist studied for separate indications; melanocortin signaling intersects skin and follicle pigmentation, included here as adjacent reference. The dermatology gold-standard hair treatments (finasteride, minoxidil, dutasteride) are not peptides and have separate evidence stacks.
+            {autoLink("GHK-Cu (glycyl-L-histidyl-L-lysine copper) is the most-studied research peptide in the hair-growth space. Mechanistically it binds copper(II), modulates growth-factor signaling, and remodels the extracellular matrix. Several small clinical and follicle-biology studies report increased anagen-phase duration, dermal-papilla cell proliferation, and follicle size with topical application. PT-141 (bremelanotide) is a melanocortin-receptor agonist studied for separate indications; melanocortin signaling intersects skin and follicle pigmentation, included here as adjacent reference. The dermatology gold-standard hair treatments (finasteride, minoxidil, dutasteride) are not peptides and have separate evidence stacks.")}
           </p>
 
           <h2>COMPOUND CLUSTER · {cluster.length} ENTRIES</h2>

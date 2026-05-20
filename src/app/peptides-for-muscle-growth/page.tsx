@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
+import { autoLink } from "@/lib/auto-link";
 
 const CLUSTER = [
   "tb-500",
@@ -68,6 +69,22 @@ export default function PeptidesForMuscleGrowthPage() {
     },
     {
       "@context": "https://schema.org",
+      "@type": "Article",
+      "@id": "https://peppudex.com/peptides-for-muscle-growth#article",
+      headline: "Peptides for Muscle Growth · Research Reference",
+      description:
+        "Seven research peptides studied for muscle growth and recovery. Tissue-repair, GH axis, IGF-1. Mechanism, evidence grades, FAQs.",
+      url: "https://peppudex.com/peptides-for-muscle-growth",
+      datePublished: "2026-05-20",
+      dateModified: "2026-05-20",
+      inLanguage: "en-US",
+      mainEntityOfPage: { "@id": "https://peppudex.com/peptides-for-muscle-growth" },
+      publisher: { "@id": "https://peppudex.com/#organization" },
+      author: { "@id": "https://peppudex.com/#organization" },
+      about: ["muscle growth", "tissue repair", "growth hormone secretagogue", "IGF-1", "Wolverine stack"],
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "PEPPUDEX", item: "https://peppudex.com" },
@@ -131,12 +148,12 @@ export default function PeptidesForMuscleGrowthPage() {
             RESEARCH REFERENCE · TISSUE REPAIR · GH AXIS · IGF-1
           </p>
           <p className="body" style={{ marginTop: 14 }}>
-            Seven research peptides studied for muscle growth and recovery. Three mechanistic families are represented. Tissue-repair compounds (BPC-157, TB-500) accelerate recovery between training stress events through angiogenesis, growth-factor upregulation, and cell migration. Growth-hormone secretagogues (the CJC-1295 plus Ipamorelin combination) raise endogenous GH and IGF-1 pulses. Direct IGF-1 receptor agonists (IGF-1 LR3) drive skeletal-muscle hypertrophy in rodent models. MOTS-c and Adamax act on metabolic and oxidative pathways relevant to training adaptation.
+            {autoLink("Seven research peptides studied for muscle growth and recovery. Three mechanistic families are represented. Tissue-repair compounds (BPC-157, TB-500) accelerate recovery between training stress events through angiogenesis, growth-factor upregulation, and cell migration. Growth-hormone secretagogues (the CJC-1295 plus Ipamorelin combination) raise endogenous GH and IGF-1 pulses. Direct IGF-1 receptor agonists (IGF-1 LR3) drive skeletal-muscle hypertrophy in rodent models. MOTS-c and Adamax act on metabolic and oxidative pathways relevant to training adaptation.")}
           </p>
 
           <h2>THE WOLVERINE STACK · BPC-157 + TB-500</h2>
           <p className="body">
-            The Wolverine stack is the most commonly referenced recovery research stack in community protocols. BPC-157 drives angiogenesis and growth-hormone-receptor upregulation. TB-500 drives cell migration via G-actin sequestration. The two mechanisms are complementary. Both compounds are prohibited at all times by WADA for tested-sport athletes. Animal-model evidence is strong. No published human RCT validates the specific combination. See /stacks/wolverine-blend for the full stack page and /vs/bpc-157-vs-tb-500 for the head-to-head comparison.
+            {autoLink("The Wolverine stack is the most commonly referenced recovery research stack in community protocols. BPC-157 drives angiogenesis and growth-hormone-receptor upregulation. TB-500 drives cell migration via G-actin sequestration. The two mechanisms are complementary. Both compounds are prohibited at all times by WADA for tested-sport athletes. Animal-model evidence is strong. No published human RCT validates the specific combination. See /stacks/wolverine-blend for the full stack page and /vs/bpc-157-vs-tb-500 for the head-to-head comparison.")}
           </p>
 
           <h2>COMPOUND CLUSTER · {cluster.length} ENTRIES</h2>
