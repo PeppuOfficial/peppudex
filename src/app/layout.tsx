@@ -29,14 +29,14 @@ const BASE_URL = "https://peppudex.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Peptide Pokedex · Research Peptide Cards + Mechanism + FAQ · Peppudex",
+  title: "List of Peptides and What They Do · 27 Research Peptide Cards · Peppudex",
   description:
-    "The Pokedex of research peptides. Trading-card profiles, mechanism notes, evidence grades A-F, peer-reviewed sources. BPC-157, GHK-Cu, Retatrutide, Tirzepatide, MOTS-c, NAD+ and 21 more.",
+    "List of 27 research peptides with mechanism, evidence grades A-F, FAQs and peer-reviewed sources. BPC-157, GHK-Cu, retatrutide, tirzepatide, MOTS-c, NAD+, TB-500 and 20 more. Research-only encyclopedia.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Peptide Pokedex · 27 Research Peptide Reference Cards",
+    title: "List of Peptides and What They Do · 27 Research Peptide Reference Cards",
     description:
-      "Trading-card profiles for 27 research peptides. Mechanism, evidence grades A-F, FAQs, peer-reviewed sources. Built like a Pokedex.",
+      "Mechanism, evidence grades, FAQs, peer-reviewed sources for 27 research peptides. Built like a Pokedex.",
     siteName: "Peppudex",
     type: "website",
     url: BASE_URL,
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Peptide Pokedex · 27 Research Peptide Reference Cards",
+    title: "List of Peptides and What They Do · 27 Research Peptide Reference Cards",
     description:
-      "Trading-card profiles for 27 research peptides. Mechanism, evidence grades, FAQs, peer-reviewed sources.",
+      "Mechanism, evidence grades, FAQs, peer-reviewed sources for 27 research peptides.",
   },
   robots: {
     index: true,
@@ -106,7 +106,16 @@ const WEBSITE_JSONLD = {
   "@type": "WebSite",
   "@id": `${BASE_URL}/#website`,
   name: "Peptide Pokedex",
-  alternateName: ["Peppudex", "Peptide Pokedex", "Peppudex · The Peptide Pokedex", "Research Peptide Encyclopedia"],
+  alternateName: [
+    "Peppudex",
+    "Peptide Pokedex",
+    "Peppudex · The Peptide Pokedex",
+    "Research Peptide Encyclopedia",
+    "List of Peptides and What They Do",
+    "Research Peptide Database",
+    "Peptide Reference Guide",
+    "Peptide Database",
+  ],
   url: BASE_URL,
   publisher: { "@id": `${BASE_URL}/#organization` },
   inLanguage: ["en-US"],

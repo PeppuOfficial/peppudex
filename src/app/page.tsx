@@ -19,9 +19,9 @@ export default function Home() {
         <div className="brandbar">
           <h1 className="brand">
             PEPPU<span className="accent">DEX</span>
-            <span className="sr-only"> · The Peptide Pokedex · Research Peptide Encyclopedia</span>
+            <span className="sr-only"> · List of Peptides and What They Do · Research Peptide Encyclopedia</span>
           </h1>
-          <span className="brand-sub">THE PEPTIDE POKEDEX · {PEPPUDEX.length} RESEARCH PEPTIDES</span>
+          <span className="brand-sub">LIST OF PEPTIDES AND WHAT THEY DO · {PEPPUDEX.length} RESEARCH PEPTIDE CARDS</span>
         </div>
 
         {/* GLOBAL NAV */}
@@ -45,7 +45,7 @@ export default function Home() {
         </Link>
 
         {/* THE INDEX · primary content, promoted above the fold */}
-        <h2 className="section-h">▶ THE INDEX · {PEPPUDEX.length} ENTRIES</h2>
+        <h2 className="section-h">▶ LIST OF {PEPPUDEX.length} PEPTIDES · WHAT THEY DO + MECHANISM + EVIDENCE</h2>
         <section className="grid">
           {PEPPUDEX.map((p) => (
             <Link key={p.id} href={`/peptides/${p.slug}`} className="card">
@@ -98,7 +98,7 @@ export default function Home() {
           <div className="box">
             <p className="pixel-h">▶ WELCOME, RESEARCHER!</p>
             <p className="body" style={{ marginTop: 12 }}>
-              Each entry in the PEPPUDEX is a research-grade peptide reference card. Click a card to read its mechanism notes, signature moves, evidence grades A-F, FAQs, and the peer-reviewed sources it&apos;s built on. For mechanism in plain prose see <a href="https://wiki.peppu.studio" target="_blank" rel="noopener noreferrer">wiki.peppu.studio</a>.
+              The peppudex is a list of {PEPPUDEX.length} research peptides with what they do, how they work, and the peer-reviewed studies behind them. Each card shows mechanism, dosing route, half-life, evidence grade A-F, and a full FAQ. For mechanism in plain prose see <a href="https://wiki.peppu.studio" target="_blank" rel="noopener noreferrer">wiki.peppu.studio</a>.
             </p>
           </div>
         </section>
