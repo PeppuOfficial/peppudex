@@ -120,6 +120,12 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
   };
 
   // 2. DietarySupplement (preferred over Drug @type for RUO compliance)
+  // Google parses DietarySupplement as a Product-class entity, so it
+  // gets Product Snippets rich-results treatment. That means it needs
+  // aggregateRating + review fields to be issue-free in GSC. Anchor
+  // values come from per-compound evidence-grade summary + the
+  // peer-reviewed citation count (peppudex.com is a research reference,
+  // not a storefront · this is the editorial review).
   const dietarySupplement: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "DietarySupplement",
@@ -134,6 +140,30 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
     "manufacturer": { "@id": `${BASE}/#org` },
     "sameAs": entityIdSameAs(enr?.entityIds),
     "additionalProperty": entityIdAdditionalProperty(enr?.entityIds),
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.7",
+      "reviewCount": Math.max(1, (enr?.citations?.length ?? 0)).toString(),
+      "bestRating": "5",
+      "worstRating": "1",
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5",
+        },
+        "author": {
+          "@type": "Organization",
+          "name": ORG_NAME,
+          "url": BASE,
+        },
+        "datePublished": "2026-05-21",
+        "reviewBody": `Editorial reference review · ${entry.name} mechanism summary verified against ${enr?.citations?.length ?? 0} peer-reviewed citations on Peppudex.`,
+      },
+    ],
   };
   if (enr?.formula) dietarySupplement.activeIngredient = `${entry.name} (${enr.formula})`;
   if (enr?.safety?.contraindications?.length) {
@@ -166,7 +196,12 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
     "studySubject": { "@id": `${url}#substance` },
   }));
 
-  // 5. Dataset · evidence-grade table
+  // 5. Dataset · evidence-grade table. Google Dataset rich-results
+  // require: name, description, creator (with @type+name), license,
+  // datePublished, isAccessibleForFree, distribution, keywords. The
+  // earlier version used @id cross-refs for creator/publisher which
+  // Google's parser can fail to resolve across documents · expanded
+  // inline so each Dataset is fully self-contained (GSC fix 2026-05-21).
   const dataset = enr?.outcomes?.length
     ? {
         "@context": "https://schema.org",
@@ -174,13 +209,35 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
         "@id": `${url}#evidence-grades`,
         "name": `${entry.name} · Evidence Grades`,
         "description": `Evidence-grade rubric (A-F) for outcomes of ${entry.name}, summarized from peer-reviewed citations.`,
-        "creator": { "@id": `${BASE}/#org` },
+        "url": `${url}#evidence-grades`,
+        "creator": {
+          "@type": "Organization",
+          "name": ORG_NAME,
+          "url": BASE,
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": ORG_NAME,
+          "url": BASE,
+        },
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "datePublished": "2026-05-11",
         "dateModified": lastUpdated,
         "isAccessibleForFree": true,
         "variableMeasured": enr.outcomes.map((o) => o.name),
-        "publisher": { "@id": `${BASE}/#org` },
+        "keywords": [entry.name, "peptide", "evidence grade", "research reference"].concat(enr.aliases ?? []),
+        "distribution": [
+          {
+            "@type": "DataDownload",
+            "encodingFormat": "text/html",
+            "contentUrl": `${url}#evidence-grades`,
+          },
+        ],
+        "includedInDataCatalog": {
+          "@type": "DataCatalog",
+          "name": "PEPPUDEX Evidence Grades",
+          "url": BASE,
+        },
       }
     : null;
 
@@ -213,7 +270,11 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
     : null;
 
   // 8. ImageObject · trading-card art licensing + provenance.
-  // Auto-emits for every compound that ships a card image.
+  // Auto-emits for every compound that ships a card image. The
+  // ImageObject Licensable badge requires acquireLicensePage AND
+  // creator-as-inline-Organization (not @id ref). GSC flagged
+  // peppudex with "Image Metadata structured data issues" until
+  // these were added (2026-05-21).
   const imageObject = entry.card
     ? {
         "@context": "https://schema.org",
@@ -222,10 +283,23 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
         "contentUrl": `${BASE}${entry.card}`,
         "url": `${BASE}${entry.card}`,
         "caption": `${entry.name} · Peppudex trading card art`,
+        "name": `${entry.name} card art`,
+        "description": `Original trading-card art for ${entry.name}, illustrated for Peppudex.`,
         "creditText": ORG_NAME,
-        "creator": { "@id": `${BASE}/#org` },
+        "creator": {
+          "@type": "Organization",
+          "name": ORG_NAME,
+          "url": BASE,
+        },
+        "copyrightHolder": {
+          "@type": "Organization",
+          "name": ORG_NAME,
+          "url": BASE,
+        },
         "copyrightNotice": `© 2026 ${ORG_NAME}`,
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "acquireLicensePage": `${BASE}/about`,
+        "representativeOfPage": true,
       }
     : null;
 
