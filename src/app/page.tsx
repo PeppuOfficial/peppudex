@@ -105,10 +105,10 @@ export default function Home() {
 
         {/* BILLBOARDS · moved AFTER the encyclopedia content, Bulbapedia footer-pattern */}
         <div className="billboard">
-          <a className="tone-labs" href="https://peppu.studio?utm_source=peppudex&utm_medium=billboard&utm_campaign=labs" rel="noopener noreferrer">
+          <a className="tone-labs" href="https://peppu.studio/?utm_source=peppudex&utm_medium=billboard&utm_campaign=labs" rel="noopener noreferrer">
             <span className="bb-eye">▶ ENTER THE LAB ◀</span>
             <span className="bb-title">PEPPU LABS</span>
-            <span className="bb-sub">Buy research-grade peptides · ≥99% purity · third-party COAs</span>
+            <span className="bb-sub">Research-grade reference compounds · ≥99% purity · third-party COAs</span>
           </a>
           <a className="tone-tree" href="https://pepputree.com?utm_source=peppudex&utm_medium=billboard&utm_campaign=tree" rel="noopener noreferrer">
             <span className="bb-eye">▶ JOIN THE TREE ◀</span>
@@ -119,7 +119,7 @@ export default function Home() {
 
         <footer className="footer">
           PEPPUDEX · The Peptide Pokedex · Powered by Peppu Studio + Peppu Labs · v1.2<br />
-          <a href="https://peppu.studio">PEPPU STUDIO</a> · <a href="https://pepputree.com">PEPPUTREE</a> · <a href="https://wiki.peppu.studio">WIKI</a> · <a href="https://peppugirl.com">PEPPUGIRL</a>
+          <a href="https://peppu.studio">PEPPU STUDIO</a> · <a href="https://pepputree.com">PEPPUTREE</a> · <a href="https://wiki.peppu.studio">WIKI</a>
         </footer>
       </div>
 

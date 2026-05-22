@@ -36,8 +36,41 @@ const SUBTOPICS = ["mechanism", "dosing", "safety"] as const;
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false,
+  compress: true,
   async headers() {
+    const crawlerCacheHeaders = [
+      {
+        key: "Cache-Control",
+        value: "public, max-age=300",
+      },
+      {
+        key: "CDN-Cache-Control",
+        value: "max-age=86400, stale-while-revalidate=604800",
+      },
+      {
+        key: "Vercel-CDN-Cache-Control",
+        value: "max-age=86400, stale-while-revalidate=604800",
+      },
+    ];
+
     return [
+      {
+        source: "/sitemap.xml",
+        headers: crawlerCacheHeaders,
+      },
+      {
+        source: "/sitemap-:segment.xml",
+        headers: crawlerCacheHeaders,
+      },
+      {
+        source: "/robots.txt",
+        headers: crawlerCacheHeaders,
+      },
+      {
+        source: "/llms.txt",
+        headers: crawlerCacheHeaders,
+      },
       {
         source: "/(.*)",
         headers: [
@@ -51,7 +84,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "X-Frame-Options",
-            value: "SAMEORIGIN",
+            value: "DENY",
           },
           {
             key: "Referrer-Policy",
@@ -59,7 +92,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
+            value: "camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()",
           },
           {
             key: "X-XSS-Protection",

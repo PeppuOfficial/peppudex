@@ -113,15 +113,45 @@ export default function HalfLifeChartPage() {
     "@id": "https://peppudex.com/tools/half-life-chart#dataset",
     name: "Peptide Plasma Half-Life Reference",
     description:
-      "Plasma half-life values for 17 research peptides, sourced from compound monographs.",
+      `Plasma half-life values for ${rows.length} research peptides, sourced from compound monographs.`,
     url: "https://peppudex.com/tools/half-life-chart",
     creator: {
       "@type": "Organization",
       name: "Peppu Studio LLC",
+      url: "https://peppu.studio",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Peppu Studio LLC",
+      url: "https://peppu.studio",
     },
     license: "https://creativecommons.org/licenses/by-nc/4.0/",
     datePublished: "2026-05-19",
+    dateModified: "2026-05-22",
     isAccessibleForFree: true,
+    keywords: [
+      "peptide half-life",
+      "pharmacokinetics",
+      "retatrutide",
+      "tirzepatide",
+      "BPC-157",
+      "TB-500",
+      "GHK-Cu",
+      "research peptide reference",
+    ],
+    variableMeasured: "Plasma half-life in hours",
+    distribution: [
+      {
+        "@type": "DataDownload",
+        encodingFormat: "text/html",
+        contentUrl: "https://peppudex.com/tools/half-life-chart",
+      },
+    ],
+    includedInDataCatalog: {
+      "@type": "DataCatalog",
+      name: "PEPPUDEX Reference Tools",
+      url: "https://peppudex.com",
+    },
   };
 
   const breadcrumbSchema = {

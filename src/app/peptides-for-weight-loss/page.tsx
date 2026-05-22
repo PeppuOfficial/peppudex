@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
 import { autoLink } from "@/lib/auto-link";
+import { storefrontProductUrl } from "@/lib/storefront-map";
 
 const CLUSTER = [
   "retatrutide",
@@ -55,7 +56,7 @@ export default function PeptidesForWeightLossPage() {
   const jsonLd = [
     {
       "@context": "https://schema.org",
-      "@type": "MedicalWebPage",
+      "@type": "WebPage",
       "@id": "https://peppudex.com/peptides-for-weight-loss",
       url: "https://peppudex.com/peptides-for-weight-loss",
       name: "Peptides for Weight Loss · Research Reference",
@@ -82,7 +83,7 @@ export default function PeptidesForWeightLossPage() {
       mainEntityOfPage: { "@id": "https://peppudex.com/peptides-for-weight-loss" },
       publisher: { "@id": "https://peppudex.com/#organization" },
       author: { "@id": "https://peppudex.com/#organization" },
-      about: ["weight loss", "body composition", "GLP-1 receptor agonist", "incretin axis"],
+      about: ["body-composition research", "metabolic signaling", "GLP-1 receptor agonist", "incretin axis"],
     },
     {
       "@context": "https://schema.org",
@@ -236,15 +237,18 @@ export default function PeptidesForWeightLossPage() {
             Research-grade reference compounds available at Peppu Studio · ≥99% purity · per-batch CoA. For laboratory research use only.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a
-              className="back"
-              style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "10px 14px", color: "var(--paper)", textDecoration: "none", background: "var(--ink)" }}
-              href="https://peppu.studio?utm_source=peppudex&utm_medium=usecase&utm_campaign=weight-loss"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              SOURCE AT PEPPU LABS ▶
-            </a>
+            {cluster.slice(0, 4).map((p) => (
+              <a
+                key={p.slug}
+                className="back"
+                style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "10px 14px", color: "var(--paper)", textDecoration: "none", background: "var(--ink)" }}
+                href={storefrontProductUrl(p.slug, "usecase-weight-loss")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                SOURCE {p.name} ▶
+              </a>
+            ))}
           </div>
         </article>
       </div>

@@ -1,0 +1,8 @@
+.env*
+.git
+.github
+.next
+node_modules
+*.log
+mcp_scheduler.log
+scheduler.db

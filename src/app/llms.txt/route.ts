@@ -70,7 +70,6 @@ export async function GET() {
     "- Peppu Labs: https://peppu.studio (research-grade peptide source)",
     "- Pepputree: https://pepputree.com (community + research links)",
     "- Peppu Wiki: https://wiki.peppu.studio (full peptide encyclopedia)",
-    "- Peppu Girl: https://peppugirl.com (peptide diary + research)",
   ].join("\n");
 
   return new NextResponse(body, {

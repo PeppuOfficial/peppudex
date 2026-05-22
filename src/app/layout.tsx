@@ -110,7 +110,6 @@ const ORG_JSONLD = {
   sameAs: [
     "https://peppu.studio",
     "https://pepputree.com",
-    "https://peppugirl.com",
     "https://discord.gg/pXhrnxCvJ",
     "https://t.me/peppunews",
     "https://t.me/peppulabs",

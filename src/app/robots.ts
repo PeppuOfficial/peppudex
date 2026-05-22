@@ -5,8 +5,8 @@ import type { MetadataRoute } from "next";
  *
  * Strategy: full-surface index for both AI-search and traditional
  * search. Peppudex is the validation / encyclopedia node of the
- * 3-property Peppu network (peppugirl awareness → peppudex
- * validation → peppu.studio conversion), so we want every retrieval
+ * Peppu network (wiki + peppudex context → peppu.studio source),
+ * so we want every retrieval
  * engine ingesting compound + mechanism + condition + study pages.
  *
  * The 5 sub-sitemaps are listed individually because Google Search

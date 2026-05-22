@@ -1,4 +1,5 @@
 import { wikiUrlFor } from "@/lib/wiki-map";
+import { storefrontProductUrl } from "@/lib/storefront-map";
 import { TrackedLink } from "@/components/TrackClient";
 
 /**
@@ -14,18 +15,15 @@ import { TrackedLink } from "@/components/TrackClient";
  * Props:
  *  - slug        · compound slug · used for UTM + wiki lookup
  *  - name        · display name · "BPC-157"
- *  - comingSoon  · when true, swap primary CTA for a "COMING SOON" pill
  */
 export function SourceForResearch({
   slug,
   name,
-  comingSoon = false,
 }: {
   slug: string;
   name: string;
-  comingSoon?: boolean;
 }) {
-  const storefrontHref = `https://peppu.studio?utm_source=peppudex&utm_medium=source-widget&utm_campaign=${slug}`;
+  const storefrontHref = storefrontProductUrl(slug, "source-widget");
   const wikiHref = wikiUrlFor(slug);
 
   return (
@@ -62,49 +60,29 @@ export function SourceForResearch({
       </p>
 
       <div className="source-cta-row">
-        {comingSoon ? (
-          <span
-            style={{
-              fontFamily: "var(--font-pixel)",
-              fontSize: 10,
-              letterSpacing: "0.14em",
-              padding: "10px 14px",
-              background: "var(--paper)",
-              color: "var(--ink)",
-              border: "3px solid var(--ink)",
-              boxShadow: "3px 3px 0 var(--shadow)",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            ◇ COMING SOON ◇
-          </span>
-        ) : (
-          <TrackedLink
-            eventName="source-widget-peppu-labs"
-            compound={slug}
-            href={storefrontHref}
-            target_attr="_blank"
-            rel="noopener noreferrer"
-            style={{
-              fontFamily: "var(--font-pixel)",
-              fontSize: 11,
-              letterSpacing: "0.14em",
-              padding: "12px 16px",
-              background: "var(--ink)",
-              color: "var(--paper)",
-              border: "3px solid var(--ink)",
-              boxShadow: "4px 4px 0 var(--shadow)",
-              textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            ▶ PEPPU LABS ◀
-          </TrackedLink>
-        )}
+        <TrackedLink
+          eventName="source-widget-peppu-labs"
+          compound={slug}
+          href={storefrontHref}
+          target_attr="_blank"
+          rel="noopener noreferrer"
+          style={{
+            fontFamily: "var(--font-pixel)",
+            fontSize: 11,
+            letterSpacing: "0.14em",
+            padding: "12px 16px",
+            background: "var(--ink)",
+            color: "var(--paper)",
+            border: "3px solid var(--ink)",
+            boxShadow: "4px 4px 0 var(--shadow)",
+            textDecoration: "none",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          ▶ PEPPU LABS ◀
+        </TrackedLink>
 
         {wikiHref && (
           <TrackedLink

@@ -8,12 +8,12 @@ import { CONDITIONS_BY_SLUG } from "@/data/conditions";
 import { stacksForCompound } from "@/data/stacks";
 import { buildCompoundJsonLd } from "@/lib/json-ld";
 import { ReviewedByByline } from "@/components/ReviewedByByline";
-import { peppugirlPostsForCompound } from "@/data/peppugirl-links";
 import { wikiUrlFor } from "@/lib/wiki-map";
 import { autoLink } from "@/lib/auto-link";
 import { PageviewBeacon, TrackedLink } from "@/components/TrackClient";
 import { SourceForResearch } from "@/components/SourceForResearch";
 import { TableOfContents } from "@/components/TableOfContents";
+import { storefrontProductUrl } from "@/lib/storefront-map";
 
 export function generateStaticParams() {
   return PEPPUDEX.map((p) => ({ slug: p.slug }));
@@ -56,12 +56,12 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
   const mechanisms = (enr?.mechanisms ?? []).map((m) => MECHANISMS_BY_SLUG[m]).filter(Boolean);
   const conditions = (enr?.conditions ?? []).map((c) => CONDITIONS_BY_SLUG[c]).filter(Boolean);
   const stacks = stacksForCompound(slug);
-  const peppugirlPosts = peppugirlPostsForCompound(slug);
 
-  // JSON-LD · MedicalWebPage + DietarySupplement + BreadcrumbList + MedicalStudy[]
-  // + Dataset + DefinedTerm + FAQPage. Wires page into Google medical Knowledge Graph
-  // via additionalProperty (CAS/PubChem/MeSH/UNII/KEGG/ChEMBL) + sameAs.
+  // JSON-LD · WebPage + DefinedTerm + BreadcrumbList + ScholarlyArticle[]
+  // + Dataset + FAQPage + ImageObject. Wires the compound entity via
+  // additionalProperty (CAS/PubChem/MeSH/UNII/KEGG/ChEMBL) + sameAs.
   const jsonLd = buildCompoundJsonLd(entry, enr);
+  const storefrontHref = storefrontProductUrl(entry.slug, "compound");
 
   // ToC sections · only include the ones the page will actually render for
   // this compound so the sidebar never points to a missing anchor.
@@ -77,7 +77,6 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
     ...(enr?.faqs && enr.faqs.length > 0 ? [{ id: "faq", label: "FAQ" }] : []),
     ...(stacks.length > 0 ? [{ id: "stacks", label: "Stacks" }] : []),
     { id: "signature-moves", label: "Signature Moves" },
-    ...(peppugirlPosts.length > 0 ? [{ id: "peppugirl-diary", label: "Peppugirl Diary" }] : []),
     { id: "source", label: "Source at Peppu Labs" },
   ];
 
@@ -107,7 +106,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           {/* Where-to-source widget · Letterboxd / IMDB pattern. Sits above
               the hero so commercial intent has a clean landing spot.
               Peppudex stays education-only · the storefront handles its
-              own catalog state (live vs coming soon) on its side. */}
+              own catalog state on its side. */}
           <SourceForResearch slug={entry.slug} name={entry.name} />
 
           {/* ── 1. HERO · CARD + IDENTIFIERS ── */}
@@ -200,7 +199,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
               <h2 id="safety">SAFETY</h2>
               <p className="body" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, marginTop: 14 }}>Side effects</p>
               <ul>{enr.safety.sideEffects.map((s, i) => (<li key={i}>{s}</li>))}</ul>
-              <p className="body" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, marginTop: 14 }}>Drug interactions</p>
+              <p className="body" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, marginTop: 14 }}>Known interactions</p>
               <ul>{enr.safety.interactions.map((s, i) => (<li key={i}>{s}</li>))}</ul>
               <p className="body" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, marginTop: 14 }}>Contraindications</p>
               <ul>{enr.safety.contraindications.map((s, i) => (<li key={i}>{s}</li>))}</ul>
@@ -287,31 +286,6 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
             ))}
           </div>
 
-          {/* ── 11.5 PEPPUGIRL DIARY · bidirectional authority loop (Phase P-1) ── */}
-          {peppugirlPosts.length > 0 && (
-            <>
-              <h2 id="peppugirl-diary">READ PEPPUGIRL&apos;S {entry.name} DIARY</h2>
-              <p className="body" style={{ marginBottom: 14 }}>
-                First-person photo-documented research-protocol log for {entry.name}. Timestamped weekly observations, before-after, evidence-grade context.
-              </p>
-              <div className="stack-grid">
-                {peppugirlPosts.map((p) => (
-                  <a
-                    key={p.slug}
-                    className="stack-card"
-                    href={`https://peppugirl.com/blog/${p.slug}`}
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <p style={{ fontFamily: "var(--font-pixel)", fontSize: 10, letterSpacing: "0.14em", opacity: 0.6 }}>PEPPUGIRL DIARY</p>
-                    <p style={{ fontFamily: "var(--font-pixel)", fontSize: 12, marginTop: 6 }}>{p.title.toUpperCase()}</p>
-                    <p className="body" style={{ marginTop: 6 }}>{p.excerpt}</p>
-                  </a>
-                ))}
-              </div>
-            </>
-          )}
-
           {/* ── 12. SOURCE NOTE / BANNER (below the research content per E-E-A-T) ── */}
           <h2 id="source">SOURCED FROM PEPPU LABS</h2>
           <p className="body" style={{ marginBottom: 14 }}>
@@ -319,7 +293,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 10 }}>
             <TrackedLink eventName="source-at-peppu-labs" compound={entry.slug}
-              href={`https://peppu.studio?utm_source=peppudex&utm_medium=compound&utm_campaign=${entry.slug}`}
+              href={storefrontHref}
               className="back" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "10px 14px", color: "var(--paper)", textDecoration: "none", background: "var(--ink)" }}
               target_attr="_blank" rel="noopener noreferrer">
               SOURCE AT PEPPU LABS ▶

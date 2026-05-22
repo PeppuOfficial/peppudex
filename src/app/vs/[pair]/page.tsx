@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { COMPARISONS, COMPARISONS_BY_SLUG } from "@/data/comparisons";
 import { PEPPUDEX } from "@/data/peppudex";
+import { storefrontProductUrl } from "@/lib/storefront-map";
 
 export function generateStaticParams() {
   return COMPARISONS.map((c) => ({ pair: c.slug }));
@@ -113,8 +114,12 @@ export default async function VsPage({ params }: { params: Promise<{ pair: strin
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <a className="back" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "10px 14px", color: "var(--paper)", textDecoration: "none", background: "var(--ink)" }}
-              href={`https://peppu.studio?utm_source=peppudex&utm_medium=vs&utm_campaign=${c.slug}`} target="_blank" rel="noopener noreferrer">
-              SOURCE AT PEPPU LABS ▶
+              href={storefrontProductUrl(a.slug, "vs")} target="_blank" rel="noopener noreferrer">
+              SOURCE {a.name} ▶
+            </a>
+            <a className="back" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "10px 14px", color: "var(--paper)", textDecoration: "none", background: "var(--grass-deep)" }}
+              href={storefrontProductUrl(b.slug, "vs")} target="_blank" rel="noopener noreferrer">
+              SOURCE {b.name} ▶
             </a>
           </div>
         </article>

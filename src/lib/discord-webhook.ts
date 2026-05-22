@@ -3,7 +3,7 @@
  *
  * Fires structured events to the Discord channel attached to env
  * `DISCORD_WEBHOOK_PEPPUDEX`. Used for funnel tracking · pageview,
- * outbound-click (wiki / peppu.studio / pepputree / peppugirl), and
+ * outbound-click (wiki / peppu.studio / pepputree), and
  * daily aggregate-summary posts from the cron job.
  *
  * NEVER throw · failures are logged and swallowed so a webhook outage

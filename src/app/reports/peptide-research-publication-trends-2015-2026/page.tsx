@@ -93,10 +93,17 @@ export default function PublicationTrendsReport() {
       "bibliometrics",
     ],
     "variableMeasured": "Annual publication count per compound",
-    "distribution": {
-      "@type": "DataDownload",
-      "encodingFormat": "application/json",
-      "contentUrl": `${REPORT_URL}`,
+    "distribution": [
+      {
+        "@type": "DataDownload",
+        "encodingFormat": "text/html",
+        "contentUrl": REPORT_URL,
+      },
+    ],
+    "includedInDataCatalog": {
+      "@type": "DataCatalog",
+      "name": "PEPPUDEX Research Reports",
+      "url": "https://peppudex.com/reports",
     },
   };
 

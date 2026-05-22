@@ -31,7 +31,7 @@ export default function PeptidesIndexPage() {
       isPartOf: { "@id": "https://peppudex.com/#site" },
       publisher: { "@id": "https://peppudex.com/#org" },
       hasPart: PEPPUDEX.map((p) => ({
-        "@type": "MedicalWebPage",
+        "@type": "WebPage",
         "@id": `https://peppudex.com/peptides/${p.slug}`,
         name: p.name,
         url: `https://peppudex.com/peptides/${p.slug}`,

@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { STACKS } from "@/data/stacks";
-import { buildUrlsetXml, type SitemapUrl } from "@/lib/sitemap-xml";
+import {
+  SITEMAP_RESPONSE_HEADERS,
+  buildUrlsetXml,
+  type SitemapUrl,
+} from "@/lib/sitemap-xml";
 
 const BASE = "https://peppudex.com";
 
@@ -67,6 +71,6 @@ export async function GET() {
     urls.push({ loc: `${BASE}${path}`, lastmod, changefreq, priority });
   }
   return new NextResponse(buildUrlsetXml(urls), {
-    headers: { "Content-Type": "application/xml; charset=utf-8" },
+    headers: SITEMAP_RESPONSE_HEADERS,
   });
 }

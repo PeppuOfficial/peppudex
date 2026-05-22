@@ -68,7 +68,7 @@ export interface Enrichment {
   citations: Citation[];
   lastUpdated: string;
   /** Machine-readable entity identifiers · wires page into Google medical Knowledge Graph.
-   *  Emit as `additionalProperty` on DietarySupplement schema + `sameAs` on entity URLs. */
+   *  Emit as `additionalProperty` on the compound entity schema + `sameAs` on entity URLs. */
   entityIds?: EntityIds;
   /** Editorial reviewer slug (joined to reviewers/) · defaults to "editorial-board". */
   reviewer?: string;

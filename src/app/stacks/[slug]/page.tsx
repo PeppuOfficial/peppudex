@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { STACKS, STACKS_BY_SLUG } from "@/data/stacks";
 import { PEPPUDEX } from "@/data/peppudex";
+import { storefrontProductUrl } from "@/lib/storefront-map";
 
 export function generateStaticParams() {
   return STACKS.map((s) => ({ slug: s.slug }));
@@ -68,10 +69,23 @@ export default async function StackPage({ params }: { params: Promise<{ slug: st
           <p className="body" style={{ marginBottom: 14 }}>
             Each component is available individually as research-grade material at Peppu Studio · ≥99% purity · per-batch CoA. For laboratory research use only. No human dose is recommended.
           </p>
-          <a className="back" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "10px 14px", color: "var(--paper)", textDecoration: "none", background: "var(--ink)" }}
-            href={`https://peppu.studio?utm_source=peppudex&utm_medium=stack&utm_campaign=${s.slug}`} target="_blank" rel="noopener noreferrer">
-            SOURCE COMPONENTS ▶
-          </a>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            {s.components.map((c) => {
+              const compound = PEPPUDEX.find((p) => p.slug === c.slug);
+              return (
+                <a
+                  key={c.slug}
+                  className="back"
+                  style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "10px 14px", color: "var(--paper)", textDecoration: "none", background: "var(--ink)" }}
+                  href={storefrontProductUrl(c.slug, "stack")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  SOURCE {compound?.name ?? c.slug} ▶
+                </a>
+              );
+            })}
+          </div>
         </article>
       </div>
       <div className="disclaimer-band">© 2026 Peppu Studio LLC · For Laboratory Research Use Only</div>

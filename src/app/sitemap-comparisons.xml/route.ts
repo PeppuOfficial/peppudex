@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { COMPARISONS } from "@/data/comparisons";
-import { buildUrlsetXml, type SitemapUrl } from "@/lib/sitemap-xml";
+import {
+  SITEMAP_RESPONSE_HEADERS,
+  buildUrlsetXml,
+  type SitemapUrl,
+} from "@/lib/sitemap-xml";
 
 const BASE = "https://peppudex.com";
 
@@ -24,6 +28,6 @@ export async function GET() {
     });
   }
   return new NextResponse(buildUrlsetXml(urls), {
-    headers: { "Content-Type": "application/xml; charset=utf-8" },
+    headers: SITEMAP_RESPONSE_HEADERS,
   });
 }

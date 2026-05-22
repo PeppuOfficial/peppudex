@@ -99,6 +99,24 @@ export default function RegulatoryMatrixReport() {
       "CDSCO",
       "WADA",
     ],
+    "variableMeasured": [
+      "Compound",
+      "Jurisdiction",
+      "Regulatory status",
+      "Primary source URL",
+    ],
+    "distribution": [
+      {
+        "@type": "DataDownload",
+        "encodingFormat": "text/html",
+        "contentUrl": REPORT_URL,
+      },
+    ],
+    "includedInDataCatalog": {
+      "@type": "DataCatalog",
+      "name": "PEPPUDEX Regulatory Reports",
+      "url": "https://peppudex.com/reports",
+    },
   };
 
   const articleSchema = {

@@ -12,6 +12,7 @@
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { PEPPUDEX } from "@/data/peppudex";
+import { storefrontProductUrl } from "@/lib/storefront-map";
 
 /** Default vial + dose presets per peptide · mirrored from the storefront. */
 const PRESETS: Record<string, { vialMg: number; doseMcg: number }> = {
@@ -221,8 +222,8 @@ export default function CalculatorPage() {
                 FULL CARD ▶
               </Link>
               <a className="back" style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "8px 12px", color: "var(--paper)", textDecoration: "none", background: "var(--grass-deep)" }}
-                href={`https://peppu.studio?utm_source=peppudex&utm_medium=calc&utm_campaign=${activeCard.slug}`} target="_blank" rel="noopener noreferrer">
-                BUY AT PEPPU LABS ▶
+                href={storefrontProductUrl(activeCard.slug, "calc")} target="_blank" rel="noopener noreferrer">
+                SOURCE AT PEPPU LABS ▶
               </a>
             </div>
           </div>

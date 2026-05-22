@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
 import { autoLink } from "@/lib/auto-link";
+import { storefrontProductUrl } from "@/lib/storefront-map";
 
 const CLUSTER = [
   "tb-500",
@@ -54,7 +55,7 @@ export default function PeptidesForMuscleGrowthPage() {
   const jsonLd = [
     {
       "@context": "https://schema.org",
-      "@type": "MedicalWebPage",
+      "@type": "WebPage",
       "@id": "https://peppudex.com/peptides-for-muscle-growth",
       url: "https://peppudex.com/peptides-for-muscle-growth",
       name: "Peptides for Muscle Growth · Research Reference",
@@ -205,15 +206,18 @@ export default function PeptidesForMuscleGrowthPage() {
             Research-grade reference compounds available at Peppu Studio · ≥99% purity · per-batch CoA. For laboratory research use only.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a
-              className="back"
-              style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "10px 14px", color: "var(--paper)", textDecoration: "none", background: "var(--ink)" }}
-              href="https://peppu.studio?utm_source=peppudex&utm_medium=usecase&utm_campaign=muscle-growth"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              SOURCE AT PEPPU LABS ▶
-            </a>
+            {cluster.slice(0, 5).map((p) => (
+              <a
+                key={p.slug}
+                className="back"
+                style={{ fontFamily: "var(--font-pixel)", fontSize: 10, padding: "10px 14px", color: "var(--paper)", textDecoration: "none", background: "var(--ink)" }}
+                href={storefrontProductUrl(p.slug, "usecase-muscle")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                SOURCE {p.name} ▶
+              </a>
+            ))}
           </div>
         </article>
       </div>

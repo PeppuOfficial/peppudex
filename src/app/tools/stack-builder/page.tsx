@@ -353,8 +353,7 @@ export default function StackBuilderPage() {
             <li>
               Saved stacks live at{" "}
               <code>/stacks/built-&lt;slug&gt;</code> and emit
-              schema.org DietarySupplement JSON-LD for the full
-              collection.
+              schema.org ItemList JSON-LD for the full collection.
             </li>
             <li>
               Component pages and primary-literature citations are

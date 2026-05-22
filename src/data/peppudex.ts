@@ -69,8 +69,8 @@ export const PEPPUDEX: PeppudexEntry[] = [
     card: "/cards/retatrutide.png",
     mechanism: "Engineered single-molecule agonist at GLP-1, GIP, and glucagon receptors. Investigational compound from Eli Lilly under the codename LY3437943.",
     moves: [
-      { name: "Appetite Suppress", power: 60, desc: "GLP-1 arm slows gastric emptying." },
-      { name: "Triple Burn", power: 160, desc: "Activates all three receptors. Phase 2 NEJM 2023 · NCT04881760." },
+      { name: "GLP-1 Signal", power: 60, desc: "GLP-1 receptor arm models gastric-motility signaling." },
+      { name: "Triple Agonism", power: 160, desc: "GLP-1R, GIPR, and GCGR pharmacology. Phase 2 NEJM 2023 · NCT04881760." },
     ],
     evidence: [
       "Jastreboff AM, Kaplan LM, Frías JP et al., Triple-Hormone-Receptor Agonist Retatrutide for Obesity · NEJM 2023; PMID 37366315 · ClinicalTrials.gov NCT04881760.",
@@ -92,10 +92,10 @@ export const PEPPUDEX: PeppudexEntry[] = [
     level: 92,
     types: ["metabolic", "incretin"],
     card: "/cards/tirzepatide.png",
-    mechanism: "Dual GLP-1 and GIP receptor agonist. Marketed (under separate human-prescription label) as Mounjaro and Zepbound by Eli Lilly. Once-weekly subcutaneous administration.",
+    mechanism: "Dual GLP-1 and GIP receptor agonist. Marketed under separate human-prescription labels as Mounjaro and Zepbound by Eli Lilly; Peppudex references the molecule for pharmacology research only.",
     moves: [
-      { name: "Incretin Pulse", power: 50, desc: "Both receptors fire. Slows gastric emptying." },
-      { name: "Dual Burn", power: 110, desc: "SURMOUNT-1 / NCT04184231." },
+      { name: "Incretin Pulse", power: 50, desc: "Dual receptor signaling model." },
+      { name: "Dual Agonism", power: 110, desc: "SURMOUNT-1 / NCT04184231." },
     ],
     evidence: [
       "Jastreboff AM et al., Tirzepatide Once Weekly for the Treatment of Obesity · NEJM 2022 · SURMOUNT-1.",
@@ -143,8 +143,8 @@ export const PEPPUDEX: PeppudexEntry[] = [
     card: "/cards/ghk-cu.png",
     mechanism: "Naturally occurring tripeptide Gly-His-Lys bound to a Cu²⁺ ion. Peer-reviewed for collagen-synthesis induction, glycosaminoglycan production, and tissue-remodeling transcriptional signaling.",
     moves: [
-      { name: "Collagen Bloom", power: 50, desc: "Heal your team 30 HP." },
-      { name: "Copper Crown", power: 30, desc: "Wound-healing kinetics." },
+      { name: "Collagen Signal", power: 50, desc: "Matrix-synthesis research signal." },
+      { name: "Copper Crown", power: 30, desc: "Tissue-remodeling kinetics." },
     ],
     evidence: [
       "Pickart L, The human tri-peptide GHK and tissue remodeling · J Biomater Sci Polym Ed 2008 · PMID 18644225.",
@@ -192,8 +192,8 @@ export const PEPPUDEX: PeppudexEntry[] = [
     card: "/cards/nad-plus.png",
     mechanism: "Endogenous redox coenzyme. Substrate of sirtuins, PARPs, and CD38. Drives cellular bioenergetics through glycolysis, the TCA cycle, and oxidative phosphorylation.",
     moves: [
-      { name: "Sirtuin Surge", power: 70, desc: "Heal all your cards 30 HP. Activates SIRT1/SIRT3." },
-      { name: "Reverse Aging", power: 100, desc: "Opponent skips next turn." },
+      { name: "Sirtuin Surge", power: 70, desc: "SIRT1/SIRT3 pathway reference." },
+      { name: "Redox Loop", power: 100, desc: "NAD-dependent bioenergetic signaling." },
     ],
     evidence: [
       "Yoshino J, Baur JA, Imai S · NAD+ Intermediates · Cell Metab 2018 · PMID 29249689.",
@@ -217,7 +217,7 @@ export const PEPPUDEX: PeppudexEntry[] = [
     mechanism: "Synthetic 7-amino-acid fragment (Ac-LKKTETQ) of thymosin beta-4 retaining the actin-sequestering activity of the parent protein. Drives cell migration and tissue-remodeling pathways in animal models.",
     moves: [
       { name: "Actin Sequester", power: 50, desc: "Status: opponent paused 2 turns. G-actin binding kinetics." },
-      { name: "Total Recovery", desc: "Heal all REGEN allies to full HP. Anti-inflammatory cascade." },
+      { name: "Actin Cascade", desc: "Cell-migration and inflammatory-pathway research." },
     ],
     evidence: [
       "Sosne G et al., Biological activities of thymosin beta4 · FASEB J 2010 · PMID 20179146.",
@@ -385,8 +385,8 @@ export const PEPPUDEX: PeppudexEntry[] = [
     card: "/cards/wolverine-blend.png",
     mechanism: "Combinatorial regeneration research panel. BPC-157 (cytoprotection + VEGF angiogenesis) + TB-500 (G-actin sequestration + cell migration) + GHK-Cu (collagen + matrix induction) co-lyophilized for connective-tissue research.",
     moves: [
-      { name: "Triple Heal", power: 130, desc: "All three component pathways fire in sequence." },
-      { name: "Cell Migration Storm", power: 180, desc: "Endothelial + stem cells recruit to injury site." },
+      { name: "Triple Pathway", power: 130, desc: "All three component pathways fire in sequence." },
+      { name: "Cell Migration Signal", power: 180, desc: "Endothelial and progenitor-cell migration model." },
     ],
     evidence: [
       "Per-component animal-model literature applies independently. No peer-reviewed publication studies the blend as a unit.",
@@ -477,8 +477,8 @@ export const PEPPUDEX: PeppudexEntry[] = [
     card: "/cards/cagrilintide.png",
     mechanism: "Long-acting amylin analog. Activates amylin and calcitonin receptors to slow gastric emptying and modulate satiety signaling. Forms the cagrilintide-half of the CagriSema combination program with semaglutide.",
     moves: [
-      { name: "Appetite Brake", power: 80, desc: "Slows gastric emptying. Amylin receptor activation." },
-      { name: "CagriSema Surge", power: 130, desc: "Stacks with semaglutide. REDEFINE Phase 3 program." },
+      { name: "Amylin Brake", power: 80, desc: "Amylin receptor activation model." },
+      { name: "CagriSema Signal", power: 130, desc: "Combination-program pharmacology. REDEFINE Phase 3 program." },
     ],
     evidence: [
       "Lau DCW et al., Cagrilintide + semaglutide (CagriSema) for obesity · Lancet 2021.",

@@ -1,10 +1,10 @@
 ﻿/**
  * JSON-LD schema builders for PEPPUDEX.
  *
- * Returns full YMYL stack: MedicalWebPage + DietarySupplement + BreadcrumbList
- * + MedicalStudy[] + Dataset + FAQPage + DefinedTerm.
+ * Returns research-reference stack: WebPage + DefinedTerm + BreadcrumbList
+ * + ScholarlyArticle[] + Dataset + FAQPage + ImageObject.
  *
- * Wires the page into Google's medical Knowledge Graph via additionalProperty
+ * Wires the compound entity into public identifiers via additionalProperty
  * (CAS/PubChem/MeSH/UNII/KEGG/ChEMBL) and sameAs (Wikidata/DrugBank/PubChem URL).
  *
  * Validate at https://validator.schema.org/ + Google Rich Results Test.
@@ -27,11 +27,10 @@ export function buildOrgSchema() {
       "https://peppudex.com",
       "https://pepputree.com",
       "https://wiki.peppu.studio",
-      "https://peppugirl.com",
     ],
     "publishingPrinciples": `${BASE}/editorial-policy`,
     "ethicsPolicy": `${BASE}/editorial-policy`,
-    "knowsAbout": ["peptide pharmacology", "research peptides", "medical chemistry"],
+    "knowsAbout": ["peptide pharmacology", "research peptides", "biochemical reference compounds"],
     "founder": { "@type": "Organization", "@id": `${BASE}/#org` },
   };
 }
@@ -85,10 +84,10 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
   const description = enr?.faqs?.[0]?.a ?? entry.mechanism;
   const lastUpdated = enr?.lastUpdated ?? "2026-05-19";
 
-  // 1. MedicalWebPage · page-level wrapper, @id = canonical URL
-  const medicalWebPage = {
+  // 1. WebPage · page-level wrapper, @id = canonical URL.
+  const webPage = {
     "@context": "https://schema.org",
-    "@type": "MedicalWebPage",
+    "@type": "WebPage",
     "@id": url,
     "url": url,
     "name": `${entry.name} · Mechanism, Evidence, FAQ`,
@@ -99,8 +98,8 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
     "publisher": { "@id": `${BASE}/#org` },
     "inLanguage": "en-US",
     "audience": {
-      "@type": "MedicalAudience",
-      "audienceType": "researcher",
+      "@type": "Audience",
+      "audienceType": "laboratory researchers",
     },
     "lastReviewed": lastUpdated,
     "reviewedBy": {
@@ -108,7 +107,6 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
       "name": "Peppu Studio Research Desk",
       "url": `${BASE}/reviewers/editorial-board`,
     },
-    "specialty": "Pharmacy",
     "mainContentOfPage": { "@type": "WebPageElement", "cssSelector": "article.detail" },
     "image": entry.card ? `${BASE}${entry.card}` : undefined,
     // SpeakableSpecification · voice-assistant readout (Google Assistant, Alexa).
@@ -119,56 +117,32 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
     },
   };
 
-  // 2. DietarySupplement (preferred over Drug @type for RUO compliance)
-  // Google parses DietarySupplement as a Product-class entity, so it
-  // gets Product Snippets rich-results treatment. That means it needs
-  // aggregateRating + review fields to be issue-free in GSC. Anchor
-  // values come from per-compound evidence-grade summary + the
-  // peer-reviewed citation count (peppudex.com is a research reference,
-  // not a storefront · this is the editorial review).
-  const dietarySupplement: Record<string, unknown> = {
+  // 2. DefinedTerm · canonical compound entity. Peppudex is a research
+  // reference, not the storefront, so avoid Product-class schema here.
+  // Avoiding DietarySupplement keeps Google from opening supplement-style
+  // Product Snippet reports for
+  // these pages and expects offer/image fields that belong on peppu.studio.
+  const substanceTerm: Record<string, unknown> = {
     "@context": "https://schema.org",
-    "@type": "DietarySupplement",
+    "@type": "DefinedTerm",
     "@id": `${url}#substance`,
     "name": entry.name,
     "alternateName": enr?.aliases ?? [],
     "description": entry.mechanism,
     "url": url,
-    "activeIngredient": entry.name,
-    "isProprietary": false,
-    "mechanismOfAction": entry.mechanism,
-    "manufacturer": { "@id": `${BASE}/#org` },
     "sameAs": entityIdSameAs(enr?.entityIds),
-    "additionalProperty": entityIdAdditionalProperty(enr?.entityIds),
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.7",
-      "reviewCount": Math.max(1, (enr?.citations?.length ?? 0)).toString(),
-      "bestRating": "5",
-      "worstRating": "1",
+    "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "PEPPUDEX",
+      "url": BASE,
     },
-    "review": [
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5",
-        },
-        "author": {
-          "@type": "Organization",
-          "name": ORG_NAME,
-          "url": BASE,
-        },
-        "datePublished": "2026-05-21",
-        "reviewBody": `Editorial reference review · ${entry.name} mechanism summary verified against ${enr?.citations?.length ?? 0} peer-reviewed citations on Peppudex.`,
-      },
-    ],
   };
-  if (enr?.formula) dietarySupplement.activeIngredient = `${entry.name} (${enr.formula})`;
-  if (enr?.safety?.contraindications?.length) {
-    dietarySupplement.nonProprietaryName = entry.name;
-    dietarySupplement.legalStatus = enr.regulatory?.fda ?? "Research Use Only";
+  const identifiers = entityIdAdditionalProperty(enr?.entityIds);
+  if (identifiers.length) {
+    substanceTerm.identifier = identifiers;
+  }
+  if (enr?.formula) {
+    substanceTerm.termCode = enr.formula;
   }
 
   // 3. BreadcrumbList
@@ -181,19 +155,18 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
     ],
   };
 
-  // 4. MedicalStudy[] · one per citation
-  const medicalStudies = (enr?.citations ?? []).map((c) => ({
+  // 4. ScholarlyArticle[] · one per citation.
+  const scholarlyArticles = (enr?.citations ?? []).map((c) => ({
     "@context": "https://schema.org",
-    "@type": "MedicalStudy",
+    "@type": "ScholarlyArticle",
     "@id": c.url,
     "name": c.title,
     "author": c.authors,
     "datePublished": String(c.year),
     "url": c.url,
-    "studyDesign": c.nct ? "InterventionalStudy" : "ReviewArticle",
     "identifier": c.pmid ? `PMID:${c.pmid}` : c.nct ?? c.title,
-    "publication": { "@type": "Periodical", "name": c.journal },
-    "studySubject": { "@id": `${url}#substance` },
+    "isPartOf": { "@type": "Periodical", "name": c.journal },
+    "about": { "@id": `${url}#substance` },
   }));
 
   // 5. Dataset · evidence-grade table. Google Dataset rich-results
@@ -240,21 +213,6 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
         },
       }
     : null;
-
-  // 6. DefinedTerm · keep existing for backward compatibility
-  const definedTerm = {
-    "@context": "https://schema.org",
-    "@type": "DefinedTerm",
-    "name": entry.name,
-    "alternateName": enr?.aliases ?? [],
-    "description": entry.mechanism,
-    "url": url,
-    "inDefinedTermSet": {
-      "@type": "DefinedTermSet",
-      "name": "PEPPUDEX",
-      "url": BASE,
-    },
-  };
 
   // 7. FAQPage
   const faqPage = enr?.faqs?.length
@@ -303,8 +261,8 @@ export function buildCompoundJsonLd(entry: PeppudexEntry, enr: Enrichment | unde
       }
     : null;
 
-  const out: object[] = [medicalWebPage, dietarySupplement, breadcrumb, definedTerm];
-  if (medicalStudies.length) out.push(...medicalStudies);
+  const out: object[] = [webPage, substanceTerm, breadcrumb];
+  if (scholarlyArticles.length) out.push(...scholarlyArticles);
   if (dataset) out.push(dataset);
   if (faqPage) out.push(faqPage);
   if (imageObject) out.push(imageObject);

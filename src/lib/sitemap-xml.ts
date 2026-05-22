@@ -1,5 +1,12 @@
 /** Shared helpers for sub-sitemap XML route handlers. */
 
+export const SITEMAP_RESPONSE_HEADERS = {
+  "Content-Type": "application/xml; charset=utf-8",
+  "Cache-Control": "public, max-age=300",
+  "CDN-Cache-Control": "max-age=86400, stale-while-revalidate=604800",
+  "Vercel-CDN-Cache-Control": "max-age=86400, stale-while-revalidate=604800",
+} as const;
+
 export interface SitemapUrl {
   loc: string;
   lastmod?: string;

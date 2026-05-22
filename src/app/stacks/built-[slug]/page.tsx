@@ -4,12 +4,13 @@ import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
 import { ENRICHMENT } from "@/data/enrichment";
 import { getSupabaseAdmin } from "@/lib/supabase-server";
+import { storefrontProductUrl } from "@/lib/storefront-map";
 
 /**
  * GET /stacks/built-<slug> · render a user-assembled compound stack.
  *
  * Server component · fetches the row by slug, emits a JSON-LD
- * collection wrapping every component as a DietarySupplement and
+ * collection wrapping every component as a research compound term and
  * the stack itself as an ItemList. Also bumps `view_count` server
  * side (fire-and-forget; failures do not block the render).
  */
@@ -88,7 +89,7 @@ export default async function BuiltStackPage({
   const url = `${BASE}/stacks/built-${slug}`;
   const names = components.map((c) => c.name).join(" + ");
 
-  // JSON-LD · ItemList wrapping DietarySupplement entries.
+  // JSON-LD · ItemList wrapping research compound entries.
   const itemList = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -101,7 +102,7 @@ export default async function BuiltStackPage({
       "@type": "ListItem",
       position: idx + 1,
       item: {
-        "@type": "DietarySupplement",
+        "@type": "DefinedTerm",
         "@id": `${BASE}/peptides/${c.slug}#substance`,
         name: c.name,
         url: `${BASE}/peptides/${c.slug}`,
@@ -282,22 +283,27 @@ export default async function BuiltStackPage({
             material at Peppu Studio · ≥99% purity · per-batch CoA. For
             laboratory research use only.
           </p>
-          <a
-            className="back"
-            style={{
-              fontFamily: "var(--font-pixel)",
-              fontSize: 10,
-              padding: "10px 14px",
-              color: "var(--paper)",
-              textDecoration: "none",
-              background: "var(--ink)",
-            }}
-            href={`https://peppu.studio?utm_source=peppudex&utm_medium=built-stack&utm_campaign=${slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            SOURCE COMPONENTS ▶
-          </a>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            {components.map((c) => (
+              <a
+                key={c.slug}
+                className="back"
+                style={{
+                  fontFamily: "var(--font-pixel)",
+                  fontSize: 10,
+                  padding: "10px 14px",
+                  color: "var(--paper)",
+                  textDecoration: "none",
+                  background: "var(--ink)",
+                }}
+                href={storefrontProductUrl(c.slug, "built-stack")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                SOURCE {c.name} ▶
+              </a>
+            ))}
+          </div>
         </article>
       </div>
       <div className="disclaimer-band">
