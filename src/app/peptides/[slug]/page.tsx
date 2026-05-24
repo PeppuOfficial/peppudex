@@ -8,6 +8,7 @@ import { CONDITIONS_BY_SLUG } from "@/data/conditions";
 import { stacksForCompound } from "@/data/stacks";
 import { buildCompoundJsonLd } from "@/lib/json-ld";
 import CardImage from "@/components/CardImage";
+import CompoundVideo from "@/components/CompoundVideo";
 import { ReviewedByByline } from "@/components/ReviewedByByline";
 import { wikiUrlFor } from "@/lib/wiki-map";
 import { autoLink } from "@/lib/auto-link";
@@ -112,12 +113,15 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
 
           {/* ── 1. HERO · CARD + IDENTIFIERS ── */}
           <section className="top" style={{ marginBottom: 24 }}>
-            <CardImage
-              src={entry.card}
-              variant="detail"
-              alt={`${entry.name} trading card`}
-              priority
-            />
+            <div style={{ display: "grid", gap: 14 }}>
+              <CompoundVideo slug={entry.slug} name={entry.name} />
+              <CardImage
+                src={entry.card}
+                variant="detail"
+                alt={`${entry.name} trading card`}
+                priority
+              />
+            </div>
             <div>
               <p style={{ fontFamily: "var(--font-pixel)", fontSize: 9, letterSpacing: "0.18em" }}>
                 NO. {entry.id} · {entry.stage.toUpperCase()} · Lv. {entry.level} · HP {entry.hp}
