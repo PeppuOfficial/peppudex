@@ -2,7 +2,30 @@ import Link from "next/link";
 import { PEPPUDEX } from "@/data/peppudex";
 import { MECHANISMS } from "@/data/mechanisms";
 import { STACKS } from "@/data/stacks";
+import CardImage from "@/components/CardImage";
 import SearchBar from "@/components/SearchBar";
+
+const INK_HEX = "#1A1A2E";
+const PAPER_HEX = "#FFF8DC";
+
+function luminance(hex: string) {
+  const value = hex.replace("#", "");
+  const rgb = [0, 2, 4].map((i) => parseInt(value.slice(i, i + 2), 16) / 255);
+  const [r, g, b] = rgb.map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrastRatio(a: string, b: string) {
+  const high = Math.max(luminance(a), luminance(b));
+  const low = Math.min(luminance(a), luminance(b));
+  return (high + 0.05) / (low + 0.05);
+}
+
+function readableMechanismText(background: string) {
+  return contrastRatio(background, INK_HEX) >= contrastRatio(background, PAPER_HEX)
+    ? INK_HEX
+    : PAPER_HEX;
+}
 
 export default function Home() {
   // Daily-highlight · deterministic rotation, day-of-year → compound.
@@ -37,7 +60,7 @@ export default function Home() {
         <SearchBar />
 
         {/* DAILY HIGHLIGHT · compact one-liner, no longer a full box */}
-        <Link href={`/peptides/${featured.slug}`} className="featured-pill">
+        <Link href={`/peptides/${featured.slug}`} className="featured-pill" prefetch={false}>
           <span className="featured-star">★</span>
           <span className="featured-label">TODAY&apos;S FEATURED</span>
           <span className="featured-name">{featured.name}</span>
@@ -47,10 +70,14 @@ export default function Home() {
         {/* THE INDEX · primary content, promoted above the fold */}
         <h2 className="section-h">▶ LIST OF {PEPPUDEX.length} PEPTIDES · WHAT THEY DO + MECHANISM + EVIDENCE</h2>
         <section className="grid">
-          {PEPPUDEX.map((p) => (
-            <Link key={p.id} href={`/peptides/${p.slug}`} className="card">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="art" src={p.card || "/cards/placeholder.svg"} alt={`${p.name} trading card`} />
+          {PEPPUDEX.map((p, index) => (
+            <Link key={p.id} href={`/peptides/${p.slug}`} className="card" prefetch={false}>
+              <CardImage
+                className="art"
+                src={p.card}
+                alt={`${p.name} trading card`}
+                priority={index < 2}
+              />
               <div className="meta">
                 <span>No. {p.id}</span>
                 <span className="hp">HP {p.hp}</span>
@@ -69,7 +96,7 @@ export default function Home() {
         <h2 className="section-h">▶ BROWSE BY MECHANISM</h2>
         <section className="shelf">
           {MECHANISMS.slice(0, 12).map((m) => (
-            <Link key={m.slug} href={`/mechanisms/${m.slug}`} className="shelf-tile" style={{ background: m.color }}>
+            <Link key={m.slug} href={`/mechanisms/${m.slug}`} className="shelf-tile" style={{ background: m.color, color: readableMechanismText(m.color) }}>
               <span>{m.shortName.toUpperCase()}</span>
             </Link>
           ))}
@@ -83,10 +110,10 @@ export default function Home() {
         <section className="stack-grid">
           {STACKS.map((s) => (
             <Link key={s.slug} href={`/stacks/${s.slug}`} className="stack-card">
-              <p style={{ fontFamily: "var(--font-pixel)", fontSize: 10, letterSpacing: "0.14em", opacity: 0.6 }}>STACK</p>
+              <p style={{ fontFamily: "var(--font-pixel)", fontSize: 10, letterSpacing: "0.14em", opacity: 0.85 }}>STACK</p>
               <p style={{ fontFamily: "var(--font-pixel)", fontSize: 14, marginTop: 6 }}>{s.name}</p>
               <p className="body" style={{ marginTop: 8 }}>{s.description}</p>
-              <p style={{ fontFamily: "var(--font-pixel)", fontSize: 8, marginTop: 10, letterSpacing: "0.12em", opacity: 0.55 }}>
+              <p style={{ fontFamily: "var(--font-pixel)", fontSize: 8, marginTop: 10, letterSpacing: "0.12em", opacity: 0.85 }}>
                 {s.components.map((c) => c.slug.toUpperCase()).join(" + ")}
               </p>
             </Link>

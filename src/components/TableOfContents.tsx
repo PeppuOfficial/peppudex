@@ -37,32 +37,44 @@ export function TableOfContents({ sections }: Props) {
   }, [sections]);
 
   if (sections.length === 0) return null;
+  const activeLabel = sections.find((s) => s.id === activeId)?.label ?? sections[0]?.label ?? "Index";
+
+  const renderLinks = () => (
+    <ul className="peptide-toc__list">
+      {sections.map((s) => (
+        <li key={s.id}>
+          <a
+            href={"#" + s.id}
+            className={"peptide-toc__link" + (activeId === s.id ? " is-active" : "")}
+            onClick={(e) => {
+              const el = document.getElementById(s.id);
+              if (!el) return;
+              e.preventDefault();
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+              history.replaceState(null, "", "#" + s.id);
+            }}
+          >
+            {s.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
-    <nav
-      aria-label="On this page"
-      className="peptide-toc"
-    >
-      <p className="peptide-toc__label">▶ ON THIS PAGE</p>
-      <ul className="peptide-toc__list">
-        {sections.map((s) => (
-          <li key={s.id}>
-            <a
-              href={"#" + s.id}
-              className={"peptide-toc__link" + (activeId === s.id ? " is-active" : "")}
-              onClick={(e) => {
-                const el = document.getElementById(s.id);
-                if (!el) return;
-                e.preventDefault();
-                el.scrollIntoView({ behavior: "smooth", block: "start" });
-                history.replaceState(null, "", "#" + s.id);
-              }}
-            >
-              {s.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div className="peptide-toc-shell">
+      <a className="peptide-toc__back" href="/">◀ INDEX</a>
+      <nav aria-label="On this page" className="peptide-toc peptide-toc--desktop">
+        <p className="peptide-toc__label">▶ ON THIS PAGE</p>
+        {renderLinks()}
+      </nav>
+      <details className="peptide-toc peptide-toc--mobile">
+        <summary>
+          <span>▶ ON THIS PAGE</span>
+          <strong>{activeLabel}</strong>
+        </summary>
+        {renderLinks()}
+      </details>
+    </div>
   );
 }

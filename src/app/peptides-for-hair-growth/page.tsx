@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
+import CardImage from "@/components/CardImage";
 import { autoLink } from "@/lib/auto-link";
 import { storefrontProductUrl } from "@/lib/storefront-map";
 
@@ -146,10 +147,14 @@ export default function PeptidesForHairGrowthPage() {
 
           <h2>COMPOUND CLUSTER · {cluster.length} ENTRIES</h2>
           <section className="grid">
-            {cluster.map((p) => (
-              <Link key={p.id} href={`/peptides/${p.slug}`} className="card">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="art" src={p.card || "/cards/placeholder.svg"} alt={`${p.name} trading card`} />
+            {cluster.map((p, index) => (
+              <Link key={p.id} href={`/peptides/${p.slug}`} className="card" prefetch={false}>
+                <CardImage
+                  className="art"
+                  src={p.card}
+                  alt={`${p.name} trading card`}
+                  priority={index < 2}
+                />
                 <div className="meta">
                   <span>No. {p.id}</span>
                   <span className="hp">HP {p.hp}</span>

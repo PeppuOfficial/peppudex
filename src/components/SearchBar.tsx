@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { PEPPUDEX } from "@/data/peppudex";
 import { ENRICHMENT } from "@/data/enrichment";
+import CardImage from "@/components/CardImage";
 
 interface SearchResult {
   slug: string;
@@ -86,9 +87,15 @@ export default function SearchBar() {
           {results.map((r) => (
             <li key={r.slug}>
               <Link href={`/peptides/${r.slug}`} onClick={() => setOpen(false)}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 {r.card && (
-                  <img src={r.card} alt="" width={32} height={56} aria-hidden="true" />
+                  <CardImage
+                    src={r.card}
+                    variant="thumb"
+                    alt=""
+                    width={32}
+                    height={56}
+                    aria-hidden="true"
+                  />
                 )}
                 <span className="r-name">{r.name}</span>
                 <span className="r-why">{r.why}</span>

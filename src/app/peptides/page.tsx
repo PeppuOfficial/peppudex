@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
 import { ENRICHMENT } from "@/data/enrichment";
 import { MECHANISMS } from "@/data/mechanisms";
+import CardImage from "@/components/CardImage";
 
 export const metadata: Metadata = {
   title: "All Research Peptides · 27 Compound Index · Peppudex",
@@ -96,10 +97,14 @@ export default function PeptidesIndexPage() {
           <section className="grid">
             {[...PEPPUDEX]
               .sort((a, b) => a.name.localeCompare(b.name))
-              .map((p) => (
-                <Link key={p.id} href={`/peptides/${p.slug}`} className="card">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="art" src={p.card || "/cards/placeholder.svg"} alt={`${p.name} trading card`} />
+              .map((p, index) => (
+                <Link key={p.id} href={`/peptides/${p.slug}`} className="card" prefetch={false}>
+                  <CardImage
+                    className="art"
+                    src={p.card}
+                    alt={`${p.name} trading card`}
+                    priority={index < 4}
+                  />
                   <div className="meta">
                     <span>No. {p.id}</span>
                     <span className="hp">HP {p.hp}</span>

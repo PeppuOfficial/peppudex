@@ -53,8 +53,26 @@ const nextConfig: NextConfig = {
         value: "max-age=86400, stale-while-revalidate=604800",
       },
     ];
+    const immutableAssetHeaders = [
+      {
+        key: "Cache-Control",
+        value: "public, max-age=31536000, immutable",
+      },
+    ];
 
     return [
+      {
+        source: "/cards/optimized/:path*",
+        headers: immutableAssetHeaders,
+      },
+      {
+        source: "/cards/:path*",
+        headers: immutableAssetHeaders,
+      },
+      {
+        source: "/:icon(favicon.ico|favicon.png|icon.svg|apple-touch-icon.png|peppu-app-icon-192.png|peppu-app-icon-512.png|og-default.png)",
+        headers: immutableAssetHeaders,
+      },
       {
         source: "/sitemap.xml",
         headers: crawlerCacheHeaders,

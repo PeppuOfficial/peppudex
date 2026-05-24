@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { STACKS, STACKS_BY_SLUG } from "@/data/stacks";
 import { PEPPUDEX } from "@/data/peppudex";
+import CardImage from "@/components/CardImage";
 import { storefrontProductUrl } from "@/lib/storefront-map";
 
 export function generateStaticParams() {
@@ -41,13 +42,17 @@ export default async function StackPage({ params }: { params: Promise<{ slug: st
 
           <h2>COMPONENTS</h2>
           <div className="grid">
-            {s.components.map((c) => {
+            {s.components.map((c, index) => {
               const compound = PEPPUDEX.find((p) => p.slug === c.slug);
               if (!compound) return null;
               return (
-                <Link key={c.slug} href={`/peptides/${c.slug}`} className="card">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="art" src={compound.card || "/cards/placeholder.svg"} alt={`${compound.name} card`} />
+                <Link key={c.slug} href={`/peptides/${c.slug}`} className="card" prefetch={false}>
+                  <CardImage
+                    className="art"
+                    src={compound.card}
+                    alt={`${compound.name} card`}
+                    priority={index < 3}
+                  />
                   <div className="meta">
                     <span>No. {compound.id}</span>
                     <span className="hp">HP {compound.hp}</span>

@@ -73,6 +73,5 @@ export default function robots(): MetadataRoute.Robots {
       `${BASE_URL}/sitemap-studies.xml`,
       `${BASE_URL}/sitemap-guides.xml`,
     ],
-    host: BASE_URL,
   };
 }

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { PEPPUDEX } from "@/data/peppudex";
 import { ENRICHMENT } from "@/data/enrichment";
+import CardImage from "@/components/CardImage";
 import { getSupabaseAdmin } from "@/lib/supabase-server";
 import { storefrontProductUrl } from "@/lib/storefront-map";
 
@@ -204,19 +205,20 @@ export default async function BuiltStackPage({
 
           <h2>COMPONENTS</h2>
           <div className="grid">
-            {components.map((c) => {
+            {components.map((c, index) => {
               const enr = ENRICHMENT[c.slug];
               return (
                 <Link
                   key={c.slug}
                   href={`/peptides/${c.slug}`}
                   className="card"
+                  prefetch={false}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <CardImage
                     className="art"
-                    src={c.card || "/cards/placeholder.svg"}
+                    src={c.card}
                     alt={`${c.name} card`}
+                    priority={index < 3}
                   />
                   <div className="meta">
                     <span>No. {c.id}</span>

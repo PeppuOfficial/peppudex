@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { CONDITIONS, CONDITIONS_BY_SLUG } from "@/data/conditions";
 import { PEPPUDEX } from "@/data/peppudex";
 import { ENRICHMENT } from "@/data/enrichment";
+import CardImage from "@/components/CardImage";
 
 export function generateStaticParams() {
   return CONDITIONS.map((c) => ({ slug: c.slug }));
@@ -42,10 +43,9 @@ export default async function ConditionPage({ params }: { params: Promise<{ slug
 
           <h2>COMPOUNDS RESEARCHED FOR THIS GOAL · {compounds.length}</h2>
           <div className="grid">
-            {compounds.map((p) => (
-              <Link key={p.slug} href={`/peptides/${p.slug}`} className="card">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="art" src={p.card || "/cards/placeholder.svg"} alt={`${p.name} card`} />
+            {compounds.map((p, index) => (
+              <Link key={p.slug} href={`/peptides/${p.slug}`} className="card" prefetch={false}>
+                <CardImage className="art" src={p.card} alt={`${p.name} card`} priority={index < 2} />
                 <div className="meta">
                   <span>No. {p.id}</span>
                   <span className="hp">HP {p.hp}</span>

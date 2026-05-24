@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { COMPARISONS, COMPARISONS_BY_SLUG } from "@/data/comparisons";
 import { PEPPUDEX } from "@/data/peppudex";
+import CardImage from "@/components/CardImage";
 import { storefrontProductUrl } from "@/lib/storefront-map";
 
 export function generateStaticParams() {
@@ -47,16 +48,14 @@ export default async function VsPage({ params }: { params: Promise<{ pair: strin
 
           {/* Side-by-side hero */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 24 }}>
-            <Link href={`/peptides/${a.slug}`} className="card">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="art" src={a.card || "/cards/placeholder.svg"} alt={`${a.name} card`} />
+            <Link href={`/peptides/${a.slug}`} className="card" prefetch={false}>
+              <CardImage className="art" src={a.card} alt={`${a.name} card`} priority />
               <div className="meta"><span>A · No. {a.id}</span><span className="hp">HP {a.hp}</span></div>
               <div className="name">{a.name}</div>
               <p className="body" style={{ marginTop: 6, fontSize: 16, opacity: 0.85 }}>{a.tagline}</p>
             </Link>
-            <Link href={`/peptides/${b.slug}`} className="card">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="art" src={b.card || "/cards/placeholder.svg"} alt={`${b.name} card`} />
+            <Link href={`/peptides/${b.slug}`} className="card" prefetch={false}>
+              <CardImage className="art" src={b.card} alt={`${b.name} card`} priority />
               <div className="meta"><span>B · No. {b.id}</span><span className="hp">HP {b.hp}</span></div>
               <div className="name">{b.name}</div>
               <p className="body" style={{ marginTop: 6, fontSize: 16, opacity: 0.85 }}>{b.tagline}</p>
