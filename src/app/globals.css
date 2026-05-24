@@ -318,6 +318,39 @@ html, body {
 .badge[data-t="cytoprotection"] { background: var(--t-cytoprotection); }
 .badge[data-t="multi"]          { background: linear-gradient(90deg, #FF6B9D, #FFE680, #66BB6A, #4FC3F7); }
 
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .card {
+    padding: 9px;
+    gap: 6px;
+    border-width: 3px;
+    box-shadow: 4px 4px 0 var(--shadow);
+  }
+  .card:hover,
+  .card:active {
+    transform: none;
+    box-shadow: 4px 4px 0 var(--shadow);
+  }
+  .card .art {
+    border-width: 2px;
+  }
+  .card .name {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+  .card .meta {
+    font-size: 6.5px;
+  }
+  .badge {
+    font-size: 5.5px;
+    padding: 3px 4px;
+    border-width: 1.5px;
+  }
+}
+
 .footer {
   background: var(--ink); color: var(--paper);
   font-family: var(--font-pixel); font-size: 9px; letter-spacing: 0.16em;

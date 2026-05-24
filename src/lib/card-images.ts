@@ -33,7 +33,7 @@ export function cardImageSizes(variant: CardImageVariant): string {
       return "(max-width: 600px) min(100vw - 28px, 340px), 340px";
     case "grid":
     default:
-      return "(max-width: 480px) 110px, (max-width: 768px) 150px, 204px";
+      return "(max-width: 600px) calc((100vw - 58px) / 2), (max-width: 768px) 150px, 204px";
   }
 }
 
