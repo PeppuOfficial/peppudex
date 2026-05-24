@@ -189,9 +189,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   window.addEventListener(evt, load, {once:true, passive:true});
                 });
                 if('requestIdleCallback' in window){
-                  requestIdleCallback(function(){ setTimeout(load, 9000); }, {timeout: 12000});
+                  requestIdleCallback(function(){ setTimeout(load, 60000); }, {timeout: 60000});
                 } else {
-                  setTimeout(load, 12000);
+                  setTimeout(load, 60000);
                 }
               })();
             `}
